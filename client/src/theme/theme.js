@@ -24,7 +24,11 @@ const theme = extendTheme({
   },
   fonts: {
     body: "Inter",
-    heading: "Inter Bold",
+    heading: "Inter",
+  },
+  config: {
+    initialColorMode: "light",
+    useSystemColorMode: false,
   },
 });
 
