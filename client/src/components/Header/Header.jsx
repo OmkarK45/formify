@@ -18,13 +18,7 @@ const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box
-        style={{
-          backdropFilter: "saturate(180%) blur(20px)",
-          position: "sticky",
-        }}
-        boxShadow="rgb(0 0 0 / 5%) 0px 1px 2px 0px"
-      >
+      <Box position="sticky" boxShadow="rgb(0 0 0 / 5%) 0px 1px 2px 0px">
         {/* Gradient Strip */}
         <Box
           h="10px"
@@ -34,7 +28,7 @@ const Header = () => {
           <Flex
             justifyContent="space-between"
             padding="1rem 0"
-            maxW="80%"
+            maxW="85%"
             margin="0 auto"
             alignItems="center"
           >
@@ -47,7 +41,7 @@ const Header = () => {
                 Formify
               </Heading>
             </Box>
-            <Menu colorMode={colorMode} toggleColorMode={toggleColorMode}/>
+            <Menu colorMode={colorMode} toggleColorMode={toggleColorMode} />
             <List
               display={["none", "none", "block"]}
               textTransform="uppercase"
@@ -69,11 +63,13 @@ const Header = () => {
                     padding="0.5rem 2rem"
                     fontFamily="body"
                     fontWeight="300"
+                    boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                   >
                     Sign Up
                   </Button>
                 </Link>
                 <IconButton
+                  boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                   icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
                   onClick={toggleColorMode}
                 >

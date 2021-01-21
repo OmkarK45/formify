@@ -23,13 +23,14 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    body: "Inter",
-    heading: "Inter",
+    body: "Inter, system-ui, sans-serif",
+    heading: "Inter, system-ui, sans-serif",
   },
   config: {
     initialColorMode: "light",
     useSystemColorMode: false,
   },
+  
 });
 
 export default theme;

@@ -69,11 +69,13 @@ function Menu({ colorMode, toggleColorMode }) {
                   padding="0.5rem 2rem"
                   fontFamily="body"
                   fontWeight="300"
+                  boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                 >
                   Sign Up
                 </Button>
               </Link>
               <IconButton
+                boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                 icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
                 onClick={toggleColorMode}
               >
