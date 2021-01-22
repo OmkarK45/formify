@@ -1,18 +1,20 @@
 import { Box, Flex, Heading, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Safari from "./Safari";
+import Features from "./Features";
+import GetStarted from "./GetStarted";
+import Footer from "./Footer";
 
 const Hero = () => {
   return (
     <>
-      <Box>
+      <Box paddingTop="8rem">
         {/* Headings Holder */}
         <Box
-          maxW={["90%", "75%", "80%"]}
+          maxW={["99%", "75%", "80%"]}
           textAlign="center"
           lineHeight={["1.13", "1.15"]}
           margin="0 auto"
-          marginTop="2.5rem"
         >
           <Heading
             fontSize={["3rem", "4rem", "5rem"]}
@@ -86,6 +88,9 @@ const Hero = () => {
       <Box>
         <Safari />
       </Box>
+      <Features />
+      <GetStarted />
+      <Footer />
     </>
   );
 };

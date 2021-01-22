@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import bigSur from "../../assets/big.png";
 const Safari = () => {
   return (

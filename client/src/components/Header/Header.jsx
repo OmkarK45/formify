@@ -18,7 +18,15 @@ const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box position="sticky" boxShadow="rgb(0 0 0 / 5%) 0px 1px 2px 0px">
+      <Box
+        position="fixed"
+        width="100%"
+        top="0"
+        left="0"
+        bg="white"
+        zIndex="3"
+        boxShadow="rgb(0 0 0 / 5%) 0px 1px 2px 0px"
+      >
         {/* Gradient Strip */}
         <Box
           h="10px"
