@@ -1,5 +1,5 @@
 import { Box, SimpleGrid, Grid, Heading, Text } from "@chakra-ui/react";
-import features from "./features";
+import features from "./featuresDb";
 
 const Features = () => {
   return (

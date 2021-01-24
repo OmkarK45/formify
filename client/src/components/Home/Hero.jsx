@@ -3,7 +3,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import Safari from "./Safari";
 import Features from "./Features";
 import GetStarted from "./GetStarted";
-import Footer from "./Footer";
+import Footer from "../Layout/Footer";
 
 const Hero = () => {
   return (
