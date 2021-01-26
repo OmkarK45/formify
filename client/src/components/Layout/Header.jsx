@@ -41,11 +41,7 @@ const Header = () => {
             alignItems="center"
           >
             <Box>
-              <Link
-                _hover={{ textDecoration: "none" }}
-                textDecoration="none"
-                to="/"
-              >
+              <Link to="/">
                 <Heading
                   fontFamily="heading"
                   color="text.heading"
@@ -63,13 +59,13 @@ const Header = () => {
             >
               <Flex alignItems="center">
                 <ListItem margin="0 0.5rem">
-                  <Link>Features</Link>
+                  <Link to="#">Features</Link>
                 </ListItem>
                 <ListItem margin="0 0.5rem">
-                  <Link>Pricing</Link>
+                  <Link to="#">Pricing</Link>
                 </ListItem>
                 <ListItem margin="0 0.5rem">
-                  <Link>Documentation</Link>
+                  <Link to="#">Documentation</Link>
                 </ListItem>
                 <Text>|</Text>
                 <Link to="/auth" style={{ margin: "0 1rem" }}>
