@@ -27,10 +27,10 @@ const Register = () => {
         </FormControl>
 
         <FormControl marginTop="1.5rem">
-          <FormLabel htmlFor="email">Email address</FormLabel>
+          <FormLabel htmlFor="registerEmail">Email address</FormLabel>
           <Input
             type="email"
-            id="email"
+            id="registerEmail"
             isRequired={true}
             name="email"
             // value={email}
@@ -39,10 +39,10 @@ const Register = () => {
         </FormControl>
 
         <FormControl marginTop="1.5rem">
-          <FormLabel htmlFor="password">Password</FormLabel>
+          <FormLabel htmlFor="registerPassword">Password</FormLabel>
           <Input
             type="password"
-            id="password"
+            id="registerPassword"
             name="password"
             isRequired={true}
             // value={password}
