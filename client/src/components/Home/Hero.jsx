@@ -1,5 +1,6 @@
-import { Box, Flex, Heading, Text, Button, Link } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import Safari from "./Safari";
 import Features from "./Features";
 import GetStarted from "./GetStarted";
@@ -61,7 +62,7 @@ const Hero = () => {
           maxW={["90%", "85%", "50%"]}
           margin="2rem auto"
         >
-          <Link marginRight={["0", "2rem"]} marginBottom={["1rem", "0"]}>
+          <Link to="/auth">
             <Button
               width="100%"
               padding="1.6rem 1.8rem"
@@ -69,11 +70,13 @@ const Hero = () => {
               colorScheme="teal"
               fontSize="lg"
               boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
+              marginRight={["0", "2rem"]}
+              marginBottom={["1rem", "0"]}
             >
               Get Started &nbsp; <AiOutlineArrowRight />
             </Button>
           </Link>
-          <Link>
+          <Link to="/">
             <Button
               boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
               width="100%"
