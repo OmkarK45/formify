@@ -56,13 +56,9 @@ exports.forgotPassword = async (req, res, next) => {
     const message = `<h1>You have requested a password reset</h1>
     <p>Please go to this link to reset your password : </p>
     <a href=${resetURL} clicktracking=off>${resetURL}</a>`;
-    
-    try {
-      
-    } catch (error) {
-      
-    }
 
+    try {
+    } catch (error) {}
   } catch (error) {}
 };
 
@@ -72,5 +68,8 @@ exports.resetPassword = (req, res, next) => {
 
 const sendToken = async (user, statusCode, res) => {
   const token = await user.getSignedToken();
-  res.status(statusCode).json({ success: true, token: token });
+  res
+    .status(statusCode)
+    // @DATA - Send user data after loggin in to store in context 
+    .json({ success: true, token: token, userID: user._id });
 };
