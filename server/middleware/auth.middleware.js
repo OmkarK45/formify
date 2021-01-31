@@ -3,13 +3,8 @@ const User = require("../models/User.model");
 const ErrorResponse = require("../utils/errorResponse");
 
 exports.protect = async (req, res, next) => {
-  let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    token = req.headers.authorization.split(" ")[1];
-  }
+  let token = req.cookies.token;
+  console.log("Token sent by client", token);
   if (!token) {
     return next(new ErrorResponse("Not authorized !", 401));
   }
@@ -22,7 +17,6 @@ exports.protect = async (req, res, next) => {
       return next(new ErrorResponse("No user found with this id", 404));
     }
     req.user = user;
-
     next();
   } catch (error) {
     return next(new ErrorResponse("Not authorized to access this route", 401));
