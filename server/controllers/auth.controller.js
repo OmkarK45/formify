@@ -1,12 +1,25 @@
 const User = require("../models/User.model");
 const ErrorResponse = require("../utils/errorResponse");
 
+exports.user = async (req, res, next) => {
+  const { email } = req.user;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next(new ErrorResponse("We couldn't find this user.", 404));
+    }
+    sendToken(user, 200, res);
+  } catch (error) {
+    return next(new ErrorResponse("Something went wrong", 500));
+  }
+};
+
 exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
   try {
     const user = await User.create({
       username,
-      email,
+      email: email.toLowerCase(),
       password,
     });
     sendToken(user, 200, res);
@@ -41,6 +54,17 @@ exports.login = async (req, res, next) => {
   }
 };
 
+exports.logout = async (req, res, next) => {
+  try {
+    res.cookie("token", "", { httpOnly: true });
+    res.json({
+      message: "Logged out successfully.",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.forgotPassword = async (req, res, next) => {
   const { email } = req.body;
 
@@ -68,8 +92,12 @@ exports.resetPassword = (req, res, next) => {
 
 const sendToken = async (user, statusCode, res) => {
   const token = await user.getSignedToken();
+  res.cookie("token", token, {
+    httpOnly: true,
+    maxAge: 7 * 24 * 3600 * 1000,
+  });
   res
     .status(statusCode)
-    // @DATA - Send user data after loggin in to store in context 
-    .json({ success: true, token: token, userID: user._id });
+    // @DATA - Send user data after loggin in to store in context
+    .json({ success: true, userID: user._id });
 };
