@@ -19,7 +19,6 @@ import Register from "./Register";
 const Auth = () => {
   return (
     <>
-      <Header />
       <Box
         border="1px solid #eee"
         borderRadius="10px"

@@ -16,7 +16,7 @@ const Features = () => {
           gap={6}
         >
           {features.map(({ icon, title, description }) => (
-            <Box w="100%">
+            <Box w="100%" key={title}>
               <Box>
                 <Box>{icon}</Box>
               </Box>

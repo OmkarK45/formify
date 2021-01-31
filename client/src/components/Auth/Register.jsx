@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -8,6 +9,9 @@ import {
 } from "@chakra-ui/react";
 
 const Register = () => {
+  const [data, setData] = useState({});
+  //@TODO -> complete this registration
+  
   return (
     <>
       <Box>
@@ -22,7 +26,7 @@ const Register = () => {
             isRequired={true}
             name="username"
             // value={username}
-            // onChange={handleUsername}
+            // onChange={handleInputChange}
           />
         </FormControl>
 
@@ -34,7 +38,7 @@ const Register = () => {
             isRequired={true}
             name="email"
             // value={email}
-            // onChange={handleEmail}
+            // onChange={handleInputChange}
           />
         </FormControl>
 
@@ -46,11 +50,12 @@ const Register = () => {
             name="password"
             isRequired={true}
             // value={password}
-            // onChange={handlePassword}
+            // onChange={handleInputChange}
           />
         </FormControl>
         <Button
           colorScheme="teal"
+          boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
           color="white"
           type="submit"
           w="100%"

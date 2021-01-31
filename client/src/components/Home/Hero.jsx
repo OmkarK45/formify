@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import userContext from "./../../context/userContext";
 import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -7,6 +9,7 @@ import GetStarted from "./GetStarted";
 import Footer from "../Layout/Footer";
 
 const Hero = () => {
+  const { user } = useContext(userContext);
   return (
     <>
       <Box paddingTop="8rem">
@@ -62,12 +65,13 @@ const Hero = () => {
           maxW={["90%", "85%", "50%"]}
           margin="2rem auto"
         >
-          <Link to="/auth">
+          <Link to={user && user.isAuthenticated ? "/dashboard" : "/auth"}>
             <Button
-              width="100%"
-              padding="1.6rem 1.8rem"
+              width={["100%", "auto"]}
+              padding="1.6rem 1.5rem"
               color="white"
-              colorScheme="teal"
+              bgColor="#D22D4F"
+              _hover={{ bgColor: "#B52643" }}
               fontSize="lg"
               boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
               marginRight={["0", "2rem"]}

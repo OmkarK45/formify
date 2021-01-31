@@ -1,20 +1,22 @@
+import { useContext } from "react";
+import userContext from "./../../context/userContext";
 import {
   Box,
   Heading,
-  ListItem,
   List,
   Flex,
-  Text,
   Button,
   useColorMode,
   IconButton,
 } from "@chakra-ui/react";
+import ProfileMenu from "./../Utils/ProfileMenu";
 import { Link } from "react-router-dom";
 import { BsMoon } from "react-icons/bs";
 import { BiSun } from "react-icons/bi";
 import Menu from "./Drawer";
 
 const Header = () => {
+  const { user } = useContext(userContext);
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
@@ -23,19 +25,19 @@ const Header = () => {
         width="100%"
         top="0"
         left="0"
-        bg="white"
-        zIndex="3"
+        zIndex="10"
         boxShadow="rgb(0 0 0 / 5%) 0px 1px 2px 0px"
+        style={{ backdropFilter: "saturate(180%) blur(20px)" }}
       >
         {/* Gradient Strip */}
         <Box
-          h="10px"
+          h="6px"
           bgGradient="linear(to-l, other.gradientStart, other.gradientEnd)"
         ></Box>
         <Box>
           <Flex
             justifyContent="space-between"
-            padding="1rem 0"
+            padding="0.6rem 0"
             maxW="85%"
             margin="0 auto"
             alignItems="center"
@@ -58,26 +60,22 @@ const Header = () => {
               letterSpacing="0.4px"
             >
               <Flex alignItems="center">
-                <ListItem margin="0 0.5rem">
-                  <Link to="#">Features</Link>
-                </ListItem>
-                <ListItem margin="0 0.5rem">
-                  <Link to="#">Pricing</Link>
-                </ListItem>
-                <ListItem margin="0 0.5rem">
-                  <Link to="#">Documentation</Link>
-                </ListItem>
-                <Text>|</Text>
-                <Link to="/auth" style={{ margin: "0 1rem" }}>
-                  <Button
-                    padding="0.5rem 2rem"
-                    fontFamily="body"
-                    fontWeight="300"
-                    boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
-                  >
-                    Sign Up
-                  </Button>
-                </Link>
+                {/* @TODO - Add feature LINkS */}
+                {console.log("What the header sees : ", user)}
+                {user && user.isAuthenticated ? (
+                  <ProfileMenu />
+                ) : (
+                  <Link to="/auth" style={{ margin: "0 1rem" }}>
+                    <Button
+                      padding="0.8rem 1.3rem"
+                      fontFamily="body"
+                      fontWeight="700"
+                      boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
+                    >
+                      Log In
+                    </Button>
+                  </Link>
+                )}
                 <IconButton
                   boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                   icon={colorMode === "light" ? <BsMoon /> : <BiSun />}

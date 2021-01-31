@@ -1,5 +1,4 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
-import { FaHeart } from "react-icons/fa";
 
 const Footer = () => {
   return (

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import {
   Drawer,
   useDisclosure,
@@ -11,14 +11,17 @@ import {
   ListItem,
   IconButton,
   List,
-  Link,
   Heading,
 } from "@chakra-ui/react";
+import ProfileMenu from "./../Utils/ProfileMenu";
+import { Link } from "react-router-dom";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { BsMoon } from "react-icons/bs";
 import { BiSun } from "react-icons/bi";
+import userContext from "./../../context/userContext";
 
 function Menu({ colorMode, toggleColorMode }) {
+  const { user } = useContext(userContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
@@ -51,29 +54,23 @@ function Menu({ colorMode, toggleColorMode }) {
               </Heading>
             </DrawerHeader>
 
-            <DrawerBody>
-              <List textTransform="uppercase" listStyleType="none">
-                <ListItem margin="1rem 0.5rem">
-                  <Link>Features</Link>
-                </ListItem>
-                <ListItem margin="1rem 0.5rem">
-                  <Link>Pricing</Link>
-                </ListItem>
-                <ListItem margin="1rem 0.5rem">
-                  <Link>Documentation</Link>
-                </ListItem>
-              </List>
-              <Link>
-                <Button
-                  marginRight="1rem"
-                  padding="0.5rem 2rem"
-                  fontFamily="body"
-                  fontWeight="300"
-                  boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
-                >
-                  Sign Up
-                </Button>
-              </Link>
+            <DrawerBody display="flex">
+              {user && user.isAuthenticated ? (
+                <ProfileMenu />
+              ) : (
+                <Link to="/auth">
+                  <Button
+                    marginRight="1rem"
+                    padding="0.5rem 2rem"
+                    fontFamily="body"
+                    fontWeight="300"
+                    boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+              )}
+
               <IconButton
                 boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                 icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
