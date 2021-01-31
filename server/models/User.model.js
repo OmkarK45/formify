@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Form = require("./Form.model");
 const Schema = mongoose.Schema;
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
@@ -34,6 +35,7 @@ const userSchema = new Schema({
   resetPasswordExpire: {
     type: Date,
   },
+  forms: [{ type: Schema.Types.ObjectId, ref: "Form" }],
 });
 
 userSchema.pre("save", async function (next) {
