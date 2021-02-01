@@ -6,9 +6,20 @@ const { chain, get } = require("lodash");
 
 // @desc -> Find all form submissions for that user
 exports.getForm = async (req, res) => {
-  res.json({
-    msg: "Get route working for now",
-  });
+  // get the userID in payload
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email }).populate("forms");
+    res.json({
+      msg: "Here are your forms you created!",
+      user,
+    });
+  } catch (error) {
+    return next(
+      new ErrorResponse("Something went wrong while fetching your forms ", 500)
+    );
+  }
+  // Search that ID in database, populate the forms array and return that to the user
 };
 
 // @desc -> Find one form submission for that user and UUID
