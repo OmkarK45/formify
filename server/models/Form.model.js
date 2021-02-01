@@ -10,6 +10,10 @@ const formSchema = new Schema(
       default: () => nanoid(6),
     },
     fields: [{ type: Schema.Types.Mixed }],
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { strict: false }
 );
