@@ -1,18 +1,4 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Input,
-  Label,
-  Form,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
-} from "@chakra-ui/react";
-import Header from "../Layout/Header";
-import Footer from "../Layout/Footer";
+import { Box, Tabs, Tab, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
 import Login from "./Login";
 import Register from "./Register";
 

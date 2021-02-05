@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Layout/Header";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Hero from "./components/Home/Hero";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { GET } from "./utils/network";
@@ -33,7 +38,6 @@ const App = () => {
     };
     checkLoggedIn();
   }, []);
-
   return (
     <>
       <userContext.Provider value={{ user, setUser }}>
@@ -41,7 +45,7 @@ const App = () => {
           <Header />
           <Switch>
             <Route path="/" exact component={Hero}></Route>
-            <Route path="/auth" exact component={Auth}></Route>
+            <Route path="/auth" exact component={Auth} />
             <PrivateRoute path="/dashboard" exact component={Dashboard} />
           </Switch>
         </Router>

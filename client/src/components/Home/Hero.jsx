@@ -70,8 +70,8 @@ const Hero = () => {
               width={["100%", "auto"]}
               padding="1.6rem 1.5rem"
               color="white"
-              bgColor="#D22D4F"
-              _hover={{ bgColor: "#B52643" }}
+              bgColor="red.600"
+              _hover={{ bgColor: "red.700" }}
               fontSize="lg"
               boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
               marginRight={["0", "2rem"]}

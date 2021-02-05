@@ -6,7 +6,7 @@ exports.user = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return next(new ErrorResponse("We couldn't find this user.", 404));
+      return next(new ErrorResponse("Invalid Credentials.", 404));
     }
     sendToken(user, 200, res);
   } catch (error) {

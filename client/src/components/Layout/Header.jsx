@@ -5,6 +5,8 @@ import {
   Heading,
   List,
   Flex,
+  Text,
+  Badge,
   Button,
   useColorMode,
   IconButton,
@@ -14,7 +16,6 @@ import { Link } from "react-router-dom";
 import { BsMoon } from "react-icons/bs";
 import { BiSun } from "react-icons/bi";
 import Menu from "./Drawer";
-
 const Header = () => {
   const { user } = useContext(userContext);
   const { colorMode, toggleColorMode } = useColorMode();
@@ -29,7 +30,6 @@ const Header = () => {
         boxShadow="rgb(0 0 0 / 5%) 0px 1px 2px 0px"
         style={{ backdropFilter: "saturate(180%) blur(20px)" }}
       >
-        {/* Gradient Strip */}
         <Box
           h="6px"
           bgGradient="linear(to-l, other.gradientStart, other.gradientEnd)"
@@ -42,11 +42,12 @@ const Header = () => {
             margin="0 auto"
             alignItems="center"
           >
-            <Box>
+            <Box textAlign="center">
               <Link to="/">
                 <Heading
+                  fontSize="4xl"
                   fontFamily="heading"
-                  color="text.heading"
+                  color={colorMode === "light" ? "purple.800" : "purple.50"}
                   letterSpacing="-0.5px"
                 >
                   Formify
@@ -60,14 +61,12 @@ const Header = () => {
               letterSpacing="0.4px"
             >
               <Flex alignItems="center">
-                {/* @TODO - Add feature LINkS */}
-                {console.log("What the header sees : ", user)}
                 {user && user.isAuthenticated ? (
                   <ProfileMenu />
                 ) : (
                   <Link to="/auth" style={{ margin: "0 1rem" }}>
                     <Button
-                      padding="0.8rem 1.3rem"
+                      p="0.8rem 1.3rem"
                       fontFamily="body"
                       fontWeight="700"
                       boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
@@ -91,5 +90,4 @@ const Header = () => {
     </>
   );
 };
-
 export default Header;

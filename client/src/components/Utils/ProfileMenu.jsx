@@ -19,8 +19,8 @@ const ProfileMenu = () => {
           as={Button}
           size="md"
           boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
-          bgColor="#D22D4F"
           color="white"
+          bgColor="#D22D4F"
           _active={{ bgColor: "#B52643" }}
           _hover={{ bgColor: "#B52643" }}
         >

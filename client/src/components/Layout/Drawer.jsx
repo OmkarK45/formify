@@ -44,16 +44,6 @@ function Menu({ colorMode, toggleColorMode }) {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader>
-              <Heading
-                fontFamily="heading"
-                color="text.heading"
-                letterSpacing="-0.5px"
-              >
-                Formify
-              </Heading>
-            </DrawerHeader>
-
             <DrawerBody display="flex">
               {user && user.isAuthenticated ? (
                 <ProfileMenu />
@@ -63,7 +53,7 @@ function Menu({ colorMode, toggleColorMode }) {
                     marginRight="1rem"
                     padding="0.5rem 2rem"
                     fontFamily="body"
-                    fontWeight="300"
+                    fontWeight="700"
                     boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                   >
                     Sign Up
