@@ -31,7 +31,7 @@ const Header = () => {
         style={{ backdropFilter: "saturate(180%) blur(20px)" }}
       >
         <Box
-          h="6px"
+          h="4px"
           bgGradient="linear(to-l, other.gradientStart, other.gradientEnd)"
         ></Box>
         <Box>

@@ -1,23 +1,23 @@
-import { useState, useEffect } from "react";
-import Header from "./components/Layout/Header";
+import { useState, useEffect } from "react"
+import Header from "./components/Layout/Header"
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
-} from "react-router-dom";
-import Hero from "./components/Home/Hero";
-import Dashboard from "./components/Dashboard/Dashboard";
-import { GET } from "./utils/network";
-import Auth from "./components/Auth/Auth";
-import userContext from "./context/userContext";
-import PrivateRoute from "./components/Utils/PrivateRoute";
+} from "react-router-dom"
+import Hero from "./components/Home/Hero"
+import Dashboard from "./components/Dashboard/Dashboard"
+import { GET } from "./utils/network"
+import Auth from "./components/Auth/Auth"
+import userContext from "./context/userContext"
+import PrivateRoute from "./components/Utils/PrivateRoute"
 
 const App = () => {
   const [user, setUser] = useState({
     isAuthenticated: false,
     userID: null,
-  });
+  })
 
   // @desc - check if existing token is valid
   useEffect(() => {
@@ -29,15 +29,15 @@ const App = () => {
           setUser({
             userID: userRes.data.userID,
             isAuthenticated: true,
-          });
-        });
+          })
+        })
       } catch (error) {
         //@TODO -> Better error handling here
-        console.log("Not logged in");
+        console.log("Not logged in")
       }
-    };
-    checkLoggedIn();
-  }, []);
+    }
+    checkLoggedIn()
+  }, [])
   return (
     <>
       <userContext.Provider value={{ user, setUser }}>
@@ -51,7 +51,7 @@ const App = () => {
         </Router>
       </userContext.Provider>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

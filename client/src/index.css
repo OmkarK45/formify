@@ -6,10 +6,20 @@ li {
   list-style: none;
 }
 .animate {
-  animation: shine 1s linear infinite;
+  background: linear-gradient(to right, #663399, #bc027f, #c1f600);
+  background-clip: text;
+  background-size: 300% 300%;
+  color: transparent;
+  animation: shine 3s linear infinite;
 }
 @keyframes shine {
-  to {
-    background-position: 200% center;
-  }
+  0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

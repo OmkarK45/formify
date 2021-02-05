@@ -1,15 +1,14 @@
-import { useContext } from "react";
-import userContext from "./../../context/userContext";
-import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react";
-import { AiOutlineArrowRight } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import Safari from "./Safari";
-import Features from "./Features";
-import GetStarted from "./GetStarted";
-import Footer from "../Layout/Footer";
+import { useContext } from "react"
+import userContext from "./../../context/userContext"
+import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react"
+import { AiOutlineArrowRight } from "react-icons/ai"
+import { Link } from "react-router-dom"
+import { Safari, Features, GetStarted } from "./index"
+import { Footer } from "../Layout"
+import "../../index.css"
 
 const Hero = () => {
-  const { user } = useContext(userContext);
+  const { user } = useContext(userContext)
   return (
     <>
       <Box paddingTop="8rem">
@@ -28,8 +27,6 @@ const Hero = () => {
             All your
           </Heading>
           <Text
-            bgGradient="linear(to-r, #663399,#bc027f,#f67300)"
-            bgClip="text"
             fontSize={["3rem", "4rem", "5rem"]}
             fontWeight="700"
             letterSpacing="-0.2rem"
@@ -99,7 +96,7 @@ const Hero = () => {
       <GetStarted />
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
