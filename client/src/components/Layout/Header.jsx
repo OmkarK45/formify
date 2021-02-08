@@ -21,6 +21,7 @@ import logo from "./logo.svg"
 const Header = () => {
   const { user } = useContext(userContext)
   const { colorMode, toggleColorMode } = useColorMode()
+  console.log(window.location.href)
   return (
     <>
       <Box
@@ -36,7 +37,7 @@ const Header = () => {
           <Flex
             justifyContent="space-between"
             padding="0.6rem 0"
-            maxW="85%"
+            maxW="80%"
             margin="0 auto"
             alignItems="center"
           >
@@ -53,7 +54,7 @@ const Header = () => {
                   <ProfileMenu />
                 ) : (
                   <Link to="/auth">
-                    <Button mr='1rem'>Log In</Button>
+                    <Button mr="1rem">Log In</Button>
                   </Link>
                 )}
                 <IconButton

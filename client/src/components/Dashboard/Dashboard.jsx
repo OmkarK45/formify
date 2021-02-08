@@ -1,29 +1,27 @@
 import { useContext } from "react"
-import {
-  Text,
-  Box,
-  Container,
-  Flex,
-  SimpleGrid,
-  Heading,
-} from "@chakra-ui/react"
+import { Text, Box, Image, Flex, SimpleGrid, Heading } from "@chakra-ui/react"
 import userContext from "./../../context/userContext"
+import { Footer } from "./../Layout"
+import bg from "./bg.svg"
 
 const Dashboard = () => {
   const { user } = useContext(userContext)
   return (
     <Box maxW="100%">
       <Box
-        marginTop={["6rem", "6rem", "6.5rem", "4.5rem"]}
-        minH="150px"
-        width="100%"
-        pt="2rem"
+        style={{ backgroundImage: "url('./assets/bg.svg')" }}
+        height="308px"
+        bg="rgba(30, 58, 138)"
       >
-        <Box textAlign={["center", "left"]} margin="0.5rem auto" maxW="80%">
-          <Box>
-            <Heading color="white" letterSpacing="-0.5px">
-            </Heading>
-          </Box>
+        <Box pt="6rem" maxW="80%" m="0 auto">
+          <Heading color="white">Hi There</Heading>
+          <Box
+            mt="2rem"
+            borderRadius="10px"
+            boxShadow="base"
+            bg="white"
+            minH="500px"
+          ></Box>
         </Box>
       </Box>
     </Box>

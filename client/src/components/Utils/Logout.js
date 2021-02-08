@@ -12,14 +12,23 @@ const Logout = () => {
     await POST(process.env.REACT_APP_BACKEND + "/api/auth/logout", {
       withCredentials: true,
     })
-    toast({
-      title: "Successfully logged out.",
-      status: "info",
-    })
-    setUser({
-      userID: null,
-      isAuthenticated: false,
-    })
+      .then(() => {
+        toast({
+          title: "Successfully logged out.",
+          status: "info",
+        })
+        setUser({
+          userID: null,
+          isAuthenticated: false,
+        })
+      })
+      .catch((error) => {
+        toast({
+          title: "Some error occured while logging out",
+          status: "error",
+        })
+      })
+
     history.push("/")
   }
 

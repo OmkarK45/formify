@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react"
 import { Header } from "./components/Layout/"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom"
 import { Hero } from "./components/Home/"
 import { Dashboard } from "./components/Dashboard/"
 import { GET } from "./utils/network"
@@ -8,13 +13,11 @@ import { Auth } from "./components/Auth"
 import userContext from "./context/userContext"
 import PrivateRoute from "./components/Utils/PrivateRoute"
 
-
 const App = () => {
   const [user, setUser] = useState({
     isAuthenticated: false,
     userID: null,
   })
-
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
@@ -29,12 +32,13 @@ const App = () => {
           })
         })
       } catch (error) {
-        // @Todo - better error handling here
+        // @Todo - better error handling her
         console.log("Not logged in")
       }
     }
     checkLoggedIn()
   }, [])
+
   return (
     <>
       <userContext.Provider value={{ user, setUser }}>

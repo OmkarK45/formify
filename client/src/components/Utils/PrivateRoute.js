@@ -4,12 +4,12 @@ import userContext from "./../../context/userContext"
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user } = useContext(userContext)
-  console.log("Im inside private route", user)
   return (
     <Route
       {...rest}
+      // Todo - This could be better. Make sure page survives refresh
       render={(props) =>
-        user && user.isAuthenticated ? (
+        user ? (
           <Component {...props} />
         ) : (
           <Redirect to="/auth" />
