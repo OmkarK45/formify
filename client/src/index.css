@@ -5,6 +5,9 @@ a {
 li {
   list-style: none;
 }
+body {
+  background-color: rgba(243, 244, 246);
+}
 .animate {
   background: linear-gradient(to right, #663399, #bc027f, #c1f600);
   background-clip: text;
@@ -14,12 +17,12 @@ li {
 }
 @keyframes shine {
   0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

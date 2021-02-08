@@ -1,29 +1,25 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext } from "react"
 import {
   Drawer,
   useDisclosure,
   DrawerBody,
-  DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   Button,
-  ListItem,
   IconButton,
-  List,
-  Heading,
-} from "@chakra-ui/react";
-import ProfileMenu from "./../Utils/ProfileMenu";
-import { Link } from "react-router-dom";
-import { HiMenuAlt1 } from "react-icons/hi";
-import { BsMoon } from "react-icons/bs";
-import { BiSun } from "react-icons/bi";
-import userContext from "./../../context/userContext";
+} from "@chakra-ui/react"
+import ProfileMenu from "./../Utils/ProfileMenu"
+import { Link } from "react-router-dom"
+import { HiMenuAlt1 } from "react-icons/hi"
+import { BsMoon } from "react-icons/bs"
+import { BiSun } from "react-icons/bi"
+import userContext from "./../../context/userContext"
 
 function Menu({ colorMode, toggleColorMode }) {
-  const { user } = useContext(userContext);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
+  const { user } = useContext(userContext)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
 
   return (
     <>
@@ -31,6 +27,7 @@ function Menu({ colorMode, toggleColorMode }) {
         display={["block", "block", "none"]}
         ref={btnRef}
         paddingLeft="1rem"
+        color="inherit"
         onClick={onOpen}
       >
         <HiMenuAlt1 />
@@ -54,7 +51,6 @@ function Menu({ colorMode, toggleColorMode }) {
                     padding="0.5rem 2rem"
                     fontFamily="body"
                     fontWeight="700"
-                    boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                   >
                     Sign Up
                   </Button>
@@ -62,7 +58,6 @@ function Menu({ colorMode, toggleColorMode }) {
               )}
 
               <IconButton
-                boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                 icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
                 onClick={toggleColorMode}
               >
@@ -73,6 +68,6 @@ function Menu({ colorMode, toggleColorMode }) {
         </DrawerOverlay>
       </Drawer>
     </>
-  );
+  )
 }
-export default Menu;
+export default Menu

@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import userContext from "./../../context/userContext"
 import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react"
-import { AiOutlineArrowRight } from "react-icons/ai"
+import { FaBolt, FaBook } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import { Safari, Features, GetStarted } from "./index"
 import { Footer } from "../Layout"
@@ -12,7 +12,6 @@ const Hero = () => {
   return (
     <>
       <Box paddingTop="8rem">
-        {/* Headings Holder */}
         <Box
           maxW={["99%", "75%", "80%"]}
           textAlign="center"
@@ -70,21 +69,22 @@ const Hero = () => {
               bgColor="red.600"
               _hover={{ bgColor: "red.700" }}
               fontSize="lg"
-              boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
               marginRight={["0", "2rem"]}
               marginBottom={["1rem", "0"]}
+              shadow="base"
             >
-              Get Started &nbsp; <AiOutlineArrowRight />
+              Get Started &nbsp; <FaBolt />
             </Button>
           </Link>
           <Link to="/">
             <Button
-              boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
               width="100%"
               fontSize="lg"
+              bg="white"
               padding="1.6rem 1.8rem"
+              shadow="base"
             >
-              Documentation
+              Documentation &nbsp; <FaBook />
             </Button>
           </Link>
         </Flex>

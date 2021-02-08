@@ -1,17 +1,18 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react"
 
 const Footer = () => {
   return (
     <Box padding="1rem 0">
-      <Flex justifyContent="center">
-        <Link color="body.text">GitHub</Link>
-        <Link color="body.text" margin="0 3rem">
-          LinkedIn
-        </Link>
-        <Link color="body.text">Instagram</Link>
+      <Flex direction="column" alignItems="center">
+        <Text fontSize="md" color="gray.600">
+          Formify, LLP
+        </Text>
+        <Text fontSize="xs" color="gray.600">
+          ©2021 Omkar Kulkarni. All Rights Reserved
+        </Text>
       </Flex>
     </Box>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

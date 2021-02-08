@@ -1,24 +1,26 @@
-import { useContext } from "react";
-import userContext from "./../../context/userContext";
+import { useContext } from "react"
+import userContext from "./../../context/userContext"
 import {
   Box,
-  Heading,
   List,
   Flex,
-  Text,
-  Badge,
   Button,
+  LinkBox,
+  LinkOverlay,
+  Image,
   useColorMode,
   IconButton,
-} from "@chakra-ui/react";
-import ProfileMenu from "./../Utils/ProfileMenu";
-import { Link } from "react-router-dom";
-import { BsMoon } from "react-icons/bs";
-import { BiSun } from "react-icons/bi";
-import Menu from "./Drawer";
+} from "@chakra-ui/react"
+import ProfileMenu from "./../Utils/ProfileMenu"
+import { Link } from "react-router-dom"
+import { BsMoon } from "react-icons/bs"
+import { BiSun } from "react-icons/bi"
+import Menu from "./Drawer"
+import logo from "./logo.svg"
+
 const Header = () => {
-  const { user } = useContext(userContext);
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { user } = useContext(userContext)
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <>
       <Box
@@ -27,13 +29,9 @@ const Header = () => {
         top="0"
         left="0"
         zIndex="10"
-        boxShadow="rgb(0 0 0 / 5%) 0px 1px 2px 0px"
-        style={{ backdropFilter: "saturate(180%) blur(20px)" }}
+        style={{ backdropFilter: "blur(20px)" }}
+        shadow="base"
       >
-        <Box
-          h="4px"
-          bgGradient="linear(to-l, other.gradientStart, other.gradientEnd)"
-        ></Box>
         <Box>
           <Flex
             justifyContent="space-between"
@@ -44,39 +42,21 @@ const Header = () => {
           >
             <Box textAlign="center">
               <Link to="/">
-                <Heading
-                  fontSize="4xl"
-                  fontFamily="heading"
-                  color={colorMode === "light" ? "purple.800" : "purple.50"}
-                  letterSpacing="-0.5px"
-                >
-                  Formify
-                </Heading>
+                <Image src="./assets/logo.png" />
               </Link>
             </Box>
+
             <Menu colorMode={colorMode} toggleColorMode={toggleColorMode} />
-            <List
-              display={["none", "none", "block"]}
-              textTransform="uppercase"
-              letterSpacing="0.4px"
-            >
+            <List display={["none", "none", "block"]} letterSpacing="0.4px">
               <Flex alignItems="center">
                 {user && user.isAuthenticated ? (
                   <ProfileMenu />
                 ) : (
-                  <Link to="/auth" style={{ margin: "0 1rem" }}>
-                    <Button
-                      p="0.8rem 1.3rem"
-                      fontFamily="body"
-                      fontWeight="700"
-                      boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
-                    >
-                      Log In
-                    </Button>
+                  <Link to="/auth">
+                    <Button mr='1rem'>Log In</Button>
                   </Link>
                 )}
                 <IconButton
-                  boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
                   icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
                   onClick={toggleColorMode}
                 >
@@ -88,6 +68,6 @@ const Header = () => {
         </Box>
       </Box>
     </>
-  );
-};
-export default Header;
+  )
+}
+export default Header

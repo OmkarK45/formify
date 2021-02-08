@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react"
-import Header from "./components/Layout/Header"
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom"
-import Hero from "./components/Home/Hero"
-import Dashboard from "./components/Dashboard/Dashboard"
+import { Header } from "./components/Layout/"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { Hero } from "./components/Home/"
+import { Dashboard } from "./components/Dashboard/"
 import { GET } from "./utils/network"
-import Auth from "./components/Auth/Auth"
+import { Auth } from "./components/Auth"
 import userContext from "./context/userContext"
 import PrivateRoute from "./components/Utils/PrivateRoute"
+
 
 const App = () => {
   const [user, setUser] = useState({
@@ -19,7 +15,6 @@ const App = () => {
     userID: null,
   })
 
-  // @desc - check if existing token is valid
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
@@ -29,10 +24,12 @@ const App = () => {
           setUser({
             userID: userRes.data.userID,
             isAuthenticated: true,
+            username: userRes?.data.username,
+            email: userRes?.data.email,
           })
         })
       } catch (error) {
-        //@TODO -> Better error handling here
+        // @Todo - better error handling here
         console.log("Not logged in")
       }
     }

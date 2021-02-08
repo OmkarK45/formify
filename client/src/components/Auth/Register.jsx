@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useContext } from "react"
+import { useHistory } from "react-router-dom"
 import {
   FormControl,
   FormLabel,
@@ -8,29 +8,37 @@ import {
   Box,
   Heading,
   useToast,
-} from "@chakra-ui/react";
-import { POST } from "../../utils/network";
-import userContext from "./../../context/userContext";
+  InputGroup,
+  InputLeftElement,
+  Icon,
+} from "@chakra-ui/react"
+import { POST } from "../../utils/network"
+import {
+  HiOutlineUser,
+  HiOutlineMail,
+  HiOutlineLockClosed,
+} from "react-icons/hi"
+import userContext from "./../../context/userContext"
 
 const Register = () => {
-  const { setUser } = useContext(userContext);
-  const history = useHistory();
-  const toast = useToast();
+  const { setUser } = useContext(userContext)
+  const history = useHistory()
+  const toast = useToast()
   const [data, setData] = useState({
     username: "",
     email: "",
     password: "",
-  });
+  })
 
   const handleInputChange = (event) => {
     setData({
       ...data,
       [event.target.name]: event.target.value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     return POST(
       process.env.REACT_APP_BACKEND + "/api/auth/register",
       { username: data.username, email: data.email, password: data.password },
@@ -39,68 +47,81 @@ const Register = () => {
       }
     )
       .then((res) => {
-        console.log(res);
+        console.log(res)
         setUser({
           isAuthenticated: true,
           userID: res.data.userID,
-        });
-        history.push("/dashboard");
+        })
+        history.push("/dashboard")
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
         toast({
           title: "Error !",
           description: "Something went wrong while registering you.",
           status: "error",
           isClosable: true,
-        });
-        history.push("/auth");
-      });
-  };
+        })
+        history.push("/auth")
+      })
+  }
   return (
-    <>
+    <Box py="1rem">
       <Box>
-        <Heading>Register.</Heading>
+        <Heading fontStyle="italic">Register.</Heading>
       </Box>
       <form onSubmit={handleSubmit}>
         <FormControl marginTop="1.5rem">
           <FormLabel htmlFor="username">Username</FormLabel>
-          <Input
-            type="text"
-            id="username"
-            isRequired={true}
-            name="username"
-            value={data.username}
-            onChange={handleInputChange}
-          />
+          <InputGroup>
+            <InputLeftElement children={<Icon as={HiOutlineUser} />} />
+            <Input
+              type="text"
+              id="username"
+              isRequired={true}
+              name="username"
+              shadow="base"
+              value={data.username}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
         </FormControl>
 
         <FormControl marginTop="1.5rem">
           <FormLabel htmlFor="registerEmail">Email address</FormLabel>
-          <Input
-            type="email"
-            id="registerEmail"
-            isRequired={true}
-            name="email"
-            value={data.email}
-            onChange={handleInputChange}
-          />
+          <InputGroup>
+            <InputLeftElement children={<Icon as={HiOutlineMail} />} />
+            <Input
+              shadow="base"
+              type="email"
+              id="registerEmail"
+              isRequired={true}
+              name="email"
+              value={data.email}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
         </FormControl>
 
         <FormControl marginTop="1.5rem">
           <FormLabel htmlFor="registerPassword">Password</FormLabel>
-          <Input
-            type="password"
-            id="registerPassword"
-            name="password"
-            isRequired={true}
-            value={data.password}
-            onChange={handleInputChange}
-          />
+          <InputGroup>
+            <InputLeftElement
+              children={<Icon size="2" as={HiOutlineLockClosed} />}
+            />
+            <Input
+              type="password"
+              id="registerPassword"
+              shadow="base"
+              name="password"
+              isRequired={true}
+              value={data.password}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
         </FormControl>
         <Button
           colorScheme="teal"
-          boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
           color="white"
           type="submit"
           w="100%"
@@ -109,8 +130,8 @@ const Register = () => {
           Register
         </Button>
       </form>
-    </>
-  );
-};
+    </Box>
+  )
+}
 
-export default Register;
+export default Register

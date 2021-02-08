@@ -7,25 +7,22 @@ import {
   MenuDivider,
   Box,
   MenuItem,
-} from "@chakra-ui/react";
-import Logout from "../Utils/Logout";
-import { Link } from "react-router-dom";
+  Avatar,
+} from "@chakra-ui/react"
+import Logout from "../Utils/Logout"
+import { Link } from "react-router-dom"
 
 const ProfileMenu = () => {
   return (
     <Box marginRight="1rem">
       <Menu>
         <MenuButton
-          as={Button}
-          size="md"
-          boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
+          as={Avatar}
+          size="sm"
+          src="https://bit.ly/ryan-florence"
           color="white"
-          bgColor="#D22D4F"
-          _active={{ bgColor: "#B52643" }}
-          _hover={{ bgColor: "#B52643" }}
-        >
-          My Profile
-        </MenuButton>
+          cursor="pointer"
+        ></MenuButton>
         <MenuList>
           <MenuGroup title="Profile">
             <Link to="/dashboard">
@@ -37,14 +34,14 @@ const ProfileMenu = () => {
           <MenuGroup title="Help">
             <MenuItem>Docs</MenuItem>
             <MenuItem>FAQ</MenuItem>
-            <MenuItem as={Box}>
+            <MenuItem>
               <Logout />
             </MenuItem>
           </MenuGroup>
         </MenuList>
       </Menu>
     </Box>
-  );
-};
+  )
+}
 
-export default ProfileMenu;
+export default ProfileMenu

@@ -1,33 +1,48 @@
-import { Box, Link, Button, Heading, Text } from "@chakra-ui/react";
+import { FaBolt } from "react-icons/fa"
+import {
+  Flex,
+  Box,
+  Text,
+  Link,
+  Button,
+  Heading,
+  Container,
+} from "@chakra-ui/react"
 
 const GetStarted = () => {
   return (
-    <>
-      <Box
-        maxW={["100%", "100%", "80%"]}
-        minH="200px"
-        padding="2rem 2rem"
+    <Flex>
+      <Flex
+        direction="column"
+        maxW={["100%", "85%", "70%"]}
         margin="4rem auto"
-        bgGradient="linear(to-l, other.gradientEnd, other.gradientStart)"
+        padding="2rem"
         color="white"
-        borderRadius="15px"
-        boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
+        bg="green.500"
+        borderRadius={["0", "10px"]}
+        boxShadow="base"
       >
-        <Heading>Ready to Get Started ?</Heading>
-        <Text
-          color="white"
-          maxW={["95%", "85%", "80%"]}
-          fontSize="lg"
-          lineHeight="1.7"
-          marginTop="0.7rem"
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          quisquam quasi perspiciatis dolorem laborum voluptatum quis expedita
-          fuga aspernatur deserunt?
-        </Text>
-      </Box>
-    </>
-  );
-};
+        <Box color="white" fontSize="lg" padding="0" lineHeight="1.7">
+          <Heading>Ready to Get Started ?</Heading>
+          <Flex mt="1rem">
+            <Text maxW={["100%", "90%", "60%"]}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Laudantium quisquam quasi perspiciatis dolorem laborum voluptatum
+              quis expedita fuga aspernatur deserunt?
+            </Text>
+          </Flex>
+          <Button
+            _hover={{ bg: "green.800" }}
+            size="lg"
+            mt="1rem"
+            bg="green.700"
+          >
+            Get Started &nbsp; <FaBolt />
+          </Button>
+        </Box>
+      </Flex>
+    </Flex>
+  )
+}
 
-export default GetStarted;
+export default GetStarted

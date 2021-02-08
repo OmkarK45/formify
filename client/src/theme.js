@@ -1,7 +1,15 @@
 import { theme, extendTheme } from "@chakra-ui/react"
+import { mode } from "@chakra-ui/theme-tools"
 
 export default extendTheme({
   ...theme,
+  styles: {
+    global: (props) => ({
+      body: {
+        bg: mode("gray.50", "gray.900")(props),
+      },
+    }),
+  },
   colors: {
     ...theme.colors,
     primary: {

@@ -1,37 +1,40 @@
-import { Box, SimpleGrid, Grid, Heading, Text } from "@chakra-ui/react";
-import features from "./featuresDb";
+import {
+  Box,
+  SimpleGrid,
+  Icon,
+  Text,
+  Stack,
+  Flex,
+  Heading,
+} from "@chakra-ui/react"
+import features from "./featuresDb"
 
-const Features = () => {
+export default function SimpleThreeColumns() {
   return (
-    <>
-      <Box margin="3rem auto" maxW={["90%", "80%", "75%"]}>
-        <Heading fontSize={["3xl", "4xl", "5xl"]}>Features.</Heading>
-        <Text fontSize="xl" color="text.body" marginTop="0.5rem">
-          Here's why formify is best!
-        </Text>
-      </Box>
-      <Box maxW={["90%", "80%", "75%"]} margin="0 auto">
-        <Grid
-          templateColumns={["1", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
-          gap={6}
-        >
-          {features.map(({ icon, title, description }) => (
-            <Box w="100%" key={title}>
-              <Box>
-                <Box>{icon}</Box>
-              </Box>
-              <Heading marginTop="0.7rem" fontSize="2xl">
-                {title}
-              </Heading>
-              <Text marginTop="0.7rem" color="text.body" maxW="80%">
-                {description}
-              </Text>
-            </Box>
-          ))}
-        </Grid>
-      </Box>
-    </>
-  );
-};
-
-export default Features;
+    <Box m="0 auto" maxW={["100%", "80%", "70%"]} p={4}>
+      <Heading>Features.</Heading>
+      <SimpleGrid mt="2rem" columns={{ base: 1, md: 3 }} spacing={10}>
+        {features.map((feature) => (
+          <Stack key={feature.id}>
+            <Flex
+              bg={"green.500"}
+              w={10}
+              h={10}
+              p={2}
+              borderRadius={"50%"}
+              align={"center"}
+              justify={"center"}
+              color={"white"}
+              rounded={"md"}
+              mb={1}
+            >
+              {feature.icon}
+            </Flex>
+            <Text fontWeight={600}>{feature.title}</Text>
+            <Text color={"gray.600"}>{feature.description}</Text>
+          </Stack>
+        ))}
+      </SimpleGrid>
+    </Box>
+  )
+}

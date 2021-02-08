@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { POST } from "../../utils/network";
+import { useState, useContext } from "react"
+import { useHistory } from "react-router-dom"
+import { POST } from "../../utils/network"
 import {
   Input,
   FormControl,
@@ -12,21 +12,21 @@ import {
   InputGroup,
   InputLeftElement,
   Icon,
-} from "@chakra-ui/react";
-import { HiOutlineMail, HiOutlineLockClosed } from "react-icons/hi";
-import userContext from "./../../context/userContext";
+} from "@chakra-ui/react"
+import { HiOutlineMail, HiOutlineLockClosed } from "react-icons/hi"
+import userContext from "./../../context/userContext"
 
 const Login = () => {
-  const { setUser } = useContext(userContext);
-  const history = useHistory();
-  const toast = useToast();
+  const { setUser } = useContext(userContext)
+  const history = useHistory()
+  const toast = useToast()
   const [data, setData] = useState({
     email: "",
     password: "",
-  });
+  })
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     return POST(
       process.env.REACT_APP_BACKEND + "/api/auth/login",
       {
@@ -38,36 +38,38 @@ const Login = () => {
       }
     )
       .then((res) => {
-        console.log(res);
+        console.log(res)
         setUser({
           isAuthenticated: true,
           userID: res.data.userID,
-        });
-        history.push("/dashboard");
+          username: res?.data.username,
+          email: res?.data.email,
+        })
+        history.push("/dashboard")
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
         toast({
           title: "Error !",
           description: "Invalid Credentials. Please check again.",
           status: "error",
           isClosable: true,
-        });
-        history.push("/auth");
-      });
-  };
+        })
+        history.push("/auth")
+      })
+  }
 
   const handleInputChange = (event) => {
     setData({
       ...data,
       [event.target.name]: event.target.value,
-    });
-  };
+    })
+  }
 
   return (
-    <>
+    <Box>
       <Box>
-        <Heading>Login.</Heading>
+        <Heading fontStyle="italic">Login.</Heading>
       </Box>
       <form onSubmit={handleSubmit}>
         <FormControl marginTop="1.5rem">
@@ -77,6 +79,7 @@ const Login = () => {
             <Input
               type="email"
               name="email"
+              shadow="base"
               value={data.email}
               isRequired={true}
               onChange={handleInputChange}
@@ -92,6 +95,7 @@ const Login = () => {
             <InputLeftElement children={<Icon as={HiOutlineLockClosed} />} />
             <Input
               type="password"
+              shadow="base"
               name="password"
               value={data.password}
               onChange={handleInputChange}
@@ -101,7 +105,6 @@ const Login = () => {
           </InputGroup>
         </FormControl>
         <Button
-          boxShadow="0 2px 4px 0 rgba(0,0,0,0.17)"
           marginTop="2.5rem"
           width="100%"
           color="white"
@@ -113,8 +116,8 @@ const Login = () => {
           Login
         </Button>
       </form>
-    </>
-  );
-};
+    </Box>
+  )
+}
 
-export default Login;
+export default Login
