@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const { nanoid } = require("nanoid");
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
+const { nanoid } = require("nanoid")
 
 const formSchema = new Schema(
   {
@@ -16,7 +16,7 @@ const formSchema = new Schema(
     },
   },
   { strict: false }
-);
+)
 
-const Form = mongoose.model("Form", formSchema);
-module.exports = Form;
+const Form = mongoose.model("Form", formSchema)
+module.exports = Form

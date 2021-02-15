@@ -12,24 +12,29 @@ export default extendTheme({
   },
   colors: {
     ...theme.colors,
-    primary: {
-      blue: "#725AD3",
-      green: "#38A389",
-      lightGreen: "#48CFAD",
-      carbon: "#323232",
+    red: {
+      50: "#ffe2ea",
+      100: "#ffb2c4",
+      200: "#ff7f9d",
+      300: "#fd4e75",
+      400: "#fc1d4e",
+      500: "#e20334",
+      600: "#b10029",
+      700: "#7f001c",
+      800: "#4e000f",
+      900: "#200005",
     },
-    background: "#F8F8F8",
-    other: {
-      danger: "#EA2121",
-      warning: "#FAC600",
-      info: "#44D6E9",
-      success: "#38A389",
-      gradientStart: "#4CB8C4",
-      gradientEnd: "#3CD3AD",
-    },
-    text: {
-      heading: "#1B0760",
-      body: "#918CA4",
+    green: {
+      50: "#e2fbed",
+      100: "#c2ebd4",
+      200: "#9fddb9",
+      300: "#7ccf9e",
+      400: "#58c184",
+      500: "#3ea76a",
+      600: "#2e8251",
+      700: "#1f5d3a",
+      800: "#0f3921",
+      900: "#001506",
     },
   },
   fonts: {
@@ -39,5 +44,17 @@ export default extendTheme({
   config: {
     initialColorMode: "light",
     useSystemColorMode: false,
+  },
+  components: {
+    Button: {
+      baseStyle: {
+        fontWeight: "400",
+      },
+    },
+    Heading: {
+      baseStyle: {
+        letterSpacing: "-0.1rem",
+      },
+    },
   },
 })

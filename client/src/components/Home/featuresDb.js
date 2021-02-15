@@ -1,5 +1,5 @@
-import { FiDatabase } from "react-icons/fi"
-import { HiOutlineSparkles, HiOutlineMail } from "react-icons/hi"
+import { FiDatabase } from "react-icons/fi";
+import { HiOutlineSparkles, HiOutlineMail } from "react-icons/hi";
 const features = [
   {
     icon: <FiDatabase fontSize="2.5rem" />,
@@ -22,5 +22,5 @@ const features = [
     description:
       "lorem ipsum dolor amit sit Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quod ea eos quibusdam",
   },
-]
-export default features
+];
+export default features;

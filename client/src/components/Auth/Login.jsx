@@ -18,6 +18,7 @@ import userContext from "./../../context/userContext"
 
 const Login = () => {
   const { setUser } = useContext(userContext)
+  const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
   const toast = useToast()
   const [data, setData] = useState({
@@ -26,6 +27,7 @@ const Login = () => {
   })
 
   const handleSubmit = (event) => {
+    setIsLoading(true)
     event.preventDefault()
     return POST(
       process.env.REACT_APP_BACKEND + "/api/auth/login",
@@ -38,6 +40,7 @@ const Login = () => {
       }
     )
       .then((res) => {
+        setIsLoading(false)
         console.log(res)
         setUser({
           isAuthenticated: true,
@@ -48,7 +51,8 @@ const Login = () => {
         history.push("/dashboard")
       })
       .catch((error) => {
-        console.log(error)
+        console.log({ error })
+        setIsLoading(false)
         toast({
           title: "Error !",
           description: "Invalid Credentials. Please check again.",
@@ -84,6 +88,7 @@ const Login = () => {
               isRequired={true}
               onChange={handleInputChange}
               aria-describedby="email-helper-text"
+              placeholder="you@example.com"
               id="email"
             />
           </InputGroup>
@@ -101,17 +106,17 @@ const Login = () => {
               onChange={handleInputChange}
               isRequired={true}
               id="password"
+              placeholder="Password"
             />
           </InputGroup>
         </FormControl>
         <Button
           marginTop="2.5rem"
           width="100%"
-          color="white"
           marginBottom="1rem"
-          bgColor="#D22D4F"
-          _hover={{ bgColor: "#B52643" }}
           type="submit"
+          isLoading={isLoading}
+          colorScheme="red"
         >
           Login
         </Button>

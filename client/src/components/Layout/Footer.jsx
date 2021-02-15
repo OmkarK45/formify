@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react"
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
@@ -12,7 +12,7 @@ const Footer = () => {
         </Text>
       </Flex>
     </Box>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

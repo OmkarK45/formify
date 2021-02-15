@@ -16,12 +16,11 @@ const Auth = () => {
   return (
     <>
       <Box
-        border="1px solid #eee"
         borderRadius="10px"
-        maxW={["90%", "75%", "65%", "30%"]}
+        maxW={["90%", "75%", "75%", "50%","30%"]}
         margin="0 auto"
-        marginTop="9.5rem"
-        bg={colorMode === "dark" ? "gray.800" : "white"}
+        marginTop="3rem"
+        bg={colorMode === "dark" ? "gray.700" : "white"}
         boxShadow={colorMode === "dark" ? "none" : "base"}
       >
         <Tabs isFitted variant="enclosed">

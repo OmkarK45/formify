@@ -3,7 +3,7 @@ import userContext from "./../../context/userContext"
 import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react"
 import { FaBolt, FaBook } from "react-icons/fa"
 import { Link } from "react-router-dom"
-import { Safari, Features, GetStarted } from "./index"
+import { HeroImage, Features, GetStarted } from "./index"
 import { Footer } from "../Layout"
 import "../../index.css"
 
@@ -11,7 +11,7 @@ const Hero = () => {
   const { user } = useContext(userContext)
   return (
     <>
-      <Box paddingTop="8rem">
+      <Box paddingTop="5rem">
         <Box
           maxW={["99%", "75%", "80%"]}
           textAlign="center"
@@ -45,13 +45,13 @@ const Hero = () => {
             maxW={["90%", "85%", "75%"]}
             lineHeight="1.7"
             margin="0 auto"
-            color="text.body"
-            fontSize={["1.1rem", "1.2rem", "1.3rem", "1.4rem"]}
+            fontSize="lg"
             marginTop={["1rem", "1.4rem"]}
           >
             Formify is a ready-to integrate form submission solution for static
             sites. Reduce hassle and let us handle your form submissions! No
-            database configuration required.
+            database configuration required. Lorem ipsum dolor sit, amet
+            consectetur adipisicing elit.
           </Text>
         </Box>
         {/* Buttons Holder */}
@@ -64,12 +64,9 @@ const Hero = () => {
           <Link to={user && user.isAuthenticated ? "/dashboard" : "/auth"}>
             <Button
               width={["100%", "auto"]}
-              padding="1.6rem 1.5rem"
-              color="white"
-              bgColor="red.600"
-              _hover={{ bgColor: "red.700" }}
-              fontSize="lg"
+              colorScheme="orange"
               marginRight={["0", "2rem"]}
+              size="lg"
               marginBottom={["1rem", "0"]}
               shadow="base"
             >
@@ -77,20 +74,14 @@ const Hero = () => {
             </Button>
           </Link>
           <Link to="/">
-            <Button
-              width="100%"
-              fontSize="lg"
-              bg="white"
-              padding="1.6rem 1.8rem"
-              shadow="base"
-            >
+            <Button width="100%" size="lg" shadow="base">
               Documentation &nbsp; <FaBook />
             </Button>
           </Link>
         </Flex>
       </Box>
       <Box>
-        <Safari />
+        <HeroImage />
       </Box>
       <Features />
       <GetStarted />

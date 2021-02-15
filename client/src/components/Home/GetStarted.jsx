@@ -1,4 +1,4 @@
-import { FaBolt } from "react-icons/fa"
+import { FaBolt } from "react-icons/fa";
 import {
   Flex,
   Box,
@@ -7,7 +7,7 @@ import {
   Button,
   Heading,
   Container,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 
 const GetStarted = () => {
   return (
@@ -20,7 +20,7 @@ const GetStarted = () => {
         color="white"
         bg="green.500"
         borderRadius={["0", "10px"]}
-        boxShadow="base"
+        boxShadow="md"
       >
         <Box color="white" fontSize="lg" padding="0" lineHeight="1.7">
           <Heading>Ready to Get Started ?</Heading>
@@ -42,7 +42,7 @@ const GetStarted = () => {
         </Box>
       </Flex>
     </Flex>
-  )
-}
+  );
+};
 
-export default GetStarted
+export default GetStarted;

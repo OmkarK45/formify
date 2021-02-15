@@ -90,6 +90,7 @@ exports.resetPassword = (req, res, next) => {
 
 const sendToken = async (user, statusCode, res) => {
   const token = await user.getSignedToken()
+  console.log(token)
   res.cookie("token", token, {
     httpOnly: true,
     maxAge: 7 * 24 * 3600 * 1000,

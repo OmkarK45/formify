@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react"
 import Logout from "../Utils/Logout"
 import { Link } from "react-router-dom"
+import { faUser } from "react-icons/fa"
 
 const ProfileMenu = () => {
   return (
@@ -19,7 +20,8 @@ const ProfileMenu = () => {
         <MenuButton
           as={Avatar}
           size="sm"
-          src="https://bit.ly/ryan-florence"
+          borderRadius="10px"
+          src={<faUser />}
           color="white"
           cursor="pointer"
         ></MenuButton>

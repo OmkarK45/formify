@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react";
 
 const Layout = ({ children }) => {
-  return <Box>{children}</Box>
-}
+  return <Box>{children}</Box>;
+};
 
-export default Layout
+export default Layout;

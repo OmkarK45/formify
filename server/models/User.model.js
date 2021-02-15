@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-const Form = require("./Form.model");
-const Schema = mongoose.Schema;
-const crypto = require("crypto");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose")
+const Form = require("./Form.model")
+const Schema = mongoose.Schema
+const crypto = require("crypto")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
 const userSchema = new Schema({
   username: {
@@ -36,20 +36,20 @@ const userSchema = new Schema({
     type: Date,
   },
   forms: [{ type: Schema.Types.ObjectId, ref: "Form" }],
-});
+})
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
-    next();
+    next()
   }
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
+  const salt = await bcrypt.genSalt(10)
+  this.password = await bcrypt.hash(this.password, salt)
+  next()
+})
 
 userSchema.methods.matchPasswords = async function (password) {
-  return await bcrypt.compare(password, this.password);
-};
+  return await bcrypt.compare(password, this.password)
+}
 
 userSchema.methods.getSignedToken = async function () {
   return await jwt.sign(
@@ -58,18 +58,18 @@ userSchema.methods.getSignedToken = async function () {
     },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRE }
-  );
-};
+  )
+}
 
 userSchema.methods.getResetPasswordToken = async function () {
-  const resetToken = crypto.randomBytes(20).toString("hex");
+  const resetToken = crypto.randomBytes(20).toString("hex")
   this.resetPasswordToken = crypto
     .createHash("sha256")
     .update(resetToken)
-    .digest("hex");
-  this.resetPasswordExpire = Data.now() + 10 * (60 * 1000);
-  return resetToken;
-};
+    .digest("hex")
+  this.resetPasswordExpire = Data.now() + 10 * (60 * 1000)
+  return resetToken
+}
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+const User = mongoose.model("User", userSchema)
+module.exports = User

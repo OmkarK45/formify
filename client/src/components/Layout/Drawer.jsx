@@ -41,6 +41,7 @@ function Menu({ colorMode, toggleColorMode }) {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
+            {/* Todo : this needs some work */}
             <DrawerBody display="flex">
               {user && user.isAuthenticated ? (
                 <ProfileMenu />
@@ -50,7 +51,6 @@ function Menu({ colorMode, toggleColorMode }) {
                     marginRight="1rem"
                     padding="0.5rem 2rem"
                     fontFamily="body"
-                    fontWeight="700"
                   >
                     Sign Up
                   </Button>

@@ -11,21 +11,21 @@ import features from "./featuresDb"
 
 export default function SimpleThreeColumns() {
   return (
-    <Box m="0 auto" maxW={["100%", "80%", "70%"]} p={4}>
+    <Box m="0 auto" maxW={["100%", "80%", "80%"]} p={4}>
       <Heading>Features.</Heading>
       <SimpleGrid mt="2rem" columns={{ base: 1, md: 3 }} spacing={10}>
         {features.map((feature) => (
           <Stack key={feature.id}>
             <Flex
-              bg={"green.500"}
+              bg={"orange.500"}
               w={10}
               h={10}
               p={2}
               borderRadius={"50%"}
               align={"center"}
               justify={"center"}
-              color={"white"}
               rounded={"md"}
+              color="white"
               mb={1}
             >
               {feature.icon}

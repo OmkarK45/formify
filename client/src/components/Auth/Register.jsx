@@ -83,6 +83,7 @@ const Register = () => {
               shadow="base"
               value={data.username}
               onChange={handleInputChange}
+              placeholder="Username"
             />
           </InputGroup>
         </FormControl>
@@ -99,6 +100,7 @@ const Register = () => {
               name="email"
               value={data.email}
               onChange={handleInputChange}
+              placeholder="you@example.com"
             />
           </InputGroup>
         </FormControl>
@@ -117,16 +119,11 @@ const Register = () => {
               isRequired={true}
               value={data.password}
               onChange={handleInputChange}
+              placeholder="Password"
             />
           </InputGroup>
         </FormControl>
-        <Button
-          colorScheme="teal"
-          color="white"
-          type="submit"
-          w="100%"
-          marginTop="1.5rem"
-        >
+        <Button colorScheme="purple" type="submit" w="100%" mt="1.5rem">
           Register
         </Button>
       </form>

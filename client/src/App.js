@@ -7,11 +7,11 @@ import {
   Redirect,
 } from "react-router-dom"
 import { Hero } from "./components/Home/"
-import { Dashboard } from "./components/Dashboard/"
 import { GET } from "./utils/network"
 import { Auth } from "./components/Auth"
 import userContext from "./context/userContext"
 import PrivateRoute from "./components/Utils/PrivateRoute"
+import Dashboard from "./components/Dashboard/Dashboard"
 
 const App = () => {
   const [user, setUser] = useState({

@@ -1,2 +1,1 @@
 - Create nav bar, buttons, decide font [Done], font color [Done] and typography
-

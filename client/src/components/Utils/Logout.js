@@ -36,7 +36,6 @@ const Logout = () => {
     <Link
       variant="link"
       textColor="inherit"
-      fontWeight="normal"
       _hover={{ textDecoration: "none" }}
       onClick={handleLogout}
     >

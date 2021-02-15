@@ -21,54 +21,46 @@ import logo from "./logo.svg"
 const Header = () => {
   const { user } = useContext(userContext)
   const { colorMode, toggleColorMode } = useColorMode()
-  console.log(window.location.href)
+  console.log(colorMode)
   return (
-    <>
-      <Box
-        position="fixed"
-        width="100%"
-        top="0"
-        left="0"
-        zIndex="10"
-        style={{ backdropFilter: "blur(20px)" }}
-        shadow="base"
-      >
-        <Box>
-          <Flex
-            justifyContent="space-between"
-            padding="0.6rem 0"
-            maxW="80%"
-            margin="0 auto"
-            alignItems="center"
-          >
-            <Box textAlign="center">
-              <Link to="/">
-                <Image src="./assets/logo.png" />
-              </Link>
-            </Box>
+    <Box shadow="base">
+      <Box>
+        <Flex
+          justifyContent="space-between"
+          p="0.6rem 0"
+          maxW="80%"
+          m="0 auto"
+          alignItems="center"
+        >
+          <Box>
+            <Link to="/">
+              <Image src="./assets/logo-orange.png" />
+            </Link>
+          </Box>
 
-            <Menu colorMode={colorMode} toggleColorMode={toggleColorMode} />
-            <List display={["none", "none", "block"]} letterSpacing="0.4px">
-              <Flex alignItems="center">
-                {user && user.isAuthenticated ? (
-                  <ProfileMenu />
-                ) : (
-                  <Link to="/auth">
-                    <Button mr="1rem">Log In</Button>
-                  </Link>
-                )}
-                <IconButton
-                  icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
-                  onClick={toggleColorMode}
-                >
-                  Toggle {colorMode === "light" ? "Dark" : "Light"}
-                </IconButton>
-              </Flex>
-            </List>
-          </Flex>
-        </Box>
+          <Menu colorMode={colorMode} toggleColorMode={toggleColorMode} />
+          <List display={["none", "none", "block"]} letterSpacing="0.4px">
+            <Flex alignItems="center">
+              {user && user.isAuthenticated ? (
+                <ProfileMenu />
+              ) : (
+                <Link to="/auth">
+                  <Button colorScheme="orange" mr="1rem">
+                    LOGIN
+                  </Button>
+                </Link>
+              )}
+              <IconButton
+                icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
+                onClick={toggleColorMode}
+              >
+                Toggle {colorMode === "light" ? "Dark" : "Light"}
+              </IconButton>
+            </Flex>
+          </List>
+        </Flex>
       </Box>
-    </>
+    </Box>
   )
 }
 export default Header
