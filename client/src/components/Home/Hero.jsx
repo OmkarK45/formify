@@ -11,7 +11,7 @@ const Hero = () => {
   const { user } = useContext(userContext)
   return (
     <>
-      <Box paddingTop="5rem">
+      <Box paddingTop="3rem">
         <Box
           maxW={["99%", "75%", "80%"]}
           textAlign="center"
@@ -19,30 +19,30 @@ const Hero = () => {
           margin="0 auto"
         >
           <Heading
-            fontSize={["3rem", "4rem", "5rem"]}
-            letterSpacing="-0.2rem"
+            fontSize={["3rem", "3.5rem", "4rem", "5rem"]}
             fontWeight="700"
+            letterSpacing="-0.2rem"
           >
             All your
           </Heading>
           <Text
-            fontSize={["3rem", "4rem", "5rem"]}
+            fontSize={["3rem", "3.5rem", "4rem", "5rem"]}
             fontWeight="700"
-            letterSpacing="-0.2rem"
             className="animate"
+            letterSpacing="-0.2rem"
           >
             form submissions
           </Text>
           <Heading
-            fontSize={["3rem", "4rem", "5rem"]}
-            letterSpacing="-0.2rem"
+            fontSize={["3rem", "3.5rem", "4rem", "5rem"]}
             fontWeight="700"
+            letterSpacing="-0.2rem"
           >
             in one single place.
           </Heading>
           <Text
             textAlign="center"
-            maxW={["90%", "85%", "75%"]}
+            maxW={["95%", "95%", "85%", "75%"]}
             lineHeight="1.7"
             margin="0 auto"
             fontSize="lg"

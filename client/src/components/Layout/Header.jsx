@@ -10,6 +10,7 @@ import {
   Image,
   useColorMode,
   IconButton,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import ProfileMenu from "./../Utils/ProfileMenu"
 import { Link } from "react-router-dom"
@@ -21,9 +22,10 @@ import logo from "./logo-orange.png"
 const Header = () => {
   const { user } = useContext(userContext)
   const { colorMode, toggleColorMode } = useColorMode()
+  const bg = useColorModeValue("gray.50", "gray.900")
   console.log(colorMode)
   return (
-    <Box shadow="base">
+    <Box position="sticky" bg={bg} top="0" zIndex="99" shadow="base">
       <Box>
         <Flex
           justifyContent="space-between"

@@ -18,10 +18,11 @@ const FormList = () => {
       borderRadius="10px"
       m="0 auto"
       mt="3rem"
-      minW={["auto", "95%", "80%"]}
-      overflowX="scroll"
+      maxW={["auto", "95%", "80%"]}
+      overflowX="auto"
     >
       <Table size="md" variant="simple">
+        {/* This is gonna be dynamic */}
         <TableCaption>Forms created by Omkar</TableCaption>
         <Thead>
           <Tr>

@@ -20,7 +20,7 @@ const FormDetails = () => {
       <DashboardHeader title="Form Name" />
       <Box bg={bg}>
         <Tabs variant="line">
-          <TabList m="0 auto" maxW={["100%", "80%"]}>
+          <TabList m="0 auto" maxW={["100%", '100%',"80%"]}>
             <Tab>Integration</Tab>
             <Tab>Submissions</Tab>
             <Tab>Settings</Tab>
