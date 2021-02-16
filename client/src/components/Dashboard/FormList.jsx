@@ -13,7 +13,14 @@ import { Link } from "react-router-dom"
 
 const FormList = () => {
   return (
-    <Box boxShadow="base" borderRadius="10px" m="0 auto" mt="3rem" maxW="80%">
+    <Box
+      boxShadow="base"
+      borderRadius="10px"
+      m="0 auto"
+      mt="3rem"
+      minW={["auto", "95%", "80%"]}
+      overflowX="scroll"
+    >
       <Table size="md" variant="simple">
         <TableCaption>Forms created by Omkar</TableCaption>
         <Thead>

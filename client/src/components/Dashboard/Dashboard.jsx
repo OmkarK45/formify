@@ -5,7 +5,9 @@ import {
   Button,
   Heading,
   useColorModeValue,
+  useMediaQuery,
   useDisclosure,
+  IconButton,
 } from "@chakra-ui/react"
 import userContext from "./../../context/userContext"
 import { HiPlusCircle } from "react-icons/hi"
@@ -18,18 +20,28 @@ const Dashboard = () => {
   const { user } = useContext(userContext)
   const bg = useColorModeValue("gray.200", "gray.800")
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isMobile] = useMediaQuery("(min-width:768px)")
   console.log({ isOpen, onOpen })
   return (
     <Box>
       <DashboardHeader title="Your Forms">
-        <Button
-          leftIcon={<HiPlusCircle />}
-          colorScheme="orange"
-          shadow="base"
-          onClick={onOpen}
-        >
-          Create Form
-        </Button>
+        {isMobile ? (
+          <Button
+            leftIcon={<HiPlusCircle />}
+            colorScheme="orange"
+            shadow="base"
+            onClick={onOpen}
+          >
+            Create Form
+          </Button>
+        ) : (
+          <IconButton
+            icon={<HiPlusCircle />}
+            colorScheme="orange"
+            shadow="base"
+            onClick={onOpen}
+          />
+        )}
       </DashboardHeader>
       <CreateFormModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       <FormList />

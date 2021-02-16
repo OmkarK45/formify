@@ -9,10 +9,6 @@ const formSchema = new Schema(
       type: String,
       default: () => nanoid(6),
     },
-    schema: {
-      type: Array,
-      // default: this.submissions.slice(1)
-    },
     submissions: [{ type: Schema.Types.Mixed }],
     createdBy: {
       type: Schema.Types.ObjectId,

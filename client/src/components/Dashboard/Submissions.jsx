@@ -22,7 +22,8 @@ export default function Submissions() {
         borderRadius="10px"
         m="0 auto"
         mt="3rem"
-        maxW="100%"
+        minW="100%"
+        overflowX="auto"
       >
         {/* <Sample /> */}
         <Table size="md" variant="simple">

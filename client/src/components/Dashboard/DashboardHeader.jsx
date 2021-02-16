@@ -12,6 +12,8 @@ export default function DashboardHeader({ title, children }) {
           p="2rem 0 2rem"
           align="center"
           justify="space-between"
+          // justify={["center", "center", "space-between"]}
+          // direction={["column", "column", "row"]}
         >
           <Heading>{title}</Heading>
           <Box>{children}</Box>

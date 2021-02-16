@@ -5,8 +5,6 @@ import {
   Tab,
   TabPanel,
   TabPanels,
-  Flex,
-  Heading,
   useColorModeValue,
 } from "@chakra-ui/react"
 import DashboardHeader from "./DashboardHeader"
@@ -29,17 +27,16 @@ const FormDetails = () => {
             <Tab isDisabled>Plugins (Coming Soon)</Tab>
           </TabList>
           <TabPanels bg={tabBg}>
-            <TabPanel maxW={["100%", "90%", "80%"]} m="0 auto">
-              {/* Component here */}
+            <TabPanel maxW={["100%", "100%", "80%"]} m="0 auto">
               <Integrations />
             </TabPanel>
-            <TabPanel maxW={["100%", "90%", "80%"]} m="0 auto">
+            <TabPanel maxW={["100%", "100%", "80%"]} m="0 auto">
               <Submissions />
             </TabPanel>
-            <TabPanel maxW={["100%", "90%", "80%"]} m="0 auto">
+            <TabPanel maxW={["100%", "100%", "80%"]} m="0 auto">
               Settings
             </TabPanel>
-            <TabPanel maxW={["100%", "90%", "80%"]} m="0 auto">
+            <TabPanel maxW={["100%", "100%", "80%"]} m="0 auto">
               Plugins
             </TabPanel>
           </TabPanels>
