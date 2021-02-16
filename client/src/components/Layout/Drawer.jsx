@@ -8,19 +8,28 @@ import {
   DrawerCloseButton,
   Button,
   IconButton,
+  DrawerHeader,
+  Heading,
+  Flex,
+  Divider,
+  useColorModeValue,
+  Box,
 } from "@chakra-ui/react"
+import { FaBolt, FaBook } from "react-icons/fa"
 import ProfileMenu from "./../Utils/ProfileMenu"
 import { Link } from "react-router-dom"
 import { HiMenuAlt1 } from "react-icons/hi"
 import { BsMoon } from "react-icons/bs"
 import { BiSun } from "react-icons/bi"
 import userContext from "./../../context/userContext"
+import Logo from "./../Logo"
+import DrawerMenu from "./DrawerMenu"
 
 function Menu({ colorMode, toggleColorMode }) {
   const { user } = useContext(userContext)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
-
+  const textColor = useColorModeValue("orange.700", "orange.300")
   return (
     <>
       {/* TODO - This needs some works */}
@@ -42,28 +51,48 @@ function Menu({ colorMode, toggleColorMode }) {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            {/* Todo : this needs some work */}
-            <DrawerBody display="flex">
-              {user && user.isAuthenticated ? (
-                <ProfileMenu />
-              ) : (
-                <Link to="/auth">
-                  <Button
-                    marginRight="1rem"
-                    padding="0.5rem 2rem"
-                    fontFamily="body"
-                  >
-                    Sign Up
-                  </Button>
-                </Link>
-              )}
+            <DrawerHeader>
+              <Flex align="center">
+                <Logo />
+                <Heading ml={2} color={textColor}>
+                  Formify
+                </Heading>
+              </Flex>
+            </DrawerHeader>
+            <Divider />
 
-              <IconButton
-                icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
+            <DrawerBody>
+              {user && user.isAuthenticated ? (
+                // This could be better
+                // <ProfileMenu />
+                <DrawerMenu />
+              ) : (
+                <Box>
+                  <Link to="/auth">
+                    <Button
+                      width="100%"
+                      colorScheme="orange"
+                      size="lg"
+                      shadow="base"
+                      margin="0.6rem 0"
+                    >
+                      Get Started &nbsp; <FaBolt />
+                    </Button>
+                  </Link>
+                  <Button width="100%" size="lg" shadow="base">
+                    Documentation &nbsp; <FaBook />
+                  </Button>
+                </Box>
+              )}
+              <Divider />
+
+              <Button
+                margin="0.6rem 0"
+                leftIcon={colorMode === "light" ? <BsMoon /> : <BiSun />}
                 onClick={toggleColorMode}
               >
-                Toggle {colorMode === "light" ? "Dark" : "Light"}
-              </IconButton>
+                {colorMode === "light" ? "Dark" : "Light"}
+              </Button>
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>

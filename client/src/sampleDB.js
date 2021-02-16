@@ -1,12 +1,13 @@
 const db = {
   // may be create a schema
-  schema: ["email", "username", "msg", "add"],
+  schema: ["email", "username", "msg", "add", "test"],
   submissions: [
     {
       email: "sample@gmail.com",
       username: "omkar",
       msg: "I love this site",
       add: "Lets check",
+      test: "teste",
     },
     {
       email: "example@gmail.com",

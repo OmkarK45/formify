@@ -25,20 +25,30 @@ exports.getForms = async (req, res) => {
 // @desc -> Find one form submission for that user and UUID
 exports.getOneForm = async (req, res, next) => {
   // @TODO -> add username validation as well
-  const { formID, email } = req.params
+  const { formID } = req.params
+  const { email } = req.user
   if (!(formID && email)) {
     return next(
-      new ErrorResponse("Sorry, We couldn't find the form with this ID", 400)
+      new ErrorResponse(
+        "Sorry, We couldn't find the form with this ID or Email. If you think this is a mistake, please contact support@formify.com.",
+        400
+      )
     )
   }
   try {
-    const formFound = await Form.findOne({ formID })
-    res.json({
+    const requestedForm = await Form.findOne({ formID })
+    if (!requestedForm) {
+      return next(
+        new ErrorResponse("The form with given ID could not be found.", 404)
+      )
+    }
+    res.status(200).json({
       msg: "Found the form",
-      formFound,
+      success: true,
+      requestedForm,
     })
   } catch (error) {
-    return next(new ErrorResponse("Sorry something went wrong", 500))
+    return next(new ErrorResponse("Sorry, something went wrong.", 500))
   }
 }
 
@@ -49,6 +59,7 @@ exports.postOneForm = async (req, res, next) => {
   if (!email || !formID) {
     return next(new ErrorResponse("Please provide a formID and username"))
   }
+  // Write logic to check if any other email is trying to post this form
   try {
     const foundForm = await Form.findOne({ formID })
     foundForm.submissions.push(submission)
@@ -65,7 +76,7 @@ exports.postOneForm = async (req, res, next) => {
 // @desc -> createForm creates a new form instance
 exports.createForm = async (req, res, next) => {
   const { fields } = req.body
-  const { email } = req.params
+  const { email } = req.user
   try {
     const user = await User.findOne({ email })
     if (!user) {

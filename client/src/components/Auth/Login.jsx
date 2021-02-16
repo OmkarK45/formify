@@ -79,7 +79,9 @@ const Login = () => {
         <FormControl marginTop="1.5rem">
           <FormLabel htmlFor="email">Email address</FormLabel>
           <InputGroup>
-            <InputLeftElement children={<Icon as={HiOutlineMail} />} />
+            <InputLeftElement
+              children={<Icon as={HiOutlineMail} color="gray.500" />}
+            />
             <Input
               type="email"
               name="email"
@@ -97,7 +99,7 @@ const Login = () => {
         <FormControl marginTop="2rem">
           <FormLabel htmlFor="password">Password</FormLabel>
           <InputGroup>
-            <InputLeftElement children={<Icon as={HiOutlineLockClosed} />} />
+            <InputLeftElement children={<Icon as={HiOutlineLockClosed} color="gray.500"/>} />
             <Input
               type="password"
               shadow="base"
@@ -116,7 +118,7 @@ const Login = () => {
           marginBottom="1rem"
           type="submit"
           isLoading={isLoading}
-          colorScheme="red"
+          colorScheme="orange"
         >
           Login
         </Button>

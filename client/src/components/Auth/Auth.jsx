@@ -20,7 +20,7 @@ const Auth = () => {
         maxW={["90%", "75%", "75%", "50%","30%"]}
         margin="0 auto"
         marginTop="3rem"
-        bg={colorMode === "dark" ? "gray.700" : "white"}
+        bg={colorMode === "dark" ? "gray.800" : "white"}
         boxShadow={colorMode === "dark" ? "none" : "base"}
       >
         <Tabs isFitted variant="enclosed">

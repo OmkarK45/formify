@@ -13,12 +13,14 @@ import userContext from "./context/userContext"
 import PrivateRoute from "./components/Utils/PrivateRoute"
 import Dashboard from "./components/Dashboard/Dashboard"
 import FormDetails from "./components/Dashboard/FormDetails"
-import Footer from './components/Layout/Footer';
+import Footer from "./components/Layout/Footer"
 
 const App = () => {
   const [user, setUser] = useState({
     isAuthenticated: false,
     userID: null,
+    username: null,
+    email: null,
   })
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -34,8 +36,12 @@ const App = () => {
           })
         })
       } catch (error) {
-        // @Todo - better error handling her
-        console.log("Not logged in")
+        setUser({
+          userID: null,
+          isAuthenticated: false,
+          username: null,
+          email: null,
+        })
       }
     }
     checkLoggedIn()

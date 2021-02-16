@@ -74,7 +74,9 @@ const Register = () => {
         <FormControl marginTop="1.5rem">
           <FormLabel htmlFor="username">Username</FormLabel>
           <InputGroup>
-            <InputLeftElement children={<Icon as={HiOutlineUser} />} />
+            <InputLeftElement
+              children={<Icon as={HiOutlineUser} color="gray.500" />}
+            />
             <Input
               type="text"
               id="username"
@@ -91,7 +93,9 @@ const Register = () => {
         <FormControl marginTop="1.5rem">
           <FormLabel htmlFor="registerEmail">Email address</FormLabel>
           <InputGroup>
-            <InputLeftElement children={<Icon as={HiOutlineMail} />} />
+            <InputLeftElement
+              children={<Icon as={HiOutlineMail} color="gray.500" />}
+            />
             <Input
               shadow="base"
               type="email"
@@ -109,7 +113,9 @@ const Register = () => {
           <FormLabel htmlFor="registerPassword">Password</FormLabel>
           <InputGroup>
             <InputLeftElement
-              children={<Icon size="2" as={HiOutlineLockClosed} />}
+              children={
+                <Icon size="2" as={HiOutlineLockClosed} color="gray.500" />
+              }
             />
             <Input
               type="password"

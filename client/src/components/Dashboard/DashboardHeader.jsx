@@ -7,7 +7,7 @@ export default function DashboardHeader({ title, children }) {
     <>
       <Box bg={bg}>
         <Flex
-          maxW="80%"
+          maxW={["90%", "80%"]}
           m="0 auto"
           p="2rem 0 2rem"
           align="center"
