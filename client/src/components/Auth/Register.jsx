@@ -66,7 +66,7 @@ const Register = () => {
       })
   }
   return (
-    <Box py="1rem">
+    <Box pb="1rem">
       <Box>
         <Heading fontStyle="italic">Register.</Heading>
       </Box>

@@ -38,7 +38,6 @@ const Auth = () => {
           </TabPanels>
         </Tabs>
       </Box>
-      <Footer />
     </>
   )
 }

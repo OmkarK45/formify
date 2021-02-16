@@ -85,7 +85,6 @@ const Hero = () => {
       </Box>
       <Features />
       <GetStarted />
-      <Footer />
     </>
   )
 }

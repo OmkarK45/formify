@@ -12,6 +12,7 @@ import { HiPlusCircle } from "react-icons/hi"
 import Footer from "./../Layout/Footer"
 import FormList from "./FormList"
 import CreateFormModal from "./CreateFormModal"
+import DashboardHeader from "./DashboardHeader"
 
 const Dashboard = () => {
   const { user } = useContext(userContext)
@@ -20,31 +21,18 @@ const Dashboard = () => {
   console.log({ isOpen, onOpen })
   return (
     <Box>
-      <Box bg={bg}>
-        <Flex
-          maxW="80%"
-          m="0 auto"
-          p="2rem 0 2rem"
-          align="center"
-          justify="space-between"
+      <DashboardHeader title="Your Forms">
+        <Button
+          leftIcon={<HiPlusCircle />}
+          colorScheme="orange"
+          shadow="base"
+          onClick={onOpen}
         >
-          <Heading>Forms</Heading>
-          <Box>
-            <Button
-              leftIcon={<HiPlusCircle />}
-              colorScheme="orange"
-              shadow="base"
-              onClick={onOpen}
-            >
-              Create Form
-            </Button>
-          </Box>
-        </Flex>
-      </Box>
-
+          Create Form
+        </Button>
+      </DashboardHeader>
       <CreateFormModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       <FormList />
-      <Footer />
     </Box>
   )
 }

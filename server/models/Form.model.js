@@ -9,13 +9,17 @@ const formSchema = new Schema(
       type: String,
       default: () => nanoid(6),
     },
-    fields: [{ type: Schema.Types.Mixed }],
+    schema: {
+      type: Array,
+      // default: this.submissions.slice(1)
+    },
+    submissions: [{ type: Schema.Types.Mixed }],
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
   },
-  { strict: false }
+  { strict: false, timestamps: true }
 )
 
 const Form = mongoose.model("Form", formSchema)

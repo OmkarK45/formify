@@ -8,27 +8,40 @@ import {
   Code,
   TabPanels,
   TabPanel,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"
+import { AiFillHtml5 } from "react-icons/ai"
+import { SiJavascript } from "react-icons/si"
+import { FaReact } from "react-icons/fa"
 const c = {
   pink: "#FF79AA",
   green: "#62E478",
   light: "#E7DE79",
   text: "#DBD7E0",
-};
-const CodeSnippet = () => {
+}
+const CodeSnippet = ({ url }) => {
   return (
-    <Box borderRadius="13px" maxW="65ch" margin="3rem auto">
+    <Box borderRadius="13px" maxW="65ch">
       <Tabs isFitted variant="enclosed">
         <TabList>
-          <Tab>Basic</Tab>
-          <Tab>Fetch</Tab>
+          <Tab>
+            <AiFillHtml5 />
+            &nbsp; Basic
+          </Tab>
+          <Tab>
+            <SiJavascript />
+            &nbsp; Fetch
+          </Tab>
+          <Tab>
+            <FaReact />
+            &nbsp; React
+          </Tab>
         </TabList>
-        <TabPanels fontSize="1.2rem" border="1px solid #eee">
+        <TabPanels>
           <TabPanel textAlign="left" backgroundColor="#011627">
             <code>
               <Text color={c.text}>
                 &lt;<span style={{ color: c.pink }}>form </span>
-                <span style={{ color: c.green }}>action="{"endpoint"}"</span>
+                <span style={{ color: c.green }}>action="{url}"</span>
                 &nbsp;<span style={{ color: c.light }}>method="POST"</span>&gt;
               </Text>
               <Text color={c.text}>
@@ -54,7 +67,7 @@ const CodeSnippet = () => {
         </TabPanels>
       </Tabs>
     </Box>
-  );
-};
+  )
+}
 
-export default CodeSnippet;
+export default CodeSnippet

@@ -1,4 +1,4 @@
-import { FaBolt } from "react-icons/fa";
+import { FaBolt } from "react-icons/fa"
 import {
   Flex,
   Box,
@@ -7,7 +7,7 @@ import {
   Button,
   Heading,
   Container,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"
 
 const GetStarted = () => {
   return (
@@ -18,7 +18,7 @@ const GetStarted = () => {
         margin="4rem auto"
         padding="2rem"
         color="white"
-        bg="green.500"
+        bg="orange.500"
         borderRadius={["0", "10px"]}
         boxShadow="md"
       >
@@ -32,17 +32,17 @@ const GetStarted = () => {
             </Text>
           </Flex>
           <Button
-            _hover={{ bg: "green.800" }}
+            _hover={{ bg: "orange.800" }}
             size="lg"
             mt="1rem"
-            bg="green.700"
+            bg="orange.700"
           >
             Get Started &nbsp; <FaBolt />
           </Button>
         </Box>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default GetStarted;
+export default GetStarted

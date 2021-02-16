@@ -9,6 +9,8 @@ import {
   TableCaption,
   Box,
 } from "@chakra-ui/react"
+import { Link } from "react-router-dom"
+
 const FormList = () => {
   return (
     <Box boxShadow="base" borderRadius="10px" m="0 auto" mt="3rem" maxW="80%">
@@ -23,19 +25,11 @@ const FormList = () => {
         </Thead>
         <Tbody>
           <Tr>
-            <Td>From Portfolio</Td>
+            <Td>
+              <Link to="/forms/23423/">From Portfolio</Link>
+            </Td>
             <Td>Active</Td>
             <Td isNumeric>34</Td>
-          </Tr>
-          <Tr>
-            <Td>From Marketing Page</Td>
-            <Td>Disabled</Td>
-            <Td isNumeric>12</Td>
-          </Tr>
-          <Tr>
-            <Td>From School Survey</Td>
-            <Td>Active</Td>
-            <Td isNumeric>99</Td>
           </Tr>
         </Tbody>
       </Table>

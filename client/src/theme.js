@@ -49,11 +49,18 @@ export default extendTheme({
     Button: {
       baseStyle: {
         fontWeight: "400",
+        boxShadow: "base",
       },
     },
     Heading: {
       baseStyle: {
         letterSpacing: "-0.1rem",
+      },
+    },
+    Code: {
+      baseStyle: {
+        fontFamily: "monospace",
+        boxShadow: "base",
       },
     },
   },

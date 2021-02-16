@@ -16,7 +16,7 @@ import { Link } from "react-router-dom"
 import { BsMoon } from "react-icons/bs"
 import { BiSun } from "react-icons/bi"
 import Menu from "./Drawer"
-import logo from "./logo.svg"
+import logo from "./logo-orange.png"
 
 const Header = () => {
   const { user } = useContext(userContext)
@@ -34,7 +34,7 @@ const Header = () => {
         >
           <Box>
             <Link to="/">
-              <Image src="./assets/logo-orange.png" />
+              <Image src={logo} />
             </Link>
           </Box>
 

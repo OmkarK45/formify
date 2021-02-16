@@ -12,6 +12,8 @@ import { Auth } from "./components/Auth"
 import userContext from "./context/userContext"
 import PrivateRoute from "./components/Utils/PrivateRoute"
 import Dashboard from "./components/Dashboard/Dashboard"
+import FormDetails from "./components/Dashboard/FormDetails"
+import Footer from './components/Layout/Footer';
 
 const App = () => {
   const [user, setUser] = useState({
@@ -48,8 +50,10 @@ const App = () => {
             <Route path="/" exact component={Hero}></Route>
             <Route path="/auth" exact component={Auth} />
             <PrivateRoute path="/dashboard" exact component={Dashboard} />
+            <PrivateRoute path="/forms/:formId" exact component={FormDetails} />
           </Switch>
         </Router>
+        <Footer />
       </userContext.Provider>
     </>
   )
