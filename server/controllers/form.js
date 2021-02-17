@@ -10,8 +10,9 @@ exports.getForms = async (req, res) => {
   const { email } = req.user
   try {
     const user = await User.findOne({ email }).populate("forms")
-    res.json({
+    res.status(200).json({
       msg: "Here are your forms you created!",
+      status: true,
       user,
     })
   } catch (error) {
@@ -28,21 +29,20 @@ exports.getOneForm = async (req, res, next) => {
   const { formID } = req.params
   const { email } = req.user
   if (!(formID && email)) {
-    return next(
-      new ErrorResponse(
-        "Sorry, We couldn't find the form with this ID or Email. If you think this is a mistake, please contact support@formify.com.",
-        400
-      )
-    )
+    return next(new ErrorResponse("Please provide valid FormID and Email", 400))
   }
   try {
     const requestedForm = await Form.findOne({ formID })
     if (!requestedForm) {
       return next(
-        new ErrorResponse("The form with given ID could not be found.", 404)
+        new ErrorResponse(
+          "Sorry, We couldn't find the form with this ID or Email. If you think this is a mistake, please contact support@formify.com.",
+          404
+        )
       )
     }
     res.status(200).json({
+      // @TODO -> MSG could be better
       msg: "Found the form",
       success: true,
       requestedForm,
@@ -52,24 +52,41 @@ exports.getOneForm = async (req, res, next) => {
   }
 }
 
-exports.postOneForm = async (req, res, next) => {
-  const { email, formID } = req.params
-  const { submission } = req.body
-  console.log(fields)
-  if (!email || !formID) {
+exports.postSubmissions = async (req, res, next) => {
+  if (
+    !req.body ||
+    (req.method !== "POST" && req.method !== "PUT" && req.method !== "PATCH")
+  ) {
+    return next(
+      new ErrorResponse(
+        "Please make sure to make request using POST method",
+        400
+      )
+    )
+  }
+
+  const { formID } = req.params
+  const submissionData = req.body
+
+  if (!formID) {
     return next(new ErrorResponse("Please provide a formID and username"))
   }
-  // Write logic to check if any other email is trying to post this form
+
   try {
     const foundForm = await Form.findOne({ formID })
-    foundForm.submissions.push(submission)
+    foundForm.submissions.push(submissionData)
     await foundForm.save()
-    res.json({
-      "Structure of the form ": foundForm,
-      "Fields sent by user": submission,
+    res.status(200).json({
+      "Structure of the form": foundForm,
+      "Fields sent by user": submissionData,
     })
   } catch (error) {
-    next(error)
+    next(
+      new ErrorResponse(
+        "Something went wrong while submitting this form. Please try again or contact support@formify.com",
+        500
+      )
+    )
   }
 }
 
@@ -83,8 +100,9 @@ exports.createForm = async (req, res, next) => {
       return next(new ErrorResponse("Sorry we couldn't find this user."))
     }
     const newForm = await Form.create({
-      fields: [fields],
+      fields,
       createdBy: user,
+      host: email,
     })
     user.forms.push(newForm)
     await user.save()
