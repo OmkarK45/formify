@@ -13,11 +13,11 @@ export default function Empty({ text }) {
       >
         <Icon
           as={ImDrawer2}
-          zIndex="-44"
+          zIndex="0"
           fontSize={["6rem", "7rem"]}
           color="gray.400"
         />
-        <Text mt="1rem" zIndex="-44" color="gray.500">
+        <Text mt="1rem" zIndex="0" color="gray.500">
           {text}
         </Text>
       </Flex>

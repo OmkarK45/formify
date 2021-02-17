@@ -15,6 +15,12 @@ const formSchema = new Schema(
       type: String,
       default: () => nanoid(6),
     },
+    formName: {
+      type: String,
+      default: "A New Form",
+      max: 256,
+      min: 3,
+    },
     fields: [
       { type: String, length: 3, required: [true, "This field is required"] },
     ],
@@ -22,14 +28,6 @@ const formSchema = new Schema(
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
-    },
-    host: {
-      type: Schema.Types.String,
-      unique: true,
-      match: [
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        "Please provide valied email address.",
-      ],
     },
     disabled: {
       type: Boolean,

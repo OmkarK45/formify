@@ -12,9 +12,11 @@ import {
 import { SkeletonCircle, SkeletonText } from "@chakra-ui/react"
 import db from "../../sampleDB"
 import Sample from "./sample"
+import Empty from "./../Utils/Empty"
 
 export default function Submissions() {
   const { form } = db
+  const data = false
   return (
     <>
       <Box
@@ -26,28 +28,32 @@ export default function Submissions() {
         overflowX="auto"
       >
         {/* <Sample /> */}
-        <Table size="md" variant="simple">
-          <TableCaption>Forms created by Omkar</TableCaption>
+        {data ? (
+          <Table size="md" variant="simple">
+            <TableCaption>Forms created by Omkar</TableCaption>
 
-          <Thead>
-            <Tr>
-              {db.schema.map((s, i) => {
-                return <Th key={i}>{s}</Th>
+            <Thead>
+              <Tr>
+                {db.schema.map((s, i) => {
+                  return <Th key={i}>{s}</Th>
+                })}
+              </Tr>
+            </Thead>
+            <Tbody>
+              {db.submissions.map((s, i) => {
+                return (
+                  <Tr key={i}>
+                    {db.schema.map((header, index) => {
+                      return <Td key={index}>{s[header]}</Td>
+                    })}
+                  </Tr>
+                )
               })}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {db.submissions.map((s, i) => {
-              return (
-                <Tr key={i}>
-                  {db.schema.map((header, index) => {
-                    return <Td key={index}>{s[header]}</Td>
-                  })}
-                </Tr>
-              )
-            })}
-          </Tbody>
-        </Table>
+            </Tbody>
+          </Table>
+        ) : (
+          <Empty text="You don't have any submissions on this form." />
+        )}
       </Box>
     </>
   )

@@ -1,8 +1,6 @@
 const User = require("../models/User.model")
 const Form = require("../models/Form.model")
 const ErrorResponse = require("../utils/errorResponse")
-const { chain, get, isArguments } = require("lodash")
-// @route -> /:username/forms/:formID
 
 // @desc -> Find all form submissions for that user
 exports.getForms = async (req, res) => {
@@ -55,7 +53,7 @@ exports.getOneForm = async (req, res, next) => {
 exports.postSubmissions = async (req, res, next) => {
   if (
     !req.body ||
-    (req.method !== "POST" && req.method !== "PUT" && req.method !== "PATCH")
+    (req.method !== "POST" && req.metsd !== "PUT" && req.method !== "PATCH")
   ) {
     return next(
       new ErrorResponse(
@@ -92,18 +90,21 @@ exports.postSubmissions = async (req, res, next) => {
 
 // @desc -> createForm creates a new form instance
 exports.createForm = async (req, res, next) => {
-  const { fields } = req.body
+  const { formName, fields } = req.body
   const { email } = req.user
+
   try {
     const user = await User.findOne({ email })
     if (!user) {
-      return next(new ErrorResponse("Sorry we couldn't find this user."))
+      return next(new ErrorResponse("Sorry we couldn't find this user.", 404))
     }
+
     const newForm = await Form.create({
+      formName,
       fields,
       createdBy: user,
-      host: email,
     })
+
     user.forms.push(newForm)
     await user.save()
     await newForm.save()
@@ -114,7 +115,13 @@ exports.createForm = async (req, res, next) => {
       user,
     })
   } catch (error) {
-    next(error)
+    console.log(error)
+    next(
+      new ErrorResponse(
+        "Something went wrong while creating your form. Please try again.",
+        500
+      )
+    )
   }
 }
 // @desc -> handleFormSubmissions -> handles form submissions of that particular UUID
