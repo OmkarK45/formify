@@ -99,7 +99,9 @@ const Login = () => {
         <FormControl marginTop="2rem">
           <FormLabel htmlFor="password">Password</FormLabel>
           <InputGroup>
-            <InputLeftElement children={<Icon as={HiOutlineLockClosed} color="gray.500"/>} />
+            <InputLeftElement
+              children={<Icon as={HiOutlineLockClosed} color="gray.500" />}
+            />
             <Input
               type="password"
               shadow="base"
@@ -118,6 +120,7 @@ const Login = () => {
           marginBottom="1rem"
           type="submit"
           isLoading={isLoading}
+          loadingText="Logging in"
           colorScheme="orange"
         >
           Login

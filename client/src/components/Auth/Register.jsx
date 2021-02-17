@@ -23,6 +23,7 @@ import userContext from "./../../context/userContext"
 const Register = () => {
   const { setUser } = useContext(userContext)
   const history = useHistory()
+  const [isLoading, setIsLoading] = useState(false)
   const toast = useToast()
   const [data, setData] = useState({
     username: "",
@@ -38,6 +39,8 @@ const Register = () => {
   }
 
   const handleSubmit = (e) => {
+    setIsLoading(true)
+
     e.preventDefault()
     return POST(
       process.env.REACT_APP_BACKEND + "/api/auth/register",
@@ -48,6 +51,8 @@ const Register = () => {
     )
       .then((res) => {
         console.log(res)
+        setIsLoading(false)
+
         setUser({
           isAuthenticated: true,
           userID: res.data.userID,
@@ -56,6 +61,8 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error)
+        setIsLoading(false)
+
         toast({
           title: "Error !",
           description: "Something went wrong while registering you.",
@@ -129,7 +136,14 @@ const Register = () => {
             />
           </InputGroup>
         </FormControl>
-        <Button colorScheme="purple" type="submit" w="100%" mt="1.5rem">
+        <Button
+          isLoading={isLoading}
+          loadingText="Registering you"
+          colorScheme="purple"
+          type="submit"
+          w="100%"
+          mt="1.5rem"
+        >
           Register
         </Button>
       </form>

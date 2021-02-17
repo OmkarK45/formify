@@ -55,6 +55,8 @@ const Header = () => {
               <IconButton
                 icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
                 onClick={toggleColorMode}
+                variant='ghost'
+                shadow='none'
               >
                 Toggle {colorMode === "light" ? "Dark" : "Light"}
               </IconButton>
