@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import {
   Table,
   Thead,
@@ -7,16 +8,27 @@ import {
   Th,
   Td,
   TableCaption,
+  Stack,
   Box,
+  Spinner,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
 } from "@chakra-ui/react"
-import { SkeletonCircle, SkeletonText } from "@chakra-ui/react"
 import db from "../../sampleDB"
-import Sample from "./sample"
 import Empty from "./../Utils/Empty"
 
 export default function Submissions() {
-  const { form } = db
-  const data = false
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  const data = true
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true)
+    }, 3000)
+  }, [])
+
   return (
     <>
       <Box
@@ -27,32 +39,41 @@ export default function Submissions() {
         minW="100%"
         overflowX="auto"
       >
-        {/* <Sample /> */}
-        {data ? (
-          <Table size="md" variant="simple">
-            <TableCaption>Forms created by Omkar</TableCaption>
+        {isLoaded ? (
+          <Box>
+            {data ? (
+              <Table size="md" variant="simple">
+                <TableCaption>Forms created by Omkar</TableCaption>
 
-            <Thead>
-              <Tr>
-                {db.schema.map((s, i) => {
-                  return <Th key={i}>{s}</Th>
-                })}
-              </Tr>
-            </Thead>
-            <Tbody>
-              {db.submissions.map((s, i) => {
-                return (
-                  <Tr key={i}>
-                    {db.schema.map((header, index) => {
-                      return <Td key={index}>{s[header]}</Td>
+                <Thead>
+                  <Tr>
+                    {db.schema.map((s, i) => {
+                      return <Th key={i}>{s}</Th>
                     })}
                   </Tr>
-                )
-              })}
-            </Tbody>
-          </Table>
+                </Thead>
+                <Tbody>
+                  {db.submissions.map((s, i) => {
+                    return (
+                      <Tr key={i}>
+                        {db.schema.map((header, index) => {
+                          return <Td key={index}>{s[header]}</Td>
+                        })}
+                      </Tr>
+                    )
+                  })}
+                </Tbody>
+              </Table>
+            ) : (
+              <Empty text="You don't have any submissions on this form." />
+            )}
+          </Box>
         ) : (
-          <Empty text="You don't have any submissions on this form." />
+          <Stack>
+            <Skeleton height="20px" />
+            <Skeleton height="20px" />
+            <Skeleton height="20px" />
+          </Stack>
         )}
       </Box>
     </>
