@@ -29,6 +29,7 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
+    confirmPassword: "",
   })
 
   const handleInputChange = (event) => {
@@ -39,6 +40,14 @@ const Register = () => {
   }
 
   const handleSubmit = (e) => {
+    if (data.confirmPassword !== data.password) {
+      e.preventDefault()
+      return toast({
+        title: "Please make sure passwords match.",
+        status: "info",
+        isClosable: true,
+      })
+    }
     setIsLoading(true)
 
     e.preventDefault()
@@ -136,6 +145,28 @@ const Register = () => {
             />
           </InputGroup>
         </FormControl>
+
+        <FormControl marginTop="1.5rem">
+          <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+          <InputGroup>
+            <InputLeftElement
+              children={
+                <Icon size="2" as={HiOutlineLockClosed} color="gray.500" />
+              }
+            />
+            <Input
+              type="password"
+              id="confirmPassword"
+              shadow="base"
+              name="confirmPassword"
+              isRequired={true}
+              value={data.confirmPassword}
+              onChange={handleInputChange}
+              placeholder="Password"
+            />
+          </InputGroup>
+        </FormControl>
+
         <Button
           isLoading={isLoading}
           loadingText="Registering you"

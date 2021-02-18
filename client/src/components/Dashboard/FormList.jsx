@@ -9,12 +9,14 @@ import {
   Td,
   TableCaption,
   Box,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 import Empty from "./../Utils/Empty"
 import { FiExternalLink } from "react-icons/fi"
 const FormList = () => {
   const data = true
+  const tableHeaderBg = useColorModeValue("gray.100", "gray.700")
   return (
     <Box
       boxShadow="base"
@@ -28,7 +30,7 @@ const FormList = () => {
         <Table size="md" variant="simple">
           {/* This is gonna be dynamic */}
           <TableCaption>Forms created by Omkar</TableCaption>
-          <Thead>
+          <Thead bg={tableHeaderBg}>
             <Tr>
               <Th>Forms</Th>
               <Th>Status</Th>
