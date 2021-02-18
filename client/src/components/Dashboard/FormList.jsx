@@ -3,6 +3,7 @@ import {
   Thead,
   Tbody,
   Tfoot,
+  Text,
   Tr,
   Th,
   Td,
@@ -11,7 +12,7 @@ import {
 } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 import Empty from "./../Utils/Empty"
-
+import { FiExternalLink } from "react-icons/fi"
 const FormList = () => {
   const data = true
   return (
@@ -37,10 +38,51 @@ const FormList = () => {
           <Tbody>
             <Tr>
               <Td>
-                <Link to="/forms/23423/">From Portfolio</Link>
+                <Link style={{ display: "flex" }} to="/forms/23423/">
+                  From Portfolio <FiExternalLink />
+                </Link>
+                <Text fontSize="sm" color="gray.500">
+                  portfolio@example.com
+                </Text>
               </Td>
               <Td>Active</Td>
               <Td isNumeric>34</Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Link style={{ display: "flex" }} to="/forms/23423/">
+                  From Contacts <FiExternalLink />
+                </Link>
+                <Text fontSize="sm" color="gray.500">
+                  portfolio@example.com
+                </Text>
+              </Td>
+              <Td>Active</Td>
+              <Td isNumeric>10</Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Link style={{ display: "flex" }} to="/forms/23423/">
+                  Twitter Survey <FiExternalLink />
+                </Link>
+                <Text fontSize="sm" color="gray.500">
+                  portfolio@example.com
+                </Text>
+              </Td>
+              <Td>Active</Td>
+              <Td isNumeric>12</Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Link style={{ display: "flex" }} to="/forms/23423/">
+                  Email Marketing Survey <FiExternalLink />
+                </Link>
+                <Text fontSize="sm" color="gray.500">
+                  portfolio@example.com
+                </Text>
+              </Td>
+              <Td>Disabled</Td>
+              <Td isNumeric>23</Td>
             </Tr>
           </Tbody>
         </Table>

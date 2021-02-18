@@ -2,7 +2,9 @@
 
 ## Work in Progress
 
-<img src="https://i.imgur.com/ofMWA16.png">
+<img src='./full.png'>
+
+<img src="./main.png">
 
 //@TODO -
 URGENT - -
