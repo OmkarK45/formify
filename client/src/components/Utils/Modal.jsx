@@ -20,6 +20,8 @@ export default function ModalAlert({
   modalTitle,
   modalStatus,
   leftIcon,
+  buttonAction,
+  buttonVarient,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const modalFooterBg = useColorModeValue("gray.50", "gray.900")
@@ -31,6 +33,7 @@ export default function ModalAlert({
         leftIcon={leftIcon}
         colorScheme={buttonColorScheme}
         onClick={onOpen}
+        variant={buttonVarient}
       >
         {buttonTitle}
       </Button>
@@ -55,7 +58,7 @@ export default function ModalAlert({
               colorScheme={modalStatus === "danger" ? "red" : "orange"}
               fontWeight="400"
             >
-              Delete
+              {buttonAction}
             </Button>
             <Button border="1px solid" borderColor="gray.300" onClick={onClose}>
               Cancel

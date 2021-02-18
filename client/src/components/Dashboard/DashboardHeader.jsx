@@ -9,7 +9,7 @@ export default function DashboardHeader({ title, children }) {
         <Flex
           maxW={["90%", "80%"]}
           m="0 auto"
-          p="2rem 0 2rem"
+          p="2rem 0 2rem 0"
           align="center"
           justify="space-between"
           // justify={["center", "center", "space-between"]}

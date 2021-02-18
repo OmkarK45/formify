@@ -22,7 +22,7 @@ export default function CreateFormModal({ isOpen, onOpen, onClose }) {
   const iconColor = useColorModeValue("orange.600", "orange.400")
   return (
     <>
-      <Modal borderRadius="0.5rem" isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader fontWeight="400">

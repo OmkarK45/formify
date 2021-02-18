@@ -19,7 +19,7 @@ export default function AccountSettings() {
       <Box bg={bg}>
         <Tabs variant="line">
           <TabList m="0 auto" maxW={["100%", "100%", "80%"]}>
-            <Tab>Profile</Tab>
+            <Tab>Account</Tab>
           </TabList>
           <TabPanels bg={tabBg}>
             <TabPanel maxW={["100%", "100%", "80%"]} m="0 auto">
