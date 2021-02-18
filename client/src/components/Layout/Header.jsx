@@ -30,7 +30,7 @@ const Header = () => {
         <Flex
           justifyContent="space-between"
           p="0.6rem 0"
-          maxW="80%"
+          maxW={['90%','80%']}
           m="0 auto"
           alignItems="center"
         >

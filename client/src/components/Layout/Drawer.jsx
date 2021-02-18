@@ -37,8 +37,10 @@ function Menu({ colorMode, toggleColorMode }) {
         display={["block", "block", "none"]}
         ref={btnRef}
         paddingLeft="1rem"
-        color="inherit"
         onClick={onOpen}
+        variant="ghost"
+        shadow="none"
+        fontSize='1.4rem'
       >
         <HiMenuAlt1 />
       </Button>

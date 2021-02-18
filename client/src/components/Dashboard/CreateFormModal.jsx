@@ -26,21 +26,7 @@ export default function CreateFormModal({ isOpen, onOpen, onClose }) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader fontWeight="400">
-            <Flex align="center">
-              <Flex
-                align="center"
-                justify="center"
-                h={10}
-                mr="2"
-                borderRadius="50%"
-                w={10}
-                bg={iconBg}
-                color={iconColor}
-              >
-                <AiOutlineFileAdd fontSize="1.3rem" />
-              </Flex>
-              <Text fontWeight="600">Create New Form</Text>
-            </Flex>
+            <Text fontWeight="600">Create New Form</Text>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>

@@ -14,7 +14,7 @@ import { AiOutlineWarning } from "react-icons/ai"
 export default function Profile() {
   return (
     <>
-      <Box m="0 auto" mt="3rem" maxW={["auto", "95%", "80%"]}>
+      <Box>
         <Text fontSize="2xl" fontWeight="600">
           Profile
         </Text>
@@ -59,8 +59,8 @@ export default function Profile() {
                   leftIcon={<AiOutlineWarning />}
                   buttonTitle="Deactivate Account"
                   buttonColorScheme="red"
-                  modalTitle="Do you wish to delete your account ?"
-                  modalContent="This action cannot be undone."
+                  modalTitle="Deactivate account"
+                  modalContent="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
                   modalStatus="danger"
                 />
               </Td>

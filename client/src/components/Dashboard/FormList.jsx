@@ -16,7 +16,7 @@ import Empty from "./../Utils/Empty"
 import { FiExternalLink } from "react-icons/fi"
 const FormList = () => {
   const data = true
-  const tableHeaderBg = useColorModeValue("gray.100", "gray.700")
+  const tableHeaderBg = useColorModeValue("gray.100", "gray.800")
   return (
     <Box
       boxShadow="base"

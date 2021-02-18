@@ -57,7 +57,9 @@ export default function ModalAlert({
             >
               Delete
             </Button>
-            <Button onClick={onClose}>Close</Button>
+            <Button border="1px solid" borderColor="gray.300" onClick={onClose}>
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
