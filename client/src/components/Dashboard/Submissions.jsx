@@ -17,18 +17,14 @@ import {
 } from "@chakra-ui/react"
 import db from "../../sampleDB"
 import Empty from "./../Utils/Empty"
-
 export default function Submissions() {
   const [isLoaded, setIsLoaded] = useState(false)
-
   const data = true
-
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true)
     }, 3000)
   }, [])
-
   return (
     <>
       <Box
@@ -44,7 +40,6 @@ export default function Submissions() {
             {data ? (
               <Table size="md" variant="simple">
                 <TableCaption>Forms created by Omkar</TableCaption>
-
                 <Thead>
                   <Tr>
                     {db.schema.map((s, i) => {

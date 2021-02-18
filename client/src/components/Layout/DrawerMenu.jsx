@@ -11,12 +11,21 @@ export default function DrawerMenu() {
         </Text>
         <Link to="/dashboard">
           <Text fontSize="lg" padding="0.6rem 0">
-            My Account
+            My Forms
           </Text>
         </Link>
         <Text fontSize="lg" padding="0.6rem 0">
           Payments
         </Text>
+        <Divider />
+        <Text fontSize="lg" padding="0.6rem 0" fontWeight="600">
+          Account
+        </Text>
+        <Link to="/account/settings">
+          <Text fontSize="lg" padding="0.6rem 0">
+            Settings
+          </Text>
+        </Link>
         <Divider />
         <Text fontSize="lg" padding="0.6rem 0" fontWeight="600">
           Help
