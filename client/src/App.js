@@ -14,7 +14,11 @@ import PrivateRoute from "./components/Utils/PrivateRoute"
 import Dashboard from "./components/Dashboard/Dashboard"
 import FormDetails from "./components/Dashboard/FormDetails"
 import Footer from "./components/Layout/Footer"
-import AccountSettings from './components/User/AccountSettings'
+import AccountSettings from "./components/User/AccountSettings"
+import { QueryClient, QueryClientProvider, useQuery } from "react-query"
+import { ReactQueryDevtools } from "react-query/devtools"
+
+const queryClient = new QueryClient()
 
 const App = () => {
   const [user, setUser] = useState({
@@ -50,23 +54,29 @@ const App = () => {
 
   return (
     <>
-      <userContext.Provider value={{ user, setUser }}>
-        <Router>
-          <Header />
-          <Switch>
-            <Route path="/" exact component={Hero}></Route>
-            <Route path="/auth" exact component={Auth} />
-            <PrivateRoute path="/dashboard" exact component={Dashboard} />
-            <PrivateRoute
-              path="/account/settings"
-              exact
-              component={AccountSettings}
-            />
-            <PrivateRoute path="/forms/:formId" exact component={FormDetails} />
-          </Switch>
-        </Router>
-        <Footer />
-      </userContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <userContext.Provider value={{ user, setUser }}>
+          <Router>
+            <Header />
+            <Switch>
+              <Route path="/" exact component={Hero}></Route>
+              <Route path="/auth" exact component={Auth} />
+              <PrivateRoute path="/dashboard" exact component={Dashboard} />
+              <PrivateRoute
+                path="/account/settings"
+                exact
+                component={AccountSettings}
+              />
+              <PrivateRoute
+                path="/dashboard/forms/:formID"
+                exact
+                component={FormDetails}
+              />
+            </Switch>
+          </Router>
+          <Footer />
+        </userContext.Provider>
+      </QueryClientProvider>
     </>
   )
 }

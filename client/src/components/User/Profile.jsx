@@ -32,21 +32,33 @@ export default function Profile() {
                 <Td color="gray.500">Username</Td>
                 <Td fontWeight="500">Omkar</Td>
                 <Td>
-                  <Update colorScheme="orange" variant="outline" />
+                  <Update
+                    updateTitle="Update Username"
+                    colorScheme="orange"
+                    variant="outline"
+                  />
                 </Td>
               </Tr>
               <Tr>
                 <Td color="gray.500">Password</Td>
                 <Td fontWeight="500">•••••</Td>
                 <Td>
-                  <Update colorScheme="orange" variant="outline" />
+                  <Update
+                    updateTitle="Update Password"
+                    colorScheme="orange"
+                    variant="outline"
+                  />
                 </Td>
               </Tr>
               <Tr>
                 <Td color="gray.500">Email</Td>
                 <Td fontWeight="500">example@example.com</Td>
                 <Td>
-                  <Update colorScheme="orange" variant="outline" />
+                  <Update
+                    updateTitle="Update Email"
+                    colorScheme="orange"
+                    variant="outline"
+                  />
                 </Td>
               </Tr>
             </Tbody>

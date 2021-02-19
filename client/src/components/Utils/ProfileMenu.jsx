@@ -48,9 +48,8 @@ const ProfileMenu = () => {
             <MenuItem icon={<AiOutlineBook />}>Docs</MenuItem>
             <MenuItem icon={<AiOutlineQuestionCircle />}>FAQ</MenuItem>
             <MenuItem icon={<FiLifeBuoy />}>Support</MenuItem>
-            <MenuItem icon={<FiLogOut />}>
-              <Logout />
-            </MenuItem>
+
+            <Logout />
           </MenuGroup>
         </MenuList>
       </Menu>

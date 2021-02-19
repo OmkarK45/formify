@@ -15,7 +15,7 @@ export default function AccountSettings() {
   const bg = useColorModeValue("gray.200", "gray.800")
   return (
     <>
-      <DashboardHeader title="Your Account" />
+      <DashboardHeader title="Account Settings" />
       <Box bg={bg}>
         <Tabs variant="line">
           <TabList m="0 auto" maxW={["100%", "100%", "80%"]}>

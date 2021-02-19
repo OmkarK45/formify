@@ -1,3 +1,7 @@
+import { useContext } from "react"
+import userContext from "./../../context/userContext"
+import { useQuery } from "react-query"
+import { Link } from "react-router-dom"
 import {
   Table,
   Thead,
@@ -9,14 +13,33 @@ import {
   Td,
   TableCaption,
   Box,
+  Heading,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
 import Empty from "./../Utils/Empty"
 import { FiExternalLink } from "react-icons/fi"
+import TableSkeleton from "./../Utils/TableSkeleton"
+import { GET } from "./../../utils/network"
+
 const FormList = () => {
-  const data = true
+  const { user } = useContext(userContext)
+  const tempdata = true
   const tableHeaderBg = useColorModeValue("gray.100", "gray.800")
+
+  const { isLoading, error, data, isFetching } = useQuery(
+    "formList",
+    async () =>
+      await GET(
+        process.env.REACT_APP_BACKEND + "/api/forms/" + user.email + "/all",
+        {
+          withCredentials: true,
+        }
+      )
+  )
+
+  if (isLoading) return <TableSkeleton />
+
+  if (error) return <Empty text={error.message} status="error" />
   return (
     <Box
       boxShadow="base"
@@ -38,6 +61,28 @@ const FormList = () => {
               </Tr>
             </Thead>
             <Tbody>
+              {data?.data?.user?.forms.map((form) => {
+                return (
+                  <Tr key={form._id}>
+                    <Td>
+                      <a
+                        style={{ display: "flex" }}
+                        href={"/dashboard/forms/" + form.formID}
+                      >
+                        {form.formName} &nbsp;
+                        <span style={{ marginLeft: "0.3rem" }}>
+                          <FiExternalLink />
+                        </span>
+                      </a>
+                      <Text fontSize="sm" color="gray.500">
+                        {form.email}
+                      </Text>
+                    </Td>
+                    <Td>{form.disabled ? "Disabled" : "Active"}</Td>
+                    <Td isNumeric>{form.submissions.length}</Td>
+                  </Tr>
+                )
+              })}
               <Tr>
                 <Td>
                   <Link style={{ display: "flex" }} to="/forms/23423/">
@@ -50,47 +95,14 @@ const FormList = () => {
                 <Td>Active</Td>
                 <Td isNumeric>34</Td>
               </Tr>
-              <Tr>
-                <Td>
-                  <Link style={{ display: "flex" }} to="/forms/23423/">
-                    From Contacts <FiExternalLink />
-                  </Link>
-                  <Text fontSize="sm" color="gray.500">
-                    portfolio@example.com
-                  </Text>
-                </Td>
-                <Td>Active</Td>
-                <Td isNumeric>10</Td>
-              </Tr>
-              <Tr>
-                <Td>
-                  <Link style={{ display: "flex" }} to="/forms/23423/">
-                    Twitter Survey <FiExternalLink />
-                  </Link>
-                  <Text fontSize="sm" color="gray.500">
-                    portfolio@example.com
-                  </Text>
-                </Td>
-                <Td>Active</Td>
-                <Td isNumeric>12</Td>
-              </Tr>
-              <Tr>
-                <Td>
-                  <Link style={{ display: "flex" }} to="/forms/23423/">
-                    Email Marketing Survey <FiExternalLink />
-                  </Link>
-                  <Text fontSize="sm" color="gray.500">
-                    portfolio@example.com
-                  </Text>
-                </Td>
-                <Td>Disabled</Td>
-                <Td isNumeric>23</Td>
-              </Tr>
             </Tbody>
           </Table>
         </Box>
       ) : (
-        <Empty text="You don't have any forms you can see submissions of. Create a form by clicking the create form button above." />
+        <Empty
+          text="You don't have any forms you can see submissions of. Create a form by clicking the create form button above."
+          status="empty"
+        />
       )}
     </Box>
   )

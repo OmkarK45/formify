@@ -17,7 +17,8 @@ import {
 } from "@chakra-ui/react"
 import db from "../../sampleDB"
 import Empty from "./../Utils/Empty"
-export default function Submissions() {
+
+export default function Submissions({ fields, submissions }) {
   const [isLoaded, setIsLoaded] = useState(false)
   const data = true
   useEffect(() => {
@@ -37,21 +38,21 @@ export default function Submissions() {
       >
         {isLoaded ? (
           <Box>
-            {data ? (
+            {submissions.length > 0 ? (
               <Table size="md" variant="simple">
                 <TableCaption>Forms created by Omkar</TableCaption>
                 <Thead>
                   <Tr>
-                    {db.schema.map((s, i) => {
+                    {fields.map((s, i) => {
                       return <Th key={i}>{s}</Th>
                     })}
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {db.submissions.map((s, i) => {
+                  {submissions.map((s, i) => {
                     return (
                       <Tr key={i}>
-                        {db.schema.map((header, index) => {
+                        {fields.map((header, index) => {
                           return <Td key={index}>{s[header]}</Td>
                         })}
                       </Tr>
@@ -60,7 +61,10 @@ export default function Submissions() {
                 </Tbody>
               </Table>
             ) : (
-              <Empty text="You don't have any submissions on this form." />
+              <Empty
+                status="empty"
+                text="You don't have any submissions on this form."
+              />
             )}
           </Box>
         ) : (

@@ -12,13 +12,21 @@ import {
   InputGroup,
   InputLeftElement,
   Icon,
+  InputRightElement,
+  IconButton,
 } from "@chakra-ui/react"
-import { HiOutlineMail, HiOutlineLockClosed } from "react-icons/hi"
+import {
+  HiOutlineMail,
+  HiOutlineLockClosed,
+  HiOutlineEye,
+  HiOutlineEyeOff,
+} from "react-icons/hi"
 import userContext from "./../../context/userContext"
 
 const Login = () => {
   const { setUser } = useContext(userContext)
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const history = useHistory()
   const toast = useToast()
   const [data, setData] = useState({
@@ -41,7 +49,6 @@ const Login = () => {
     )
       .then((res) => {
         setIsLoading(false)
-        console.log(res)
         setUser({
           isAuthenticated: true,
           userID: res.data.userID,
@@ -51,7 +58,6 @@ const Login = () => {
         history.push("/dashboard")
       })
       .catch((error) => {
-        console.log({ error })
         setIsLoading(false)
         toast({
           title: "Error !",
@@ -103,7 +109,7 @@ const Login = () => {
               children={<Icon as={HiOutlineLockClosed} color="gray.500" />}
             />
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               shadow="base"
               name="password"
               value={data.password}
@@ -112,6 +118,19 @@ const Login = () => {
               id="password"
               placeholder="Password"
             />
+            <InputRightElement width="4.5rem">
+              <IconButton
+                icon={showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
+                h="1.75rem"
+                shadow="none"
+                bg="inherit"
+                size="sm"
+                title="Show Password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </IconButton>
+            </InputRightElement>
           </InputGroup>
         </FormControl>
         <Button

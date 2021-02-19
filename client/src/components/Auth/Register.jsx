@@ -59,7 +59,6 @@ const Register = () => {
       }
     )
       .then((res) => {
-        console.log(res)
         setIsLoading(false)
 
         setUser({
@@ -69,7 +68,6 @@ const Register = () => {
         history.push("/dashboard")
       })
       .catch((error) => {
-        console.log(error)
         setIsLoading(false)
 
         toast({

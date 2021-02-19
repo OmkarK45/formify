@@ -21,7 +21,6 @@ const Dashboard = () => {
   const bg = useColorModeValue("gray.200", "gray.800")
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [isMobile] = useMediaQuery("(min-width:768px)")
-  console.log({ isOpen, onOpen })
   return (
     <Box>
       <DashboardHeader title="Your Forms">

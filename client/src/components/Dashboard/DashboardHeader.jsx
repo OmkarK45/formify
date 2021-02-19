@@ -1,6 +1,11 @@
-import { Box, Flex, Heading, useColorModeValue } from "@chakra-ui/react"
+import { Box, Flex, Heading, useColorModeValue, Text } from "@chakra-ui/react"
 
-export default function DashboardHeader({ title, children }) {
+export default function DashboardHeader({
+  title,
+  submissions,
+  createdAt,
+  children,
+}) {
   const bg = useColorModeValue("gray.200", "gray.800")
 
   return (
@@ -12,10 +17,11 @@ export default function DashboardHeader({ title, children }) {
           p="2rem 0 2rem 0"
           align="center"
           justify="space-between"
-          // justify={["center", "center", "space-between"]}
-          // direction={["column", "column", "row"]}
+          wrap="wrap"
         >
-          <Heading>{title}</Heading>
+          <Flex direction="column">
+            <Heading>{title}</Heading>
+          </Flex>
           <Box>{children}</Box>
         </Flex>
       </Box>

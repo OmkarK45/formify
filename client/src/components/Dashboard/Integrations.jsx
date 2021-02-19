@@ -11,13 +11,13 @@ import {
 import { MdContentCopy } from "react-icons/md"
 import { useState } from "react"
 import CodeSnippet from "./CodeSnippet"
-const url = "https://formify.com/forms/324sdfx"
-export default function Integrations() {
+
+export default function Integrations({ formID }) {
+  const url = "https://formify.com/forms/" + formID
   const toast = useToast()
   const [copyStatus, setCopySuccess] = useState("")
   const copyToClipboard = async (e) => {
     e.preventDefault()
-    console.log(e.target[0].value)
     try {
       await navigator.clipboard.writeText(e.target[0].value)
       setCopySuccess("Copied!")
@@ -29,7 +29,7 @@ export default function Integrations() {
     } catch (err) {
       setCopySuccess("Failed to copy!")
       toast({
-        title: "Something went wront :(",
+        title: "Something went wrong :(",
         status: "error",
         isClosable: true,
       })

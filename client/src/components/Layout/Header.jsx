@@ -23,14 +23,13 @@ const Header = () => {
   const { user } = useContext(userContext)
   const { colorMode, toggleColorMode } = useColorMode()
   const bg = useColorModeValue("gray.50", "gray.900")
-  console.log(colorMode)
   return (
     <Box position="sticky" bg={bg} top="0" zIndex="99" shadow="base">
       <Box>
         <Flex
           justifyContent="space-between"
           p="0.6rem 0"
-          maxW={['90%','80%']}
+          maxW={["90%", "80%"]}
           m="0 auto"
           alignItems="center"
         >
@@ -55,8 +54,8 @@ const Header = () => {
               <IconButton
                 icon={colorMode === "light" ? <BsMoon /> : <BiSun />}
                 onClick={toggleColorMode}
-                variant='ghost'
-                shadow='none'
+                variant="ghost"
+                shadow="none"
               >
                 Toggle {colorMode === "light" ? "Dark" : "Light"}
               </IconButton>
