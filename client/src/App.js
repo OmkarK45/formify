@@ -16,7 +16,6 @@ import FormDetails from "./components/Dashboard/FormDetails"
 import Footer from "./components/Layout/Footer"
 import AccountSettings from "./components/User/AccountSettings"
 import { QueryClient, QueryClientProvider, useQuery } from "react-query"
-import { ReactQueryDevtools } from "react-query/devtools"
 
 const queryClient = new QueryClient()
 
@@ -26,27 +25,28 @@ const App = () => {
     userID: null,
     username: null,
     email: null,
+    isLoading: true,
   })
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
         await GET(process.env.REACT_APP_BACKEND + "/api/auth/user", {
           withCredentials: true,
-        }).then((userRes) => {
-          setUser({
-            userID: userRes.data.userID,
-            isAuthenticated: true,
-            username: userRes?.data.username,
-            email: userRes?.data.email,
+        })
+          .then((userRes) => {
+            setUser({
+              userID: userRes.data.userID,
+              isAuthenticated: true,
+              username: userRes?.data.username,
+              email: userRes?.data.email,
+              isLoading: false,
+            })
           })
-        })
+          .catch(() => {
+            setUser(null)
+          })
       } catch (error) {
-        setUser({
-          userID: null,
-          isAuthenticated: false,
-          username: null,
-          email: null,
-        })
+        setUser(null)
       }
     }
     checkLoggedIn()
@@ -61,7 +61,11 @@ const App = () => {
             <Switch>
               <Route path="/" exact component={Hero}></Route>
               <Route path="/auth" exact component={Auth} />
-              <PrivateRoute path="/dashboard" exact component={Dashboard} />
+              <PrivateRoute
+                path="/dashboard/forms"
+                exact
+                component={Dashboard}
+              />
               <PrivateRoute
                 path="/account/settings"
                 exact
