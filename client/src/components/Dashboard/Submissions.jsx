@@ -10,13 +10,9 @@ import {
   TableCaption,
   Stack,
   Box,
-  Spinner,
-  Skeleton,
-  SkeletonCircle,
-  SkeletonText,
 } from "@chakra-ui/react"
-import db from "../../sampleDB"
 import Empty from "./../Utils/Empty"
+import { SkeletonRow } from "./../Utils/TableSkeleton"
 
 export default function Submissions({ fields, submissions }) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -68,11 +64,16 @@ export default function Submissions({ fields, submissions }) {
             )}
           </Box>
         ) : (
-          <Stack>
-            <Skeleton height="20px" />
-            <Skeleton height="20px" />
-            <Skeleton height="20px" />
-          </Stack>
+          <Table>
+            <thead>
+              <SkeletonRow width="100px" />
+            </thead>
+            <tbody>
+              <SkeletonRow width="75px" />
+              <SkeletonRow width="75px" />
+              <SkeletonRow width="75px" />
+            </tbody>
+          </Table>
         )}
       </Box>
     </>
