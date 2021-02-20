@@ -4,12 +4,22 @@ import userContext from "./../../context/userContext"
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user } = useContext(userContext)
+  console.log("Im hit")
+  console.log(user)
   return (
     <Route
       {...rest}
       // Todo - This could be better. Make sure page survives refresh
       children={(props) =>
-        user ? <Component {...props} /> : <Redirect to="/auth" />
+        !user?.isLoading ? (
+          user ? (
+            <Component {...props} />
+          ) : (
+            <Redirect to="/auth" />
+          )
+        ) : (
+          "Loading"
+        )
       }
     />
   )
