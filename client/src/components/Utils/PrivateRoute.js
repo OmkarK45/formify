@@ -1,11 +1,10 @@
 import { useContext } from "react"
 import { Redirect, Route } from "react-router-dom"
 import userContext from "./../../context/userContext"
+import { Progress } from "@chakra-ui/react"
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user } = useContext(userContext)
-  console.log("Im hit")
-  console.log(user)
   return (
     <Route
       {...rest}
@@ -18,7 +17,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             <Redirect to="/auth" />
           )
         ) : (
-          "Loading"
+          // @TODO-> This needs some work
+          <Progress colorScheme="orange" size="xs" isIndeterminate />
         )
       }
     />
