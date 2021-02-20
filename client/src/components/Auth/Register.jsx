@@ -65,7 +65,7 @@ const Register = () => {
           isAuthenticated: true,
           userID: res.data.userID,
         })
-        history.push("/dashboard")
+        history.push("/dashboard/forms")
       })
       .catch((error) => {
         setIsLoading(false)

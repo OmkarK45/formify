@@ -9,7 +9,7 @@ export default function DrawerMenu() {
         <Text fontSize="lg" padding="0.6rem 0" fontWeight="600">
           Profile
         </Text>
-        <Link to="/dashboard">
+        <Link to="/dashboard/forms">
           <Text fontSize="lg" padding="0.6rem 0">
             My Forms
           </Text>

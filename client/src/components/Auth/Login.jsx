@@ -55,7 +55,7 @@ const Login = () => {
           username: res?.data.username,
           email: res?.data.email,
         })
-        history.push("/dashboard")
+        history.push("/dashboard/forms")
       })
       .catch((error) => {
         setIsLoading(false)

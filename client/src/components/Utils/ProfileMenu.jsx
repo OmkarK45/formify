@@ -33,7 +33,7 @@ const ProfileMenu = () => {
         ></MenuButton>
         <MenuList>
           <MenuGroup title="Profile">
-            <Link to="/dashboard">
+            <Link to="/dashboard/forms">
               <MenuItem icon={<AiOutlineFileText />}>My Forms</MenuItem>
             </Link>
           </MenuGroup>

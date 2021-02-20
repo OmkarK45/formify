@@ -61,7 +61,9 @@ const Hero = () => {
           maxW={["90%", "85%", "50%"]}
           margin="2rem auto"
         >
-          <Link to={user && user.isAuthenticated ? "/dashboard" : "/auth"}>
+          <Link
+            to={user && user.isAuthenticated ? "/dashboard/forms" : "/auth"}
+          >
             <Button
               width={["100%", "auto"]}
               colorScheme="orange"
