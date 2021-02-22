@@ -8,7 +8,7 @@ import {
 } from "react-router-dom"
 import { Hero } from "./components/Home/"
 import { GET } from "./utils/network"
-import { Auth } from "./components/Auth"
+import { Auth, ForgotPassword, ResetPassword } from "./components/Auth"
 import userContext from "./context/userContext"
 import PrivateRoute from "./components/Utils/PrivateRoute"
 import Dashboard from "./components/Dashboard/Dashboard"
@@ -61,6 +61,16 @@ const App = () => {
             <Switch>
               <Route path="/" exact component={Hero}></Route>
               <Route path="/auth" exact component={Auth} />
+              <Route
+                path="/auth/forgotPassword"
+                exact
+                component={ForgotPassword}
+              />
+              <Route
+                path="/auth/resetpassword/:resetToken"
+                exact
+                component={ResetPassword}
+              />
               <PrivateRoute
                 path="/dashboard/forms"
                 exact

@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { POST } from "../../utils/network"
 import {
   Input,
@@ -132,6 +132,12 @@ const Login = () => {
               </IconButton>
             </InputRightElement>
           </InputGroup>
+          <Link
+            to="/auth/forgotPassword"
+            style={{ marginTop: "0.8rem", display: "block", color: "purple" }}
+          >
+            Forgot Password ?
+          </Link>
         </FormControl>
         <Button
           marginTop="2.5rem"

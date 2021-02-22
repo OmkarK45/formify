@@ -5,8 +5,6 @@ import {
   List,
   Flex,
   Button,
-  LinkBox,
-  LinkOverlay,
   Image,
   useColorMode,
   IconButton,

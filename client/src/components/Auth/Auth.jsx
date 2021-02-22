@@ -5,23 +5,22 @@ import {
   TabList,
   TabPanels,
   TabPanel,
-  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import { Register } from "./index"
 import Login from "./Login"
 import Footer from "./../Layout/Footer"
 
 const Auth = () => {
-  const { colorMode } = useColorMode()
   return (
     <>
       <Box
         borderRadius="10px"
-        maxW={["90%", "75%", "75%", "50%","30%"]}
+        maxW={["90%", "75%", "75%", "50%", "30%"]}
         margin="0 auto"
         marginTop="3rem"
-        bg={colorMode === "dark" ? "gray.800" : "white"}
-        boxShadow={colorMode === "dark" ? "none" : "base"}
+        bg={useColorModeValue("white", "gray.800")}
+        boxShadow={useColorModeValue("base", "none")}
       >
         <Tabs isFitted variant="enclosed">
           <TabList mb="1em">
