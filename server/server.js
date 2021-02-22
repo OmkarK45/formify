@@ -17,10 +17,10 @@ app.use(helmet())
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use("/api/user/", require("./routes/user.routes"))
 app.use("/api/auth", require("./routes/auth.routes"))
 app.use("/api/dashboard", require("./routes/dashboard.routes"))
 app.use("/api/forms/", require("./routes/form.routes"))
-app.use("/api/user/", require("./routes/user.routes"))
 app.use(errorHandler)
 
 const server = app.listen(PORT, () => {

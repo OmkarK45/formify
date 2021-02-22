@@ -54,7 +54,10 @@ exports.message = (resetURL) => {
                                             style="background:#DD6B20
 ;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                                             Password</a>
+                                            <div>
                                             <a href=${resetURL}>You can also click this link if the above button doesn't work</a>
+                                            
+                                            </div>
                                     </td>
                                 </tr>
                                 <tr>

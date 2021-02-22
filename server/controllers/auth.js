@@ -77,7 +77,7 @@ exports.forgotPassword = async (req, res, next) => {
     const resetToken = await user.getResetPasswordToken()
     await user.save()
 
-    const resetURL = `http://localhost:3000/passwordreset/${resetToken}`
+    const resetURL = `http://localhost:3000/auth/resetpassword/${resetToken}`
     const html = message(resetURL)
 
     try {
@@ -86,7 +86,7 @@ exports.forgotPassword = async (req, res, next) => {
         subject: "[Formify] : Password Reset Request",
         text: html,
       })
-      res.json({
+      res.status(200).json({
         success: true,
         msg: "Email has been sent to you.",
       })
@@ -122,7 +122,7 @@ exports.resetPassword = async (req, res, next) => {
     user.resetPasswordExpire = undefined
 
     await user.save()
-    res.json({
+    res.status(200).json({
       msg: "Password Reset Successfully.",
       success: true,
     })
