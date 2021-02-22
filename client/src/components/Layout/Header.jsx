@@ -35,7 +35,10 @@ const Header = () => {
         >
           <Box>
             <Link to="/">
-              <Image src={logo} />
+              <Image
+                height="2rem"
+                src="https://tailwindui.com/img/logos/workflow-mark-orange-500.svg"
+              />
             </Link>
           </Box>
 
