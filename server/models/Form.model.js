@@ -15,6 +15,11 @@ const formSchema = new Schema(
       type: String,
       default: () => nanoid(6),
     },
+    // Requires user to solve captcha before proceeding further
+    requiresVerification: {
+      type: Boolean,
+      default: true,
+    },
     formName: {
       type: String,
       default: "A New Form",

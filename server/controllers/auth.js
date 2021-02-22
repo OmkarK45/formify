@@ -1,5 +1,8 @@
 const User = require("../models/User.model")
 const ErrorResponse = require("../utils/errorResponse")
+const sendEmail = require("../utils/sendEmail")
+const { message } = require("../utils/resetPasswordTemplate")
+const crypto = require("crypto")
 
 exports.user = async (req, res, next) => {
   const { email } = req.user
@@ -67,25 +70,65 @@ exports.forgotPassword = async (req, res, next) => {
   const { email } = req.body
 
   try {
-    const user = User.findOne({ email })
+    const user = await User.findOne({ email })
     if (!user) {
       return next(new ErrorResponse("Email could not be sent.", 404))
     }
-    const resetToken = user.getResetPasswordToken()
+    const resetToken = await user.getResetPasswordToken()
     await user.save()
 
     const resetURL = `http://localhost:3000/passwordreset/${resetToken}`
-    const message = `<h1>You have requested a password reset</h1>
-    <p>Please go to this link to reset your password : </p>
-    <a href=${resetURL} clicktracking=off>${resetURL}</a>`
+    const html = message(resetURL)
 
     try {
-    } catch (error) {}
-  } catch (error) {}
+      await sendEmail({
+        to: user.email,
+        subject: "[Formify] : Password Reset Request",
+        text: html,
+      })
+      res.json({
+        success: true,
+        msg: "Email has been sent to you.",
+      })
+    } catch (error) {
+      user.resetToken = undefined
+      await user.save()
+      return next(new ErrorResponse("Email could not be sent.", 500))
+    }
+  } catch (error) {
+    next(error)
+  }
 }
 
-exports.resetPassword = (req, res, next) => {
-  res.send("Reset password Route")
+exports.resetPassword = async (req, res, next) => {
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.resetToken)
+    .digest("hex")
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: {
+        $gt: Date.now(),
+      },
+    })
+
+    if (!user) {
+      return next(new ErrorResponse("Invalid Reset Token", 400))
+    }
+    user.password = req.body.password
+    user.resetPasswordToken = undefined
+    user.resetPasswordExpire = undefined
+
+    await user.save()
+    res.json({
+      msg: "Password Reset Successfully.",
+      success: true,
+    })
+  } catch (error) {
+    next(new ErrorResponse(error, 500))
+  }
 }
 
 const sendToken = async (user, statusCode, res) => {

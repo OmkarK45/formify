@@ -62,12 +62,13 @@ userSchema.methods.getSignedToken = async function () {
 }
 
 userSchema.methods.getResetPasswordToken = async function () {
+  console.log("Im called")
   const resetToken = crypto.randomBytes(20).toString("hex")
   this.resetPasswordToken = crypto
     .createHash("sha256")
     .update(resetToken)
     .digest("hex")
-  this.resetPasswordExpire = Data.now() + 10 * (60 * 1000)
+  this.resetPasswordExpire = Date.now() + 10 * (60 * 1000)
   return resetToken
 }
 
