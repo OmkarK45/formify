@@ -11,6 +11,8 @@ import FormDetails from "./components/Dashboard/FormDetails"
 import Footer from "./components/Layout/Footer"
 import AccountSettings from "./components/User/AccountSettings"
 import { QueryClient, QueryClientProvider } from "react-query"
+import VerificationEmailSent from "./components/Auth/VerificationEmailSent"
+import EmailVerified from "./components/Auth/EmailVerified"
 
 const queryClient = new QueryClient()
 
@@ -61,7 +63,16 @@ const App = () => {
                 exact
                 component={ForgotPassword}
               />
-              <Route path="/auth/emailverification/:verificationToken" exact />
+              <Route
+                path="/auth/emailsent"
+                exact
+                component={VerificationEmailSent}
+              />
+              <Route
+                path="/auth/emailverification/:verificationToken"
+                exact
+                component={EmailVerified}
+              />
               <Route
                 path="/auth/resetpassword/:resetToken"
                 exact

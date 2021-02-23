@@ -60,15 +60,12 @@ const Register = () => {
     )
       .then((res) => {
         setIsLoading(false)
-        setUser({
-          isAuthenticated: true,
-          userID: res.data.userID,
-        })
         // @TODO -> instead of redirecting here, redirect to email verification flow
-        history.push("/dashboard/forms")
+        history.push("/auth/emailsent")
       })
       .catch((error) => {
         setIsLoading(false)
+        console.log({ error })
         if (error.response.status === 400) {
           toast({
             title: "Error !",
