@@ -69,7 +69,7 @@ exports.register = async (req, res, next) => {
 exports.verifyEmail = async (req, res, next) => {
   const { verificationToken } = req.body
   if (!verificationToken) {
-    return next(new ErrorResponse("Invalid verification token", 400))
+    return next(new ErrorResponse("Invalid verification token", 404))
   }
   try {
     const user = await User.findOne({
@@ -79,18 +79,15 @@ exports.verifyEmail = async (req, res, next) => {
       },
     })
     if (!user) {
-      return next(new ErrorResponse("Verification Token has been expired"))
-    } else if (user.isVerified) {
-      return next(new ErrorResponse("This user is already verified.", 400))
+      return next(new ErrorResponse("This user is already verified.", 201))
     }
     if (verificationToken === user.verificationToken) {
       user.isVerified = true
       user.verificationToken = undefined
       user.verificationTokenExpiresIn = undefined
+
       await user.save()
-      res.status(200).json({
-        msg: "Your email was verified successfully.",
-      })
+      sendToken(user, 200, res)
     }
   } catch (error) {
     return next(new ErrorResponse(error, 500))
