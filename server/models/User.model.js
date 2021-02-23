@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
 const userSchema = new Schema({
+  // @TODO -> This needs some strict checking
   username: {
     type: String,
     required: [true, "Please provide a username"],
@@ -35,7 +36,17 @@ const userSchema = new Schema({
   resetPasswordExpire: {
     type: Date,
   },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
   forms: [{ type: Schema.Types.ObjectId, ref: "Form" }],
+  verificationToken: {
+    type: String,
+  },
+  verificationTokenExpiresIn: {
+    type: Date,
+  },
 })
 
 userSchema.pre("save", async function (next) {
@@ -49,6 +60,13 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.matchPasswords = async function (password) {
   return await bcrypt.compare(password, this.password)
+}
+
+userSchema.methods.getEmailVerifcationToken = async function () {
+  const verificationToken = await crypto.randomBytes(16).toString("hex")
+  this.verificationToken = verificationToken
+  this.verificationTokenExpiresIn = Date.now() + 60 * 60 * 24 * 1000
+  return verificationToken
 }
 
 userSchema.methods.getSignedToken = async function () {

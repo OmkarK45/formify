@@ -8,6 +8,7 @@ const {
   resetPassword,
   user,
   logout,
+  verifyEmail,
 } = require("../controllers/auth")
 
 // @route - /api/auth/->
@@ -17,5 +18,5 @@ router.route("/login").post(login)
 router.route("/logout").post(protect, logout)
 router.route("/forgotpassword").post(forgotPassword)
 router.route("/resetpassword/:resetToken").put(resetPassword)
-
+router.route("/emailverification/:verificationToken").post(verifyEmail)
 module.exports = router

@@ -23,7 +23,6 @@ exports.getForms = async (req, res) => {
 
 // @desc -> Find one form submission for that user and UUID
 exports.getOneForm = async (req, res, next) => {
-  // @TODO -> add username validation as well
   const { formID } = req.params
   const { email } = req.user
   if (!(formID && email)) {
@@ -40,7 +39,6 @@ exports.getOneForm = async (req, res, next) => {
       )
     }
     res.status(200).json({
-      // @TODO -> MSG could be better
       msg: "Found the form",
       success: true,
       requestedForm,
@@ -72,7 +70,7 @@ exports.postSubmissions = async (req, res, next) => {
 
   try {
     const foundForm = await Form.findOne({ formID })
-    foundForm.submissions.push(submissionData)
+    foundForm.submissions.push({ ...submissionData, submittedAt: Date.now() })
     await foundForm.save()
     res.status(200).json({
       "Structure of the form": foundForm,

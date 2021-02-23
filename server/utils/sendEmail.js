@@ -2,7 +2,6 @@ const nodemailer = require("nodemailer")
 
 const sendEmail = (options) => {
   const transporter = nodemailer.createTransport({
-    // @TODO - Create These in ENV
     host: process.env.EMAIL_HOST,
     auth: {
       user: process.env.EMAIL_USERNAME,

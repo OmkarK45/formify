@@ -19,15 +19,81 @@ exports.user = async (req, res, next) => {
 
 exports.register = async (req, res, next) => {
   const { username, email, password } = req.body
+  const isAlreadyRegistered = await User.findOne({
+    $or: [{ email: email }, { username: username }],
+  })
+  if (isAlreadyRegistered) {
+    return next(
+      new ErrorResponse("User already exists with that username or email", 400)
+    )
+  } else {
+    try {
+      console.log("im getting called")
+      const user = new User({
+        username,
+        email: email.toLowerCase(),
+        password,
+      })
+      const verificationToken = await user.getEmailVerifcationToken()
+      await user.save()
+
+      const verificationURL = `http://localhost:3000/auth/emailverification/${verificationToken}`
+
+      const verificationEmailContent = `<h1>Formify</h1> <a href='${verificationURL}'>Click this link to verify your account.</a>`
+      try {
+        await sendEmail({
+          to: user.email,
+          subject: "[Formify] : Verify Your Email",
+          text: verificationEmailContent,
+        })
+        res.status(200).json({
+          success: true,
+          msg: "Email has been sent to you.",
+        })
+      } catch (error) {
+        user.verificationToken = undefined
+        user.verificationTokenExpiresIn = undefined
+        await user.save()
+        return next(new ErrorResponse("Email could not be sent.", 500))
+      }
+      // sendToken(user, 200, res)
+    } catch (error) {
+      console.log(error)
+      return next(
+        new ErrorResponse("Some Error occured while registering", 500)
+      )
+    }
+  }
+}
+
+exports.verifyEmail = async (req, res, next) => {
+  const { verificationToken } = req.body
+  if (!verificationToken) {
+    return next(new ErrorResponse("Invalid verification token", 400))
+  }
   try {
-    const user = await User.create({
-      username,
-      email: email.toLowerCase(),
-      password,
+    const user = await User.findOne({
+      verificationToken,
+      verificationTokenExpiresIn: {
+        $gt: Date.now(),
+      },
     })
-    sendToken(user, 200, res)
+    if (!user) {
+      return next(new ErrorResponse("Verification Token has been expired"))
+    } else if (user.isVerified) {
+      return next(new ErrorResponse("This user is already verified.", 400))
+    }
+    if (verificationToken === user.verificationToken) {
+      user.isVerified = true
+      user.verificationToken = undefined
+      user.verificationTokenExpiresIn = undefined
+      await user.save()
+      res.status(200).json({
+        msg: "Your email was verified successfully.",
+      })
+    }
   } catch (error) {
-    next(error)
+    return next(new ErrorResponse(error, 500))
   }
 }
 
