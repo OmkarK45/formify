@@ -18,5 +18,5 @@ router.route("/login").post(login)
 router.route("/logout").post(protect, logout)
 router.route("/forgotpassword").post(forgotPassword)
 router.route("/resetpassword/:resetToken").put(resetPassword)
-router.route("/emailverification/:verificationToken").post(verifyEmail)
+router.route("/emailverification/").post(verifyEmail)
 module.exports = router
