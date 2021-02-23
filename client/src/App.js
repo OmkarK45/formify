@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react"
 import { Header } from "./components/Layout/"
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { Hero } from "./components/Home/"
 import { GET } from "./utils/network"
 import { Auth, ForgotPassword, ResetPassword } from "./components/Auth"
@@ -15,7 +10,7 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import FormDetails from "./components/Dashboard/FormDetails"
 import Footer from "./components/Layout/Footer"
 import AccountSettings from "./components/User/AccountSettings"
-import { QueryClient, QueryClientProvider, useQuery } from "react-query"
+import { QueryClient, QueryClientProvider } from "react-query"
 
 const queryClient = new QueryClient()
 
@@ -66,6 +61,7 @@ const App = () => {
                 exact
                 component={ForgotPassword}
               />
+              <Route path="/auth/emailverification/:verificationToken" exact />
               <Route
                 path="/auth/resetpassword/:resetToken"
                 exact

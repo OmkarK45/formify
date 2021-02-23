@@ -79,7 +79,7 @@ const Login = () => {
   return (
     <Box>
       <Box>
-        <Heading fontStyle="italic">Login.</Heading>
+        <Heading>Login.</Heading>
       </Box>
       <form onSubmit={handleSubmit}>
         <FormControl marginTop="1.5rem">

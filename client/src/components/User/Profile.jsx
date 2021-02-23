@@ -13,6 +13,7 @@ import { AiOutlineWarning } from "react-icons/ai"
 import Update from "./Update"
 export default function Profile() {
   const bg = useColorModeValue("gray.100", "gray.800")
+  const handleAccountDelete = () => {}
   return (
     <Box>
       <Box bg={bg} borderRadius="13px" shadow="base">
@@ -86,6 +87,7 @@ export default function Profile() {
                   modalContent="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
                   modalStatus="danger"
                   buttonAction="Delete"
+                  handleAccountDelete={handleAccountDelete}
                 />
               </Td>
             </Tr>

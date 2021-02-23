@@ -44,7 +44,7 @@ export default function ForgotPassword() {
       })
   }
   setTimeout(() => {
-    setDisabled(true)
+    setDisabled(false)
   }, 45000)
   return (
     <Box
@@ -57,7 +57,7 @@ export default function ForgotPassword() {
     >
       <Box px="2rem" py="2rem">
         <Box>
-          <Heading fontStyle="italic">Reset Password.</Heading>
+          <Heading>Reset Password.</Heading>
           <Text marginTop="1rem">{info}</Text>
         </Box>
         <form onSubmit={handleSubmit}>

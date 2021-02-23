@@ -60,29 +60,37 @@ const Register = () => {
     )
       .then((res) => {
         setIsLoading(false)
-
         setUser({
           isAuthenticated: true,
           userID: res.data.userID,
         })
+        // @TODO -> instead of redirecting here, redirect to email verification flow
         history.push("/dashboard/forms")
       })
       .catch((error) => {
         setIsLoading(false)
-
-        toast({
-          title: "Error !",
-          description: "Something went wrong while registering you.",
-          status: "error",
-          isClosable: true,
-        })
+        if (error.response.status === 400) {
+          toast({
+            title: "Error !",
+            description: "User with email or username already exists",
+            status: "error",
+            isClosable: true,
+          })
+        } else {
+          toast({
+            title: "Error !",
+            description: "Something went wrong while registering you.",
+            status: "error",
+            isClosable: true,
+          })
+        }
         history.push("/auth")
       })
   }
   return (
     <Box pb="1rem">
       <Box>
-        <Heading fontStyle="italic">Register.</Heading>
+        <Heading>Register.</Heading>
       </Box>
       <form onSubmit={handleSubmit}>
         <FormControl marginTop="1.5rem">

@@ -22,6 +22,7 @@ export default function ModalAlert({
   leftIcon,
   buttonAction,
   buttonVarient,
+  handleAccountDelete,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const modalFooterBg = useColorModeValue("gray.50", "gray.900")
@@ -57,6 +58,7 @@ export default function ModalAlert({
               mr={3}
               colorScheme={modalStatus === "danger" ? "red" : "orange"}
               fontWeight="400"
+              onClick={handleAccountDelete}
             >
               {buttonAction}
             </Button>

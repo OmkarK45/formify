@@ -59,20 +59,20 @@ export default function ResetPassword() {
   }
   return (
     <Box
-      borderRadius="10px"
+      rounded="10px"
       maxW={["90%", "75%", "75%", "50%", "30%"]}
-      margin="0 auto"
-      marginTop="3rem"
+      mx="auto"
+      mt="3rem"
       bg={useColorModeValue("white", "gray.800")}
-      boxShadow={useColorModeValue("base", "none")}
+      shadow={useColorModeValue("base", "none")}
     >
-      <Box px="2rem" py="2rem">
+      <Box p={2}>
         <Box>
-          <Heading fontStyle="italic">Set New Password.</Heading>
-          <Text marginTop="1rem">Please enter your new password.</Text>
+          <Heading>Set New Password.</Heading>
+          <Text mt="1rem">Please enter your new password.</Text>
         </Box>
         <form onSubmit={handleSubmit}>
-          <FormControl marginTop="1.5rem">
+          <FormControl mt="1.5rem">
             <FormLabel htmlFor="newPassword">New Password</FormLabel>
             <InputGroup>
               <Input
@@ -80,7 +80,7 @@ export default function ResetPassword() {
                 id="newPassword"
                 shadow="base"
                 name="password"
-                isRequired={true}
+                isRequired
                 value={password}
                 onChange={handleInputChange}
                 placeholder="Password"

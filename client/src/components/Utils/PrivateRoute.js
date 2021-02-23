@@ -8,7 +8,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      // Todo - This could be better. Make sure page survives refresh
       children={(props) =>
         !user?.isLoading ? (
           user ? (
@@ -17,7 +16,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             <Redirect to="/auth" />
           )
         ) : (
-          // @TODO-> This needs some work
           <Progress colorScheme="orange" size="xs" isIndeterminate />
         )
       }
