@@ -52,23 +52,25 @@ export default function Submissions({ fields, submissions }) {
         overflowX="auto"
       >
         {isLoaded ? (
-          <Box>
+          <Box position="relative">
             {submissions.length > 0 ? (
               <Table size="md" variant="simple">
                 <TableCaption>
                   <TableCaption>
+                    {/* Special thanks to @anubra26 on discord :) */}
                     <Pagination
                       current={current}
                       onChange={(page) => setCurrent(page)}
                       pageSize={pageSize}
                       total={submissions.length}
-                      baseStyles={{ bg: "purple.400" }}
-                      activeStyles={{ bg: "purple.700" }}
+                      colorScheme="yellow"
+                      rounded="full"
                       itemRender={itemRender}
                       paginationProps={{
                         display: "flex",
                         pos: "absolute",
                         left: "50%",
+                        bottom: "10px",
                         transform: "translateX(-50%)",
                       }}
                     />
@@ -76,6 +78,7 @@ export default function Submissions({ fields, submissions }) {
                 </TableCaption>
                 <Thead>
                   <Tr>
+                    {/* @TODO-> Create a date column here */}
                     {fields.map((s, i) => {
                       return <Th key={i}>{s}</Th>
                     })}
