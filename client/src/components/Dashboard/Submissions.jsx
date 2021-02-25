@@ -8,25 +8,44 @@ import {
   Th,
   Td,
   TableCaption,
-  Stack,
+  Button,
   Box,
 } from "@chakra-ui/react"
+import Pagination from "@choc-ui/paginator"
 import Empty from "./../Utils/Empty"
 import { SkeletonRow } from "./../Utils/TableSkeleton"
 
 export default function Submissions({ fields, submissions }) {
   const [isLoaded, setIsLoaded] = useState(false)
-  const data = true
+  const [loading, setLoading] = useState(true)
+  const [current, setCurrent] = useState(1)
+  const pageSize = 8
+  const offset = (current - 1) * pageSize
+  const posts = submissions.slice(offset, offset + pageSize)
+
+  const Prev = (props) => <Button {...props}>Prev </Button>
+  const Next = (props) => <Button {...props}> Next </Button>
+
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true)
     }, 3000)
   }, [])
+
+  const itemRender = (_, type) => {
+    if (type === "prev") {
+      return Prev
+    }
+    if (type === "next") {
+      return Next
+    }
+  }
+
   return (
     <>
       <Box
-        boxShadow="base"
-        borderRadius="10px"
+        shadow="base"
+        rounded="10px"
         m="0 auto"
         mt="3rem"
         minW="100%"
@@ -36,7 +55,25 @@ export default function Submissions({ fields, submissions }) {
           <Box>
             {submissions.length > 0 ? (
               <Table size="md" variant="simple">
-                <TableCaption>Forms created by Omkar</TableCaption>
+                <TableCaption>
+                  <TableCaption>
+                    <Pagination
+                      current={current}
+                      onChange={(page) => setCurrent(page)}
+                      pageSize={pageSize}
+                      total={submissions.length}
+                      baseStyles={{ bg: "purple.400" }}
+                      activeStyles={{ bg: "purple.700" }}
+                      itemRender={itemRender}
+                      paginationProps={{
+                        display: "flex",
+                        pos: "absolute",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                      }}
+                    />
+                  </TableCaption>
+                </TableCaption>
                 <Thead>
                   <Tr>
                     {fields.map((s, i) => {
@@ -45,7 +82,7 @@ export default function Submissions({ fields, submissions }) {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {submissions.map((s, i) => {
+                  {posts.map((s, i) => {
                     return (
                       <Tr key={i}>
                         {fields.map((header, index) => {

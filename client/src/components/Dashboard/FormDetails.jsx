@@ -1,3 +1,5 @@
+import { useQuery } from "react-query"
+import { useContext } from "react"
 import {
   Box,
   Tabs,
@@ -14,8 +16,6 @@ import DashboardHeader from "./DashboardHeader"
 import Integrations from "./Integrations"
 import Submissions from "./Submissions"
 import { GET } from "./../../utils/network"
-import { useQuery } from "react-query"
-import { useContext } from "react"
 import userContext from "./../../context/userContext"
 import TableSkeleton from "./../Utils/TableSkeleton"
 import Empty from "./../Utils/Empty"
