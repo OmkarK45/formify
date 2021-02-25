@@ -2,6 +2,7 @@ const User = require("../models/User.model")
 const ErrorResponse = require("../utils/errorResponse")
 const sendEmail = require("../utils/sendEmail")
 const { message } = require("../utils/resetPasswordTemplate")
+const { confirmEmail } = require("../utils/confirmEmailTemplate")
 const crypto = require("crypto")
 
 exports.user = async (req, res, next) => {
@@ -39,7 +40,7 @@ exports.register = async (req, res, next) => {
 
       const verificationURL = `http://localhost:3000/auth/emailverification/${verificationToken}`
 
-      const verificationEmailContent = `<h1>Formify</h1> <a href='${verificationURL}'>Click this link to verify your account.</a>`
+      const verificationEmailContent = confirmEmail(verificationURL)
       try {
         await sendEmail({
           to: user.email,

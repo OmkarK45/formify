@@ -12,6 +12,9 @@ connectDB()
 
 const PORT = process.env.PORT || 5000
 
+app.set("view engine", "ejs")
+app.use(express.static(__dirname + "/public"))
+app.set("views", __dirname + "/views")
 app.use(cookieParser())
 app.use(helmet())
 app.use(cors(corsOptions))
@@ -26,7 +29,12 @@ app.use(errorHandler)
 const server = app.listen(PORT, () => {
   console.log(`Server [${PORT}] : Started`)
 })
-
+app.get("/", (req, res) => {
+  res.render("backendhome")
+})
+app.get("/thankyou", (req, res) => {
+  res.render("submitted")
+})
 process.on("unhandledRejection", (error, promise) => {
   console.log(`Logged Error : ${error} ErrorStack : ${error.stack}`)
   server.close(() => process.exit(1))

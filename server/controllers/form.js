@@ -72,10 +72,7 @@ exports.postSubmissions = async (req, res, next) => {
     const foundForm = await Form.findOne({ formID })
     foundForm.submissions.push({ ...submissionData, submittedAt: Date.now() })
     await foundForm.save()
-    res.status(200).json({
-      "Structure of the form": foundForm,
-      "Fields sent by user": submissionData,
-    })
+    res.status(200).render("submitted")
   } catch (error) {
     next(
       new ErrorResponse(
