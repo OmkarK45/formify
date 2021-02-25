@@ -30,6 +30,7 @@ const ProfileMenu = () => {
           icon={<FaRegUser />}
           size="md"
           borderRadius="10px"
+          shadow="none"
         ></MenuButton>
         <MenuList>
           <MenuGroup title="Profile">

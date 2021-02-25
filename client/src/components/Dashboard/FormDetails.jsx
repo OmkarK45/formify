@@ -20,6 +20,7 @@ import userContext from "./../../context/userContext"
 import TableSkeleton from "./../Utils/TableSkeleton"
 import Empty from "./../Utils/Empty"
 import { db } from "../../utils/MOCK_DATA"
+import FormSettings from "./FormSettings"
 
 const FormDetails = ({ location: { state } }) => {
   const tabBg = useColorModeValue("gray.50", "gray.900")
@@ -74,11 +75,13 @@ const FormDetails = ({ location: { state } }) => {
             </TabPanel>
             <TabPanel {...tabStyle}>
               <Submissions
-                submissions={db}
+                submissions={data?.data?.requestedForm.submissions}
                 fields={data?.data?.requestedForm.fields}
               />
             </TabPanel>
-            <TabPanel {...tabStyle}>Settings</TabPanel>
+            <TabPanel {...tabStyle}>
+              <FormSettings />
+            </TabPanel>
             <TabPanel {...tabStyle}>Plugins</TabPanel>
           </TabPanels>
         </Tabs>

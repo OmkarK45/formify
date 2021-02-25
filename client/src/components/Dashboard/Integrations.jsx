@@ -39,9 +39,7 @@ export default function Integrations({ formID }) {
     <>
       <form onSubmit={copyToClipboard}>
         <Box>
-          <Text mt="1rem" fontSize="lg">
-            Your form's endpoint is:
-          </Text>
+          <Text mt="1rem">Your form's endpoint is:</Text>
           <Input
             mt="1rem"
             maxW={["70%", "60%"]}
