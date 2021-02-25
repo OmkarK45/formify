@@ -15,11 +15,6 @@ const formSchema = new Schema(
       type: String,
       default: () => nanoid(6),
     },
-    // Requires user to solve captcha before proceeding further
-    requiresVerification: {
-      type: Boolean,
-      default: true,
-    },
     formName: {
       type: String,
       default: "A New Form",
@@ -34,9 +29,17 @@ const formSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    requiresVerification: {
+      type: Boolean,
+      default: true,
+    },
     disabled: {
       type: Boolean,
       default: false,
+    },
+    emailNotifications: {
+      type: Boolean,
+      default: true,
     },
   },
   { strict: false, timestamps: true }
