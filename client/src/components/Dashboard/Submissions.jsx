@@ -79,6 +79,8 @@ export default function Submissions({ fields, submissions }) {
                 <Thead>
                   <Tr>
                     {/* @TODO-> Create a date column here */}
+                    <Th>Submitted At</Th>
+
                     {fields.map((s, i) => {
                       return <Th key={i}>{s}</Th>
                     })}
@@ -88,6 +90,7 @@ export default function Submissions({ fields, submissions }) {
                   {posts.map((s, i) => {
                     return (
                       <Tr key={i}>
+                        <Td>{new Date(s["submittedAt"]).toDateString()}</Td>
                         {fields.map((header, index) => {
                           return <Td key={index}>{s[header]}</Td>
                         })}
