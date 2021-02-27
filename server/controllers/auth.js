@@ -4,6 +4,7 @@ const sendEmail = require("../utils/sendEmail")
 const { message } = require("../utils/resetPasswordTemplate")
 const { confirmEmail } = require("../utils/confirmEmailTemplate")
 const crypto = require("crypto")
+const { sanitizeBody } = require("express-validator")
 
 exports.user = async (req, res, next) => {
   const { email } = req.user

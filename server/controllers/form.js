@@ -3,9 +3,7 @@ const Form = require("../models/Form.model")
 const ErrorResponse = require("../utils/errorResponse")
 const sendEmail = require("../utils/sendEmail")
 
-// @desc -> Find all form submissions for that user
 exports.getForms = async (req, res) => {
-  // get the userID in payload
   const { email } = req.user
   try {
     const user = await User.findOne({ email }).populate("forms")
@@ -19,16 +17,17 @@ exports.getForms = async (req, res) => {
       new ErrorResponse("Something went wrong while fetching your forms ", 500)
     )
   }
-  // Search that ID in database, populate the forms array and return that to the user
 }
 
 // @desc -> Find one form submission for that user and UUID
 exports.getOneForm = async (req, res, next) => {
   const { formID } = req.params
   const { email } = req.user
+
   if (!(formID && email)) {
     return next(new ErrorResponse("Please provide valid FormID and Email", 400))
   }
+
   try {
     const requestedForm = await Form.findOne({ formID })
     if (!requestedForm) {
@@ -39,6 +38,7 @@ exports.getOneForm = async (req, res, next) => {
         )
       )
     }
+
     res.status(200).json({
       msg: "Found the form",
       success: true,
@@ -57,12 +57,21 @@ exports.formSettings = async (req, res, next) => {
     requiresVerification,
   } = req.body
   const { email } = req.user
+  console.log({
+    formID,
+    disabled,
+    emailNotifications,
+    requiresVerification,
+    email,
+  })
+
   if (!(formID && email)) {
     return next(new ErrorResponse("Please provide valid FormID and Email", 400))
   }
   const form = await Form.findOne({
     formID,
   }).populate("createdBy")
+
   if (form.createdBy.email !== email) {
     return next(new ErrorResponse("You have no permission to edit this form"))
   }
@@ -70,12 +79,15 @@ exports.formSettings = async (req, res, next) => {
   if (emailNotifications !== undefined) {
     form["emailNotifications"] = emailNotifications
   }
+
   if (disabled !== undefined) {
     form.disabled = disabled
   }
+
   if (requiresVerification !== undefined) {
     form.requiresVerification = requiresVerification
   }
+
   await form.save(function (err) {
     if (err) return next(new ErrorResponse(err, 500))
     return res.json(form)
@@ -85,7 +97,7 @@ exports.formSettings = async (req, res, next) => {
 exports.postSubmissions = async (req, res, next) => {
   if (
     !req.body ||
-    (req.method !== "POST" && req.metsd !== "PUT" && req.method !== "PATCH")
+    (req.method !== "POST" && req.method !== "PUT" && req.method !== "PATCH")
   ) {
     return next(
       new ErrorResponse(
@@ -104,9 +116,14 @@ exports.postSubmissions = async (req, res, next) => {
 
   try {
     const foundForm = await Form.findOne({ formID }).populate("createdBy")
+
+    // @TODO -> check if form is disabled by uyser
     foundForm.submissions.push({ ...submissionData, submittedAt: Date.now() })
+
     await foundForm.save()
+
     res.status(200).render("submitted")
+
     if (foundForm.emailNotifications) {
       await sendEmail({
         to: foundForm.createdBy.email,
@@ -151,7 +168,6 @@ exports.createForm = async (req, res, next) => {
       user,
     })
   } catch (error) {
-    console.log(error)
     next(
       new ErrorResponse(
         "Something went wrong while creating your form. Please try again.",
@@ -160,4 +176,3 @@ exports.createForm = async (req, res, next) => {
     )
   }
 }
-// @desc -> handleFormSubmissions -> handles form submissions of that particular UUID
