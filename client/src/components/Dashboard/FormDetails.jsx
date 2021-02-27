@@ -49,7 +49,7 @@ const FormDetails = ({ location: { state } }) => {
   if (isLoading) return <TableSkeleton />
 
   if (error) return <Empty text={error.message} status="error" />
-  console.log(data)
+  console.log("Form sent by server : ", data)
   return (
     <>
       <DashboardHeader title={data?.data?.requestedForm.formName}>
@@ -80,7 +80,7 @@ const FormDetails = ({ location: { state } }) => {
               />
             </TabPanel>
             <TabPanel {...tabStyle}>
-              <FormSettings />
+              <FormSettings form={data?.data?.requestedForm} />
             </TabPanel>
             <TabPanel {...tabStyle}>Plugins</TabPanel>
           </TabPanels>

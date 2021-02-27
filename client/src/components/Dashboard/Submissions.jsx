@@ -55,26 +55,24 @@ export default function Submissions({ fields, submissions }) {
           <Box position="relative">
             {submissions.length > 0 ? (
               <Table size="md" variant="simple">
-                <TableCaption>
-                  <TableCaption>
-                    {/* Special thanks to @anubra26 on discord :) */}
-                    <Pagination
-                      current={current}
-                      onChange={(page) => setCurrent(page)}
-                      pageSize={pageSize}
-                      total={submissions.length}
-                      colorScheme="yellow"
-                      rounded="full"
-                      itemRender={itemRender}
-                      paginationProps={{
-                        display: "flex",
-                        pos: "absolute",
-                        left: "50%",
-                        bottom: "10px",
-                        transform: "translateX(-50%)",
-                      }}
-                    />
-                  </TableCaption>
+                <TableCaption py="1.6rem">
+                  {/* Special thanks to @anubra26 on discord :) */}
+                  <Pagination
+                    current={current}
+                    onChange={(page) => setCurrent(page)}
+                    pageSize={pageSize}
+                    total={submissions.length}
+                    colorScheme="yellow"
+                    rounded="full"
+                    itemRender={itemRender}
+                    paginationProps={{
+                      display: "flex",
+                      pos: "absolute",
+                      left: "50%",
+                      bottom: "10px",
+                      transform: "translateX(-50%)",
+                    }}
+                  />
                 </TableCaption>
                 <Thead>
                   <Tr>
