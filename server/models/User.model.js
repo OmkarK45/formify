@@ -13,11 +13,18 @@ const userSchema = new Schema({
     unique: true,
     trim: true,
     minlength: 3,
+    trim: true,
+    match: [
+      /^[a-zA-Z0-9._]+$/,
+      "Username must be valid. Only (.) and underscore (_) are allowed",
+    ],
   },
   email: {
     type: String,
     required: [true, "Please provide an email."],
     unique: true,
+    trim: true,
+    lowercase: true,
     match: [
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       "Please provide valied email address.",
@@ -29,6 +36,7 @@ const userSchema = new Schema({
     minlength: 6,
     maxlength: 256,
     select: false,
+    trim: true,
   },
   resetPasswordToken: {
     type: String,
