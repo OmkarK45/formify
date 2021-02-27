@@ -29,7 +29,6 @@ exports.register = async (req, res, next) => {
     )
   } else {
     try {
-      console.log("im getting called")
       const user = new User({
         username,
         email: email.toLowerCase(),
@@ -59,7 +58,6 @@ exports.register = async (req, res, next) => {
       }
       // sendToken(user, 200, res)
     } catch (error) {
-      console.log(error)
       return next(
         new ErrorResponse("Some Error occured while registering", 500)
       )
