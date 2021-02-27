@@ -1,6 +1,7 @@
 const User = require("../models/User.model")
 const Form = require("../models/Form.model")
 const ErrorResponse = require("../utils/errorResponse")
+const sendEmail = require("../utils/sendEmail")
 
 // @desc -> Find all form submissions for that user
 exports.getForms = async (req, res) => {
@@ -62,7 +63,6 @@ exports.formSettings = async (req, res, next) => {
   const form = await Form.findOne({
     formID,
   }).populate("createdBy")
-  console.log({ formID, disabled, emailNotifications, requiresVerification })
   if (form.createdBy.email !== email) {
     return next(new ErrorResponse("You have no permission to edit this form"))
   }
@@ -76,7 +76,6 @@ exports.formSettings = async (req, res, next) => {
   if (requiresVerification !== undefined) {
     form.requiresVerification = requiresVerification
   }
-  console.log({ form })
   await form.save(function (err) {
     if (err) return next(new ErrorResponse(err, 500))
     return res.json(form)
@@ -104,10 +103,17 @@ exports.postSubmissions = async (req, res, next) => {
   }
 
   try {
-    const foundForm = await Form.findOne({ formID })
+    const foundForm = await Form.findOne({ formID }).populate("createdBy")
     foundForm.submissions.push({ ...submissionData, submittedAt: Date.now() })
     await foundForm.save()
     res.status(200).render("submitted")
+    if (foundForm.emailNotifications) {
+      await sendEmail({
+        to: foundForm.createdBy.email,
+        subject: `[Formify] : New Submission for ${foundForm.formName}`,
+        html: "<h1>Login on formify to check who submitted it</>",
+      })
+    }
   } catch (error) {
     next(
       new ErrorResponse(
