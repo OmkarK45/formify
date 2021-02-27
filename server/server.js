@@ -35,6 +35,13 @@ app.get("/", (req, res) => {
 app.get("/thankyou", (req, res) => {
   res.render("submitted")
 })
+app.use((req, res, next) => {
+  res.status(404).json({
+    msg: "Requested resource was not found on this server",
+    status: 404,
+  })
+  next()
+})
 process.on("unhandledRejection", (error, promise) => {
   console.log(`Logged Error : ${error} ErrorStack : ${error.stack}`)
   server.close(() => process.exit(1))
