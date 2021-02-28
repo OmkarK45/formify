@@ -196,19 +196,15 @@ exports.resetPassword = async (req, res, next) => {
 
 const sendToken = async (user, statusCode, res) => {
   const token = await user.getSignedToken()
+  // During deploy, set secure : true and sameSite : none
   res.cookie("token", token, {
     httpOnly: true,
     maxAge: 7 * 24 * 3600 * 1000,
-    sameSite: "none",
-    secure: true,
   })
-  res
-    .status(statusCode)
-    // @DATA - Send user data after loggin in to store in context
-    .json({
-      success: true,
-      userID: user._id,
-      username: user.username,
-      email: user.email,
-    })
+  res.status(statusCode).json({
+    success: true,
+    userID: user._id,
+    username: user.username,
+    email: user.email,
+  })
 }

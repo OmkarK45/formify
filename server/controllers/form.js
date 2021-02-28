@@ -1,4 +1,5 @@
 const User = require("../models/User.model")
+const { newSubmissionTemplate } = require("./../utils/newSubmissionTemplate")
 const Form = require("../models/Form.model")
 const Submission = require("../models/Submission.model")
 const ErrorResponse = require("../utils/errorResponse")
@@ -129,24 +130,35 @@ exports.postSubmissions = async (req, res, next) => {
 
     await foundForm.save()
 
-    res.status(200).render("submitted")
+    if (foundForm.enabled) {
+      res.status(200).render("submitted", {
+        success: true,
+        heading: "Thank you!",
+        message: "Your form was submitted successfully.",
+      })
+    }
+
+    res.status(200).render("submitted", {
+      success: true,
+      message: "The owner of this form has disabled new submissions.",
+      heading: "Cannot submit this form.",
+    })
 
     if (foundForm.emailNotifications) {
-      // @TODO -> Create a better email template
+      const html = newSubmissionTemplate(foundForm.formName)
       await sendEmail({
         to: foundForm.createdBy.email,
         subject: `[Formify] : New Submission for ${foundForm.formName}`,
-        html: "<h1>Login on formify to check who submitted it</>",
+        html: html,
       })
     }
   } catch (error) {
     console.log(error)
-    next(
-      new ErrorResponse(
+    res.status(500).render("submitted", {
+      success: false,
+      message:
         "Something went wrong while submitting this form. Please try again or contact support@formify.com",
-        500
-      )
-    )
+    })
   }
 }
 
