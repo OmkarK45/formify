@@ -88,7 +88,7 @@ export default function Submissions({ fields, submissions }) {
                   {posts.map((s, i) => {
                     return (
                       <Tr key={i}>
-                        <Td>{new Date(s["submittedAt"]).toDateString()}</Td>
+                        <Td>{new Date(s["createdAt"]).toDateString()}</Td>
                         {fields.map((header, index) => {
                           return <Td key={index}>{s[header]}</Td>
                         })}
