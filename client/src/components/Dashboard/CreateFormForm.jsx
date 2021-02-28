@@ -10,10 +10,10 @@ import {
   InputLeftElement,
   Icon,
 } from "@chakra-ui/react"
-export default function CreateFormForm() {
+export default function CreateFormForm({ handleInputChange, handleSubmit }) {
   return (
     <Box mb="1rem">
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <FormControl>
           <FormLabel>Form Name : </FormLabel>
           <InputGroup>
@@ -22,6 +22,7 @@ export default function CreateFormForm() {
               isRequired={true}
               aria-describedby="email-helper-text"
               placeholder="A New Form"
+              onChange={handleInputChange}
             />
           </InputGroup>
         </FormControl>
@@ -34,6 +35,7 @@ export default function CreateFormForm() {
               placeholder="you@example.com"
               isRequired={true}
               aria-describedby="email-helper-text"
+              onChange={handleInputChange}
             />
           </InputGroup>
         </FormControl>
