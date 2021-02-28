@@ -29,7 +29,7 @@ export default function Submissions({ fields, submissions }) {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true)
-    }, 3000)
+    }, 1500)
   }, [])
 
   const itemRender = (_, type) => {

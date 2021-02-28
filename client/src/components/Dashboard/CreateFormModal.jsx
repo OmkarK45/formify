@@ -15,11 +15,19 @@ import {
 } from "@chakra-ui/react"
 import { AiOutlineFileAdd } from "react-icons/ai"
 import CreateFormForm from "./CreateFormForm"
+import { useState } from "react"
 
 export default function CreateFormModal({ isOpen, onOpen, onClose }) {
   const modalFooterBg = useColorModeValue("gray.50", "gray.900")
   const iconBg = useColorModeValue("orange.100", "orange.700")
   const iconColor = useColorModeValue("orange.600", "orange.400")
+
+  const [data, setData] = useState({})
+
+  const handleInputChange = (e) => {}
+
+  const handleSubmit = (e) => {}
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -30,7 +38,10 @@ export default function CreateFormModal({ isOpen, onOpen, onClose }) {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <CreateFormForm />
+            <CreateFormForm
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+            />
           </ModalBody>
 
           <ModalFooter bg={modalFooterBg}>
