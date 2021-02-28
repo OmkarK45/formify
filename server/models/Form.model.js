@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 const { nanoid } = require("nanoid")
-
+const Submission = require("./Submission.model")
 /*
   Each Form has a FormID, A fields Array which handles schema of the form
   submission -> array of objects which handle submissions at this form
@@ -24,7 +24,14 @@ const formSchema = new Schema(
     fields: [
       { type: String, length: 3, required: [true, "This field is required"] },
     ],
-    submissions: [{ type: Schema.Types.Mixed }],
+    // submissions: [{ type: Schema.Types.Mixed }],
+    submissions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Submission",
+      },
+    ],
+
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
