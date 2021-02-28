@@ -199,6 +199,8 @@ const sendToken = async (user, statusCode, res) => {
   res.cookie("token", token, {
     httpOnly: true,
     maxAge: 7 * 24 * 3600 * 1000,
+    sameSite: "none",
+    secure: true,
   })
   res
     .status(statusCode)
