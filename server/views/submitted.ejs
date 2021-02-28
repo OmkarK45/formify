@@ -40,11 +40,20 @@
   </head>
   <body>
     <div class="flex">
+      <%if(success){ %>
       <div class="container">
-        <h1>Thanks !</h1>
-        <p>The form was submitted successfully.</p>
+        <h1><%=heading%></h1>
+        <p><%=message%></p>
         <a class="btn" href="javascript:history.go(-1)">Go Back</a>
       </div>
+      <% }else { %>
+      <div class="container">
+        <h1><%=heading%></h1>
+        <p><%= message %></p>
+        <a class="btn" href="javascript:history.go(-1)">Go Back</a>
+      </div>
+
+      <% } %>
       <div class="brand">
         <a href="#">Forms powered by Formify</a>
       </div>
