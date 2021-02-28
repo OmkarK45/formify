@@ -1,5 +1,6 @@
 const User = require("../models/User.model")
 const Form = require("../models/Form.model")
+const Submission = require("../models/Submission.model")
 const ErrorResponse = require("../utils/errorResponse")
 const sendEmail = require("../utils/sendEmail")
 
@@ -29,7 +30,7 @@ exports.getOneForm = async (req, res, next) => {
   }
 
   try {
-    const requestedForm = await Form.findOne({ formID })
+    const requestedForm = await Form.findOne({ formID }).populate("submissions")
     if (!requestedForm) {
       return next(
         new ErrorResponse(
@@ -115,16 +116,26 @@ exports.postSubmissions = async (req, res, next) => {
   }
 
   try {
-    const foundForm = await Form.findOne({ formID }).populate("createdBy")
-
+    const foundForm = await Form.findOne({ formID })
+      .populate("createdBy")
+      .populate("submissions")
     // @TODO -> check if form is disabled by uyser
-    foundForm.submissions.push({ ...submissionData, submittedAt: Date.now() })
+    const submission = await Submission.create({
+      belongTo: foundForm._id,
+      ...submissionData,
+      createdAt: Date.now(),
+    })
+
+    foundForm.submissions.push(submission)
+
+    await submission.save()
 
     await foundForm.save()
 
     res.status(200).render("submitted")
 
     if (foundForm.emailNotifications) {
+      // @TODO -> Create a better email template
       await sendEmail({
         to: foundForm.createdBy.email,
         subject: `[Formify] : New Submission for ${foundForm.formName}`,
@@ -132,6 +143,7 @@ exports.postSubmissions = async (req, res, next) => {
       })
     }
   } catch (error) {
+    console.log(error)
     next(
       new ErrorResponse(
         "Something went wrong while submitting this form. Please try again or contact support@formify.com",
