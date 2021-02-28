@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useMutation } from "react-query"
 import {
   Box,
   Input,
@@ -12,6 +13,8 @@ import {
   FormControl,
   FormLabel,
   useToast,
+  Flex,
+  Stack,
 } from "@chakra-ui/react"
 import { HiOutlineTrash } from "react-icons/hi"
 import { MdSave } from "react-icons/md"
@@ -19,27 +22,36 @@ import Setting from "./Setting"
 import { PUT } from "./../../utils/network"
 // Settings need some work
 export default function FormSettings({
-  form: {
-    disabled,
-    emailNotifications,
-    requiresVerification,
-    formName,
-    formID,
-  },
+  form: { enabled, emailNotifications, requiresVerification, formName, formID },
 }) {
-  const toast = useToast()
   const [settings, setSettings] = useState({
-    disabled,
+    enabled,
     emailNotifications,
     requiresVerification,
     formName,
   })
+  console.log({ settings })
   // @TODO -> This needs work
-  async function handleUpdate(e) {
+  const toast = useToast()
+  function handleInputChange(e) {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value
+    console.log(e.target.type)
+    console.log(e.target.name)
     setSettings({
       ...settings,
-      [e.target.name]: e.target.checked,
+      [e.target.name]: value,
     })
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!settings.formName) {
+      return toast({
+        title: "Form name is required",
+        status: "error",
+      })
+    }
     try {
       await PUT(
         process.env.REACT_APP_BACKEND + "/api/forms/" + formID + "/settings",
@@ -51,38 +63,36 @@ export default function FormSettings({
           withCredentials: true,
         }
       ).then((res) => {
-        toast({
-          title: "OK",
+        return toast({
+          title: "Settings saved!",
+          status: "success",
+          isClosable: true,
         })
       })
     } catch (error) {
-      console.log(error)
+      return toast({
+        title: "Failed to save settings",
+        status: "error",
+        isClosable: true,
+      })
     }
   }
-
   return (
-    <Box>
-      <form onSubmit={handleUpdate}>
-        <Setting>
-          <VStack spacing={8} align="stretch" maxW={["95%", "90%", "80%"]}>
+    <Box mt={4}>
+      <form onSubmit={handleSubmit}>
+        <Setting mb={8}>
+          <VStack spacing={8} align="stretch">
             <Box>
               <Text fontSize="lg" fontWeight="bold">
                 Form Name
               </Text>
               <HStack mt="0.7rem" spacing={8} justify="space-between">
                 <Input
-                  readOnly
                   bg={useColorModeValue("gray.50", "gray.700")}
                   value={settings.formName}
+                  onChange={handleInputChange}
+                  name="formName"
                 />
-                <Button
-                  leftIcon={<MdSave />}
-                  variant="outline"
-                  colorScheme="orange"
-                  type="submit"
-                >
-                  Save
-                </Button>
               </HStack>
             </Box>
 
@@ -98,11 +108,11 @@ export default function FormSettings({
                 </FormLabel>
                 <Switch
                   id="form-disable"
-                  isChecked={settings.disabled}
+                  isChecked={settings.enabled}
                   colorScheme="orange"
                   size="lg"
-                  name="disabled"
-                  onChange={handleUpdate}
+                  name="enabled"
+                  onChange={handleInputChange}
                 />
               </HStack>
             </FormControl>
@@ -124,7 +134,7 @@ export default function FormSettings({
                   colorScheme="orange"
                   size="lg"
                   name="emailNotifications"
-                  onChange={handleUpdate}
+                  onChange={handleInputChange}
                 />
               </HStack>
             </FormControl>
@@ -146,28 +156,35 @@ export default function FormSettings({
                   colorScheme="orange"
                   size="lg"
                   name="requiresVerification"
-                  onChange={handleUpdate}
+                  onChange={handleInputChange}
                 />
               </HStack>
             </FormControl>
-
-            <FormControl>
-              <HStack justify="space-between">
-                <FormLabel htmlFor="delete-form" mb="0">
-                  <Text fontSize="lg" fontWeight="bold">
-                    Delete this form
-                  </Text>
-                  <Text>
-                    This will remove all submissions from this form. Proceed
-                    with caution
-                  </Text>
-                </FormLabel>
-                <IconButton icon={<HiOutlineTrash />} />
-              </HStack>
-            </FormControl>
+            <Stack direction="row-reverse">
+              <Button type="submit" colorScheme="orange">
+                Save
+              </Button>
+              <Button>Cancel</Button>
+            </Stack>
           </VStack>
         </Setting>
       </form>
+      <Setting>
+        <FormControl>
+          <HStack justify="space-between">
+            <FormLabel htmlFor="delete-form" mb="0">
+              <Text fontSize="lg" fontWeight="bold">
+                Delete this form
+              </Text>
+              <Text>
+                This will remove all submissions from this form. Proceed with
+                caution
+              </Text>
+            </FormLabel>
+            <Button colorScheme="red">Delete</Button>
+          </HStack>
+        </FormControl>
+      </Setting>
     </Box>
   )
 }

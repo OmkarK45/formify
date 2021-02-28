@@ -52,7 +52,7 @@ const FormList = () => {
       {data ? (
         <Box>
           <Table size="md" variant="simple">
-            <TableCaption>Forms created by Omkar</TableCaption>
+            <TableCaption>Forms created by {user?.username}</TableCaption>
             <Thead bg={tableHeaderBg}>
               <Tr>
                 <Th>Forms</Th>

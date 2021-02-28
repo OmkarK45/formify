@@ -49,7 +49,7 @@ const FormDetails = ({ location: { state } }) => {
   if (isLoading) return <TableSkeleton />
 
   if (error) return <Empty text={error.message} status="error" />
-  console.log("Form sent by server : ", data)
+  console.log("Form sent by server : ", data?.data?.requestedForm)
   return (
     <>
       <DashboardHeader title={data?.data?.requestedForm.formName}>

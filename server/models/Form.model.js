@@ -40,9 +40,9 @@ const formSchema = new Schema(
       type: Boolean,
       default: true,
     },
-    disabled: {
+    enabled: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     emailNotifications: {
       type: Boolean,

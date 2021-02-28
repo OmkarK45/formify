@@ -55,6 +55,10 @@ const userSchema = new Schema({
   verificationTokenExpiresIn: {
     type: Date,
   },
+  registeredOn: {
+    type: Date,
+    default: Date.now(),
+  },
 })
 
 userSchema.pre("save", async function (next) {

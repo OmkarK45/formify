@@ -53,25 +53,22 @@ exports.getOneForm = async (req, res, next) => {
 exports.formSettings = async (req, res, next) => {
   const {
     formID,
-    disabled,
+    enabled,
     emailNotifications,
     requiresVerification,
+    formName,
   } = req.body
   const { email } = req.user
-  console.log({
-    formID,
-    disabled,
-    emailNotifications,
-    requiresVerification,
-    email,
-  })
-
   if (!(formID && email)) {
     return next(new ErrorResponse("Please provide valid FormID and Email", 400))
   }
   const form = await Form.findOne({
     formID,
   }).populate("createdBy")
+
+  if (formName !== form.formName && formName !== "") {
+    form["formName"] = formName
+  }
 
   if (form.createdBy.email !== email) {
     return next(new ErrorResponse("You have no permission to edit this form"))
@@ -81,8 +78,8 @@ exports.formSettings = async (req, res, next) => {
     form["emailNotifications"] = emailNotifications
   }
 
-  if (disabled !== undefined) {
-    form.disabled = disabled
+  if (enabled !== undefined) {
+    form.enabled = enabled
   }
 
   if (requiresVerification !== undefined) {
