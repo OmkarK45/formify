@@ -10,6 +10,9 @@ import {
   TableCaption,
   Button,
   Box,
+  HStack,
+  Heading,
+  Text,
 } from "@chakra-ui/react"
 import Pagination from "@choc-ui/paginator"
 import Empty from "./../Utils/Empty"
@@ -43,11 +46,14 @@ export default function Submissions({ fields, submissions }) {
 
   return (
     <>
+      <HStack justify="flex-end">
+        <Button colorScheme="orange">Export JSON</Button>
+      </HStack>
       <Box
         shadow="base"
         rounded="10px"
         m="0 auto"
-        mt="3rem"
+        mt="1rem"
         minW="100%"
         overflowX="auto"
       >
@@ -116,6 +122,11 @@ export default function Submissions({ fields, submissions }) {
             </tbody>
           </Table>
         )}
+      </Box>
+      <Box mt={4} textAlign="center">
+        <Text>
+          Submissions older than 30days are deleted automatically. Learn More
+        </Text>
       </Box>
     </>
   )
