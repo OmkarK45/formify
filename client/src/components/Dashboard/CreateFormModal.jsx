@@ -22,15 +22,26 @@ export default function CreateFormModal({ isOpen, onOpen, onClose }) {
   const iconBg = useColorModeValue("orange.100", "orange.700")
   const iconColor = useColorModeValue("orange.600", "orange.400")
 
-  const [data, setData] = useState({})
+  const [data, setData] = useState({
+    formName: "",
+    email: "",
+  })
 
-  const handleInputChange = (e) => {}
+  const handleInputChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    })
+  }
 
-  const handleSubmit = (e) => {}
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(data)
+  }
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal size="xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader fontWeight="400">
@@ -41,15 +52,10 @@ export default function CreateFormModal({ isOpen, onOpen, onClose }) {
             <CreateFormForm
               handleInputChange={handleInputChange}
               handleSubmit={handleSubmit}
+              data={data}
+              onClose={onClose}
             />
           </ModalBody>
-
-          <ModalFooter bg={modalFooterBg}>
-            <Button type="submit" mr={3} colorScheme="orange" fontWeight="400">
-              Create
-            </Button>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
