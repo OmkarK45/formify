@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 import { HeroImage, Features, GetStarted } from "./index"
 import { Footer } from "../Layout"
 import "../../index.css"
-
 const Hero = () => {
   const { user } = useContext(userContext)
   return (
