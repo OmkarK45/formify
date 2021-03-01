@@ -144,16 +144,17 @@ exports.postSubmissions = async (req, res, next) => {
       heading: "Cannot submit this form.",
     })
 
+    const html = newSubmissionTemplate(foundForm.formName)
+    console.log({ html })
     if (foundForm.emailNotifications) {
-      const html = newSubmissionTemplate(foundForm.formName)
       await sendEmail({
         to: foundForm.createdBy.email,
         subject: `[Formify] : New Submission for ${foundForm.formName}`,
-        html: html,
+        text: html,
       })
     }
   } catch (error) {
-    console.log(error)
+    console.log("Logged error", error)
     res.status(500).render("submitted", {
       success: false,
       message:
