@@ -19,3 +19,6 @@ Good colors to use
 1. For big div BGs - > #DDF6FF
 
 @TODO ->
+-> Create mark as spam flow
+-> Delete submissions after process.env.SUBMISSION_DELETE_DURATION days
+-> Fix UI inconsistencies
