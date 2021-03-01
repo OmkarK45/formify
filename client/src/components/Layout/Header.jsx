@@ -9,6 +9,7 @@ import {
   useColorMode,
   IconButton,
   useColorModeValue,
+  Text,
 } from "@chakra-ui/react"
 import ProfileMenu from "./../Utils/ProfileMenu"
 import { Link } from "react-router-dom"
@@ -16,6 +17,7 @@ import { BsMoon } from "react-icons/bs"
 import { BiSun } from "react-icons/bi"
 import Menu from "./Drawer"
 import logo from "./logo-orange.png"
+import Banner from "../Home/Banner"
 
 const Header = () => {
   const { user } = useContext(userContext)
@@ -23,6 +25,7 @@ const Header = () => {
   const bg = useColorModeValue("gray.50", "gray.900")
   return (
     <Box position="sticky" bg={bg} top="0" zIndex="99" shadow="base">
+      {/* <Banner /> */}
       <Box>
         <Flex
           justifyContent="space-between"
@@ -64,6 +67,9 @@ const Header = () => {
           </List>
         </Flex>
       </Box>
+      {/* <Box bg="orange.100" py="0.1rem" textAlign="center">
+        <Text fontWeight="bold">PREVIEW BETA</Text>
+      </Box> */}
     </Box>
   )
 }
