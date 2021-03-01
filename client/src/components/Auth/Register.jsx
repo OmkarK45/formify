@@ -90,7 +90,7 @@ const Register = () => {
         <Heading>Register.</Heading>
       </Box>
       <form onSubmit={handleSubmit}>
-        <FormControl marginTop="1.5rem">
+        <FormControl isRequired marginTop="1.5rem">
           <FormLabel htmlFor="username">Username</FormLabel>
           <InputGroup>
             <InputLeftElement
@@ -109,7 +109,7 @@ const Register = () => {
           </InputGroup>
         </FormControl>
 
-        <FormControl marginTop="1.5rem">
+        <FormControl isRequired marginTop="1.5rem">
           <FormLabel htmlFor="registerEmail">Email address</FormLabel>
           <InputGroup>
             <InputLeftElement
@@ -128,7 +128,7 @@ const Register = () => {
           </InputGroup>
         </FormControl>
 
-        <FormControl marginTop="1.5rem">
+        <FormControl isRequired marginTop="1.5rem">
           <FormLabel htmlFor="registerPassword">Password</FormLabel>
           <InputGroup>
             <InputLeftElement
@@ -149,7 +149,7 @@ const Register = () => {
           </InputGroup>
         </FormControl>
 
-        <FormControl marginTop="1.5rem">
+        <FormControl isRequired marginTop="1.5rem">
           <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
           <InputGroup>
             <InputLeftElement
