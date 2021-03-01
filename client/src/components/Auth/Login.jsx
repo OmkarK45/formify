@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { useHistory, Link } from "react-router-dom"
+import { useHistory, Link as ReactRouterLink } from "react-router-dom"
 import { POST } from "../../utils/network"
 import {
   Input,
@@ -14,6 +14,7 @@ import {
   Icon,
   InputRightElement,
   IconButton,
+  Link,
 } from "@chakra-ui/react"
 import {
   HiOutlineMail,
@@ -82,7 +83,7 @@ const Login = () => {
         <Heading>Login.</Heading>
       </Box>
       <form onSubmit={handleSubmit}>
-        <FormControl marginTop="1.5rem">
+        <FormControl isRequired marginTop="1.5rem">
           <FormLabel htmlFor="email">Email address</FormLabel>
           <InputGroup>
             <InputLeftElement
@@ -102,7 +103,7 @@ const Login = () => {
           </InputGroup>
         </FormControl>
 
-        <FormControl marginTop="2rem">
+        <FormControl isRequired marginTop="2rem">
           <FormLabel htmlFor="password">Password</FormLabel>
           <InputGroup>
             <InputLeftElement
@@ -133,14 +134,16 @@ const Login = () => {
             </InputRightElement>
           </InputGroup>
           <Link
+            as={ReactRouterLink}
             to="/auth/forgotPassword"
-            style={{ marginTop: "0.8rem", display: "block", color: "purple" }}
+            d="block"
+            mt="0.8rem"
           >
             Forgot Password ?
           </Link>
         </FormControl>
         <Button
-          marginTop="2.5rem"
+          marginTop="2rem"
           width="100%"
           marginBottom="1rem"
           type="submit"
