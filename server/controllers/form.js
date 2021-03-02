@@ -29,7 +29,6 @@ exports.getOneForm = async (req, res, next) => {
   if (!(formID && email)) {
     return next(new ErrorResponse("Please provide valid FormID and Email", 400))
   }
-
   try {
     const requestedForm = await Form.findOne({ formID }).populate("submissions")
     if (!requestedForm) {
@@ -94,20 +93,21 @@ exports.formSettings = async (req, res, next) => {
 }
 
 exports.postSubmissions = async (req, res, next) => {
-  if (
-    !req.body ||
-    (req.method !== "POST" && req.method !== "PUT" && req.method !== "PATCH")
-  ) {
-    return next(
-      new ErrorResponse(
-        "Please make sure to make request using POST method",
-        400
-      )
-    )
+  const submissionData = req.body
+  const { formID } = req.params
+
+  if (!submissionData) {
+    next(new ErrorResponse("Please make sure to fill required fields", 400))
   }
 
-  const { formID } = req.params
-  const submissionData = req.body
+  if (req.method !== "POST") {
+    res.render("badrequest", {
+      message: "Please make sure to use POST method.",
+      heading: "Aw, Snap!",
+      success: false,
+    })
+    return
+  }
 
   if (!formID) {
     return next(new ErrorResponse("Please provide a formID and username"))
@@ -117,7 +117,7 @@ exports.postSubmissions = async (req, res, next) => {
     const foundForm = await Form.findOne({ formID })
       .populate("createdBy")
       .populate("submissions")
-    // @TODO -> check if form is disabled by uyser
+
     const submission = await Submission.create({
       belongTo: foundForm._id,
       ...submissionData,
@@ -126,26 +126,23 @@ exports.postSubmissions = async (req, res, next) => {
 
     foundForm.submissions.push(submission)
 
-    await submission.save()
-
-    await foundForm.save()
-
     if (foundForm.enabled) {
-      res.status(200).render("submitted", {
+      await submission.save()
+      await foundForm.save()
+      res.render("submitted", {
+        message: "Your response was submitted.",
+        heading: "Thanks!",
         success: true,
-        heading: "Thank you!",
-        message: "Your form was submitted successfully.",
       })
     }
-
-    res.status(200).render("submitted", {
-      success: true,
-      message: "The owner of this form has disabled new submissions.",
-      heading: "Cannot submit this form.",
-    })
-
-    const html = newSubmissionTemplate(foundForm.formName)
-    console.log({ html })
+    if (foundForm.enabled === false) {
+      res.render("submitted", {
+        message: "The owner of this form has disabled submission",
+        heading: "Aw, Snap!",
+        success: false,
+      })
+    }
+    const html = newSubmissionTemplate(foundForm.formName, foundForm.formID)
     if (foundForm.emailNotifications) {
       await sendEmail({
         to: foundForm.createdBy.email,
@@ -154,11 +151,12 @@ exports.postSubmissions = async (req, res, next) => {
       })
     }
   } catch (error) {
-    console.log("Logged error", error)
-    res.status(500).render("submitted", {
+    console.log(error)
+    res.render("submitted", {
       success: false,
       message:
         "Something went wrong while submitting this form. Please try again or contact support@formify.com",
+      heading: "Aw Snap!",
     })
   }
 }
