@@ -1,7 +1,7 @@
 import axios from "axios"
 
-export const GET = async (url, options) => {
-  return await axios.get(url, options)
+export const GET = (url, options) => {
+  return axios.get(url, options)
 }
 
 export const POST = async (url, payload, options) => {
