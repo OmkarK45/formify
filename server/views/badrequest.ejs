@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f7fafc;
+      }
+      .flex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        border: "1px solid #eee";
+        border-radius: 10px;
+        min-height: 300px;
+
+        font-family: "Inter", sans-serif;
+      }
+      .btn {
+        background-color: orange;
+        color: white;
+        padding: 1rem 2rem;
+        text-decoration: none;
+      }
+      .brand {
+        margin-top: 1rem;
+      }
+    </style>
+    <title>Form Not Submitted | Formify</title>
+  </head>
+  <body>
+    <div class="flex">
+      <div class="container">
+        <h1><%=heading%></h1>
+        <p><%=message%></p>
+        <a class="btn" href="javascript:history.go(-1)">Go Back</a>
+      </div>
+      <div class="brand">
+        <a href="#">Forms powered by Formify</a>
+      </div>
+    </div>
+  </body>
+</html>
