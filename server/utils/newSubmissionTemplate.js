@@ -1,4 +1,4 @@
-exports.newSubmissionTemplate = (formName) => {
+exports.newSubmissionTemplate = (formName, formID) => {
   return `
     <!DOCTYPE html>
     <html>
@@ -138,7 +138,7 @@ exports.newSubmissionTemplate = (formName) => {
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Inter', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                   <p style="margin: 0;">If that doesn't work, copy and paste the following link in your browser:</p>
-                  <p style="margin: 0;"><a href="https://sendgrid.com" target="_blank">https://same-link-as-button.url/xxx-xxx-xxxx</a></p>
+                  <p style="margin: 0;"><a href="http://localhost:3000/dashboard/forms/${formID}" target="_blank">http://localhost:3000/dashboard/forms/${formID}</a></p>
                 </td>
               </tr>
     
