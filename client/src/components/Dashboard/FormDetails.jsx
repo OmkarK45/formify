@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import { useContext } from "react"
+import { useContext, useState, useEffect } from "react"
 import {
   Box,
   Tabs,
@@ -10,6 +10,7 @@ import {
   TabPanels,
   useColorModeValue,
   Flex,
+  Spinner,
 } from "@chakra-ui/react"
 import { useParams } from "react-router-dom"
 import DashboardHeader from "./DashboardHeader"
@@ -27,16 +28,19 @@ const FormDetails = ({ location: { state } }) => {
   const bg = useColorModeValue("gray.200", "gray.800")
   const { user } = useContext(userContext)
   let { formID } = useParams()
+  console.log({ formID })
   const tabStyle = {
     maxW: ["100%", "100%", "80%"],
     m: "0 auto",
   }
+  console.log(user)
+  // @TODO-> This needs some work
   const { isLoading, error, data, isFetching } = useQuery(
     "formList",
     async () =>
       await GET(
         process.env.REACT_APP_BACKEND +
-          "/api/forms/" +
+          "/api/forms/f/" +
           user.email +
           "/" +
           formID,
@@ -47,46 +51,48 @@ const FormDetails = ({ location: { state } }) => {
   )
 
   if (isLoading) return <TableSkeleton />
-
   if (error) return <Empty text={error.message} status="error" />
-  console.log("Form sent by server : ", data?.data?.requestedForm)
+  console.log(data)
   return (
-    <>
-      <DashboardHeader title={data?.data?.requestedForm.formName}>
-        <Text>{data?.data?.requestedForm.submissions.length} Submissions</Text>
-        <Flex>
-          <Text fontWeight="600">Date Created : </Text>
-          <Text>
-            &nbsp;{new Date(data?.data?.requestedForm.createdAt).toDateString()}
-          </Text>
-        </Flex>
-      </DashboardHeader>
-      <Box bg={bg}>
-        <Tabs defaultIndex={1} variant="line">
-          <TabList m="0 auto" maxW={["100%", "100%", "80%"]}>
-            <Tab>Integration</Tab>
-            <Tab>Submissions</Tab>
-            <Tab>Settings</Tab>
-            <Tab isDisabled>Plugins (Coming Soon)</Tab>
-          </TabList>
-          <TabPanels bg={tabBg}>
-            <TabPanel {...tabStyle}>
-              <Integrations formID={formID} />
-            </TabPanel>
-            <TabPanel {...tabStyle}>
-              <Submissions
-                submissions={data?.data?.requestedForm.submissions}
-                fields={data?.data?.requestedForm.fields}
-              />
-            </TabPanel>
-            <TabPanel {...tabStyle}>
-              <FormSettings form={data?.data?.requestedForm} />
-            </TabPanel>
-            <TabPanel {...tabStyle}>Plugins</TabPanel>
-          </TabPanels>
-        </Tabs>
+    <Box>
+      <Box>
+        <DashboardHeader title={data.data.requestedForm.formName}>
+          <Text>{data.data.requestedForm.submissions.length} Submissions</Text>
+          <Flex>
+            <Text fontWeight="600">Date Created : </Text>
+            <Text>
+              &nbsp;
+              {new Date(data.data.requestedForm.createdAt).toDateString()}
+            </Text>
+          </Flex>
+        </DashboardHeader>
+        <Box bg={bg}>
+          <Tabs defaultIndex={1} variant="line">
+            <TabList m="0 auto" maxW={["100%", "100%", "80%"]}>
+              <Tab>Integration</Tab>
+              <Tab>Submissions</Tab>
+              <Tab>Settings</Tab>
+              <Tab isDisabled>Plugins (Coming Soon)</Tab>
+            </TabList>
+            <TabPanels bg={tabBg}>
+              <TabPanel {...tabStyle}>
+                <Integrations formID={formID} />
+              </TabPanel>
+              <TabPanel {...tabStyle}>
+                <Submissions
+                  submissions={data.data.requestedForm.submissions}
+                  fields={data.data.requestedForm.fields}
+                />
+              </TabPanel>
+              <TabPanel {...tabStyle}>
+                <FormSettings form={data.data.requestedForm} />
+              </TabPanel>
+              <TabPanel {...tabStyle}>Plugins</TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
       </Box>
-    </>
+    </Box>
   )
 }
 export default FormDetails
