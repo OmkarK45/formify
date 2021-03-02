@@ -27,7 +27,7 @@ const FormList = () => {
   const tableHeaderBg = useColorModeValue("gray.100", "gray.800")
 
   const { isLoading, error, data, isFetching } = useQuery(
-    "formList",
+    "getList",
     async () =>
       await GET(
         process.env.REACT_APP_BACKEND + "/api/forms/" + user.email + "/all",
@@ -65,15 +65,12 @@ const FormList = () => {
                 return (
                   <Tr key={form._id}>
                     <Td>
-                      <a
-                        style={{ display: "flex" }}
-                        href={"/dashboard/forms/" + form.formID}
-                      >
+                      <Link to={"/dashboard/forms/" + form.formID}>
                         {form.formName} &nbsp;
                         <span style={{ marginLeft: "0.3rem" }}>
                           <FiExternalLink />
                         </span>
-                      </a>
+                      </Link>
                       <Text fontSize="sm" color="gray.500">
                         {form.email}
                       </Text>
