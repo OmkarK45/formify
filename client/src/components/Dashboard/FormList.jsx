@@ -1,29 +1,27 @@
 import { useContext } from "react"
-import userContext from "./../../context/userContext"
 import { useQuery } from "react-query"
 import { Link } from "react-router-dom"
+import { FiExternalLink } from "react-icons/fi"
 import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Text,
   Tr,
   Th,
   Td,
   TableCaption,
   Box,
-  Heading,
   useColorModeValue,
 } from "@chakra-ui/react"
-import Empty from "./../Utils/Empty"
-import { FiExternalLink } from "react-icons/fi"
-import TableSkeleton from "./../Utils/TableSkeleton"
+
 import { GET } from "./../../utils/network"
+import userContext from "./../../context/userContext"
+import Empty from "./../Utils/Empty"
+import TableSkeleton from "./../Utils/TableSkeleton"
 
 const FormList = () => {
   const { user } = useContext(userContext)
-  const tempdata = true
   const tableHeaderBg = useColorModeValue("gray.100", "gray.800")
 
   const { isLoading, error, data, isFetching } = useQuery(
@@ -80,18 +78,6 @@ const FormList = () => {
                   </Tr>
                 )
               })}
-              <Tr>
-                <Td>
-                  <Link style={{ display: "flex" }} to="/forms/23423/">
-                    From Portfolio <FiExternalLink />
-                  </Link>
-                  <Text fontSize="sm" color="gray.500">
-                    portfolio@example.com
-                  </Text>
-                </Td>
-                <Td>Active</Td>
-                <Td isNumeric>34</Td>
-              </Tr>
             </Tbody>
           </Table>
         </Box>

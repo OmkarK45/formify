@@ -163,7 +163,7 @@ exports.postSubmissions = async (req, res, next) => {
 
 // @desc -> createForm creates a new form instance
 exports.createForm = async (req, res, next) => {
-  const { formName, fields } = req.body
+  const { formName, fields, emailSubmissions, description } = req.body
   const { email } = req.user
 
   try {
@@ -176,6 +176,7 @@ exports.createForm = async (req, res, next) => {
       formName,
       fields,
       createdBy: user,
+      description,
     })
 
     user.forms.push(newForm)

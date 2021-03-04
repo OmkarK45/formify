@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import { useContext, useState, useEffect } from "react"
+import { useContext } from "react"
 import {
   Box,
   Tabs,
@@ -10,7 +10,6 @@ import {
   TabPanels,
   useColorModeValue,
   Flex,
-  Spinner,
 } from "@chakra-ui/react"
 import { useParams } from "react-router-dom"
 import DashboardHeader from "./DashboardHeader"
@@ -20,7 +19,6 @@ import { GET } from "./../../utils/network"
 import userContext from "./../../context/userContext"
 import TableSkeleton from "./../Utils/TableSkeleton"
 import Empty from "./../Utils/Empty"
-import { db } from "../../utils/MOCK_DATA"
 import FormSettings from "./FormSettings"
 
 const FormDetails = ({ location: { state } }) => {
@@ -28,14 +26,11 @@ const FormDetails = ({ location: { state } }) => {
   const bg = useColorModeValue("gray.200", "gray.800")
   const { user } = useContext(userContext)
   let { formID } = useParams()
-  console.log({ formID })
   const tabStyle = {
     maxW: ["100%", "100%", "80%"],
     m: "0 auto",
   }
-  console.log(user)
-  // @TODO-> This needs some work
-  const { isLoading, error, data, isFetching } = useQuery(
+  const { isLoading, error, data } = useQuery(
     "formList",
     async () =>
       await GET(
@@ -51,8 +46,9 @@ const FormDetails = ({ location: { state } }) => {
   )
 
   if (isLoading) return <TableSkeleton />
+
   if (error) return <Empty text={error.message} status="error" />
-  console.log(data)
+
   return (
     <Box>
       <Box>
@@ -66,6 +62,7 @@ const FormDetails = ({ location: { state } }) => {
             </Text>
           </Flex>
         </DashboardHeader>
+
         <Box bg={bg}>
           <Tabs defaultIndex={1} variant="line">
             <TabList m="0 auto" maxW={["100%", "100%", "80%"]}>

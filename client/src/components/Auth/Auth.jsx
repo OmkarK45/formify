@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react"
 import { Register } from "./index"
 import Login from "./Login"
-import Footer from "./../Layout/Footer"
 
 const Auth = () => {
   return (

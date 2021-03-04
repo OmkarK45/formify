@@ -13,6 +13,7 @@ import AccountSettings from "./components/User/AccountSettings"
 import { QueryClient, QueryClientProvider } from "react-query"
 import VerificationEmailSent from "./components/Auth/VerificationEmailSent"
 import EmailVerified from "./components/Auth/EmailVerified"
+import CreateNewForm from "./components/Dashboard/CreateNewForm"
 
 const queryClient = new QueryClient()
 
@@ -82,6 +83,11 @@ const App = () => {
                 path="/dashboard/forms"
                 exact
                 component={Dashboard}
+              />
+              <PrivateRoute
+                path="/dashboard/forms/new"
+                exact
+                component={CreateNewForm}
               />
               <PrivateRoute
                 path="/account/settings"

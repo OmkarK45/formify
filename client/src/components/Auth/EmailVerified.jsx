@@ -6,6 +6,7 @@ import {
   AlertDescription,
   AlertTitle,
   Progress,
+  useToast,
 } from "@chakra-ui/react"
 import { useParams, useHistory } from "react-router-dom"
 import { POST } from "../../utils/network"
@@ -15,6 +16,8 @@ export default function EmailVerified() {
   const { setUser } = useContext(userContext)
   const history = useHistory()
   const { verificationToken } = useParams()
+  const toast = useToast()
+
   useEffect(() => {
     const sendVerficationToken = async () => {
       try {
@@ -32,8 +35,12 @@ export default function EmailVerified() {
           console.log(res)
         })
       } catch (error) {
-        console.log({ error })
-        // handle error
+        toast({
+          title: "Something went wrong",
+          description: "Please try again.",
+          status: "error",
+          isClosable: true,
+        })
       }
     }
     sendVerficationToken()

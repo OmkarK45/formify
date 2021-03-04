@@ -32,16 +32,7 @@ const Logout = () => {
     history.push("/")
   }
 
-  return (
-    <Link
-      variant="link"
-      textColor="inherit"
-      _hover={{ textDecoration: "none" }}
-      onClick={handleLogout}
-    >
-      Logout
-    </Link>
-  )
+  return <Link onClick={handleLogout}>Logout</Link>
 }
 
 export default Logout

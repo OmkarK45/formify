@@ -10,6 +10,7 @@ import {
   IconButton,
   Flex,
   Select,
+  Textarea,
 } from "@chakra-ui/react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import { FaRegTimesCircle } from "react-icons/fa"
@@ -17,12 +18,11 @@ export default function CreateFormForm({
   handleInputChange,
   handleSubmit,
   data,
-  onClose,
 }) {
   const [values, setValues] = useState({
     val: [{ fieldValue: "", fieldType: "" }],
   })
-  console.log(values)
+
   function createInputs() {
     return values.val.map((el, i) => (
       <HStack spacing={4} my={4} key={i}>
@@ -43,7 +43,12 @@ export default function CreateFormForm({
           <option value="date">Date</option>
           <option value="number">Number</option>
         </Select>
-        <IconButton icon={<FaRegTimesCircle />} onClick={removeClick.bind(i)} />
+        <IconButton
+          variant="ghost"
+          shadow="none"
+          icon={<FaRegTimesCircle />}
+          onClick={removeClick.bind(i)}
+        />
       </HStack>
     ))
   }
@@ -125,7 +130,7 @@ export default function CreateFormForm({
           >
             Create
           </Button>
-          <Button onClick={onClose}>Close</Button>
+          <Button>Cancel</Button>
         </HStack>
       </form>
     </Box>

@@ -2,12 +2,10 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  Button,
   MenuGroup,
   MenuDivider,
   Box,
   MenuItem,
-  Avatar,
   IconButton,
 } from "@chakra-ui/react"
 import Logout from "../Utils/Logout"
@@ -49,7 +47,6 @@ const ProfileMenu = () => {
             <MenuItem icon={<AiOutlineBook />}>Docs</MenuItem>
             <MenuItem icon={<AiOutlineQuestionCircle />}>FAQ</MenuItem>
             <MenuItem icon={<FiLifeBuoy />}>Support</MenuItem>
-
             <Logout />
           </MenuGroup>
         </MenuList>

@@ -48,6 +48,11 @@ const formSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    description: {
+      type: String,
+      min: 5,
+      max: 256,
+    },
   },
   { strict: false, timestamps: true }
 )
