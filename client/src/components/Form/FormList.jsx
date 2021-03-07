@@ -10,6 +10,7 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react"
+import format from "date-fns/format"
 import { useContext } from "react"
 import { FiExternalLink } from "react-icons/fi"
 import { useQuery } from "react-query"
@@ -38,6 +39,12 @@ const FormList = () => {
   if (isLoading) return <TableSkeleton />
 
   if (error) return <Empty text={error.message} status="error" />
+  function getCreatedAtDate(date) {
+    return format(new Date(date), "dd-MMM, KK:mm aaa")
+  }
+  function getUpdatedAtDate(date) {
+    return format(new Date(date), "dd-MMM, KK:mm aaa")
+  }
   return (
     <Box
       boxShadow="base"
@@ -54,6 +61,8 @@ const FormList = () => {
             <Thead bg={tableHeaderBg}>
               <Tr>
                 <Th>Forms</Th>
+                <Th>Date Created</Th>
+                <Th>Last Submission</Th>
                 <Th>Status</Th>
                 <Th isNumeric>Submissions</Th>
               </Tr>
@@ -73,6 +82,8 @@ const FormList = () => {
                         {form.email}
                       </Text>
                     </Td>
+                    <Td>{getCreatedAtDate(form.createdAt)}</Td>
+                    <Td>{getUpdatedAtDate(form.updatedAt)}</Td>
                     <Td>{form.disabled ? "Disabled" : "Active"}</Td>
                     <Td isNumeric>{form.submissions.length}</Td>
                   </Tr>

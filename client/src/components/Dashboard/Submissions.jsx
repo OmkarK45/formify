@@ -13,13 +13,12 @@ import {
 } from "@chakra-ui/react"
 import Pagination from "@choc-ui/paginator"
 import { useEffect, useState } from "react"
-
+import format from "date-fns/format"
 import Empty from "./../Utils/Empty"
 import { SkeletonRow } from "./../Utils/TableSkeleton"
 
 export default function Submissions({ fields, submissions }) {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [loading, setLoading] = useState(true)
   const [current, setCurrent] = useState(1)
   const pageSize = 8
   const offset = (current - 1) * pageSize
@@ -93,7 +92,12 @@ export default function Submissions({ fields, submissions }) {
                   {posts.map((s, i) => {
                     return (
                       <Tr key={i}>
-                        <Td>{new Date(s["createdAt"]).toDateString()}</Td>
+                        <Td>
+                          {format(
+                            new Date(s["createdAt"]),
+                            "dd-MMM, KK:mm aaa"
+                          )}
+                        </Td>
                         {fields.map((header, index) => {
                           return <Td key={index}>{s[header]}</Td>
                         })}
