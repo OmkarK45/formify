@@ -8,6 +8,7 @@ import {
   Input,
   InputGroup,
   Select,
+  useToast,
 } from "@chakra-ui/react"
 import { useContext, useState } from "react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
@@ -15,10 +16,12 @@ import { FaRegTimesCircle } from "react-icons/fa"
 
 import userContext from "../../context/userContext"
 import { POST } from "../../utils/network"
+import { useHistory } from "react-router-dom"
 
 export default function CreateFormForm() {
   const { user } = useContext(userContext)
-
+  const history = useHistory()
+  const toast = useToast()
   const [values, setValues] = useState({
     val: [{ fieldValue: "", fieldType: "" }],
   })
@@ -100,8 +103,24 @@ export default function CreateFormForm() {
           withCredentials: true,
         }
       )
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
+        .then((res) => {
+          console.log(res.data)
+          if (res.status === 200) {
+            toast({
+              title: "Form created!",
+            })
+            history.push("/dashboard/forms/" + res.data.newForm.formID)
+          } else {
+            throw new Error("Something went wrong")
+          }
+        })
+        .catch((err) =>
+          toast({
+            title: err,
+            description: "Something went wrong",
+            status: "error",
+          })
+        )
     } catch (error) {
       console.log(error)
     }

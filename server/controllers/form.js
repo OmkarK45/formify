@@ -175,7 +175,6 @@ exports.createForm = async (req, res, next) => {
     if (!user) {
       return next(new ErrorResponse("Sorry we couldn't find this user.", 404))
     }
-    console.log(formName, fields)
 
     function makeFields(fields) {
       const newFields = []
@@ -197,6 +196,7 @@ exports.createForm = async (req, res, next) => {
       msg: "Form created sucessfully !",
       success: true,
       user,
+      newForm,
     })
   } catch (error) {
     next(
