@@ -11,13 +11,13 @@ import {
 } from "./components/Auth"
 import { CreateNewForm, Dashboard } from "./components/Dashboard/"
 import { FormDetails } from "./components/Form"
-import { Hero, Main } from "./components/Home/"
-import { Footer, Header } from "./components/Layout/"
+import { Main } from "./components/Home/"
+import { Footer, Nav } from "./components/Layout/"
 import { AccountSettings } from "./components/User/"
 import { PrivateRoute } from "./components/Utils"
 import userContext from "./context/userContext"
 import { GET } from "./utils/network"
-import { Nav } from "./components/Layout"
+
 const queryClient = new QueryClient()
 
 const App = () => {
@@ -58,7 +58,6 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <userContext.Provider value={{ user, setUser }}>
           <Router>
-            {/* <Header /> */}
             <Nav />
             <Switch>
               <Route path="/" exact component={Main}></Route>
