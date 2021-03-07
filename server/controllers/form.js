@@ -163,20 +163,30 @@ exports.postSubmissions = async (req, res, next) => {
 
 // @desc -> createForm creates a new form instance
 exports.createForm = async (req, res, next) => {
-  const { formName, fields, emailSubmissions, description } = req.body
+  const { formName, fields } = req.body
   const { email } = req.user
+
+  if (!formName || !fields) {
+    return res.json({ msg: "Please fill all the fields required" })
+  }
 
   try {
     const user = await User.findOne({ email })
     if (!user) {
       return next(new ErrorResponse("Sorry we couldn't find this user.", 404))
     }
+    console.log(formName, fields)
+
+    function makeFields(fields) {
+      const newFields = []
+      fields.map((field) => newFields.push(field.fieldValue))
+      return newFields
+    }
 
     const newForm = await Form.create({
       formName,
-      fields,
+      fields: makeFields(fields),
       createdBy: user,
-      description,
     })
 
     user.forms.push(newForm)
