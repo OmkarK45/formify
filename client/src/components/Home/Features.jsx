@@ -11,10 +11,18 @@ import {
   ListItem,
   Text,
   VStack,
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import { FaCheckCircle as CheckIcon } from "react-icons/fa"
 import { Link as RouterLink } from "react-router-dom"
-export default function Features() {
+import AccountSettings from "./../User/AccountSettings"
+
+export function Features() {
   return (
     <Box as="section" w="full" overflow="hidden">
       <Container maxW="container.xl" py={16}>
@@ -102,6 +110,98 @@ export default function Features() {
             />
           </Center>
         </Flex>
+      </Container>
+    </Box>
+  )
+}
+
+const faqItems = [
+  {
+    title: "Is this free ?",
+    text: `No lol.`,
+  },
+  {
+    title: "Is this free ?",
+    text: `No lol.`,
+  },
+  {
+    title: "Is this free ?",
+    text: `No lol.`,
+  },
+]
+
+export const FAQ = () => {
+  return (
+    <Box as="section" bg="panels.white" w="full">
+      <Container maxW="container.lg" py="section.lg">
+        <Flex
+          direction="column"
+          justify="center"
+          align="center"
+          textAlign="center"
+        >
+          <Heading as="h3" size="xl" color="text.primary.base" mb={12}>
+            FAQ
+          </Heading>
+          <Accordion w="full">
+            {faqItems.map((item, index) => (
+              <AccordionItem key={`accordion-item-${index}`}>
+                <AccordionButton>
+                  <Flex grow={1} my={3} justify="center">
+                    <Text color="text.onLight.dark">{item.title}</Text>
+                  </Flex>
+                  <AccordionIcon />
+                </AccordionButton>
+                <AccordionPanel pb={4} color="text.onLight.base">
+                  {item.text}
+                </AccordionPanel>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </Flex>
+      </Container>
+    </Box>
+  )
+}
+
+export const CTA = () => {
+  return (
+    <Box as="section" w="full" py={20}>
+      <Container maxW="container.md">
+        <Box
+          rounded="lg"
+          shadow="base"
+          overflow="hidden"
+          bg={useColorModeValue("green.200", "green.600")}
+        >
+          <Flex direction={{ base: "column", md: "row" }}>
+            <Flex
+              direction="column"
+              align="flex-start"
+              w={{ base: "full", lg: 8 / 12 }}
+              p={6}
+            >
+              <Text
+                fontStyle="italic"
+                fontSize="2xl"
+                fontWeight="bold"
+                fontFamily="heading"
+              >
+                Join the preview beta.
+              </Text>
+              <Text py={4}>Explore the application in early access.</Text>
+              <Button colorScheme="green">Let's go</Button>
+            </Flex>
+
+            <Image
+              w={{ base: "full", lg: 4 / 12 }}
+              borderLeftRadius={{ base: "none", md: "full" }}
+              alt="Beta"
+              fit="cover"
+              src="https://placekitten.com/451/301"
+            />
+          </Flex>
+        </Box>
       </Container>
     </Box>
   )

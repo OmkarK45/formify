@@ -15,8 +15,9 @@ import {
 import { useContext } from "react"
 import { Link as RouterLink } from "react-router-dom"
 
-import { Features } from "."
+import { Features, FAQ } from "."
 import userContext from "./../../context/userContext"
+import { CTA } from "./Features"
 
 export default function Main() {
   const textBg = useColorModeValue("orange.300", "orange.600")
@@ -138,6 +139,8 @@ export default function Main() {
         </Stack>
       </Container>
       <Features />
+      <FAQ />
+      <CTA />
     </>
   )
 }
