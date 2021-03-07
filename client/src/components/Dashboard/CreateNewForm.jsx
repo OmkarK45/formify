@@ -1,30 +1,8 @@
 import { Stack } from "@chakra-ui/react"
-import { useState } from "react"
 
 import { CreateFormForm, DashboardHeader } from "."
 
 export default function CreateNewForm() {
-  const [data, setData] = useState({
-    formName: "",
-    email: "",
-    description: "",
-    // This needs some work
-    fields: [],
-  })
-  const [fields, setFields] = useState([])
-
-  const handleInputChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(data)
-  }
-  console.log("in parent", fields)
   return (
     <>
       <DashboardHeader title="Create new form" />
@@ -33,13 +11,7 @@ export default function CreateNewForm() {
         mx="auto"
         mt={["0.4rem", "0.7rem", "1rem"]}
       >
-        <CreateFormForm
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          data={data}
-          stFields={setFields}
-          fields={fields}
-        />
+        <CreateFormForm />
       </Stack>
     </>
   )

@@ -9,17 +9,23 @@ import {
   InputGroup,
   Select,
 } from "@chakra-ui/react"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import { FaRegTimesCircle } from "react-icons/fa"
 
-export default function CreateFormForm({
-  handleInputChange,
-  handleSubmit,
-  data,
-}) {
+import userContext from "../../context/userContext"
+import { POST } from "../../utils/network"
+
+export default function CreateFormForm() {
+  const { user } = useContext(userContext)
+
   const [values, setValues] = useState({
     val: [{ fieldValue: "", fieldType: "" }],
+  })
+
+  const [data, setData] = useState({
+    formName: "",
+    email: "",
   })
 
   function createInputs() {
@@ -72,6 +78,33 @@ export default function CreateFormForm({
     let vals = [...values.val]
     vals.splice(this, 1)
     setValues({ val: vals })
+  }
+
+  const handleInputChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    })
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log("Data", data)
+    try {
+      await POST(
+        process.env.REACT_APP_BACKEND + "/api/forms/" + user.email + "/create",
+        {
+          formName: data.formName,
+          fields: values.val,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

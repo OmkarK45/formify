@@ -178,7 +178,6 @@ export default function FormSettings({
                 caution
               </Text>
             </FormLabel>
-            <Button colorScheme="red">Delete</Button>
           </HStack>
         </FormControl>
       </Setting>

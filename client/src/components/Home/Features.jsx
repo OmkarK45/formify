@@ -195,7 +195,8 @@ export const CTA = () => {
             </Flex>
 
             <Image
-              w={{ base: "full", lg: 4 / 12 }}
+              w={{ base: "full", md: 5 / 12, lg: 4 / 12 }}
+              h={{ base: "150px", md: "auto", lg: "auto" }}
               borderLeftRadius={{ base: "none", md: "full" }}
               alt="Beta"
               fit="cover"
