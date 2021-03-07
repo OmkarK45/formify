@@ -1,11 +1,11 @@
-import { Link, useToast } from "@chakra-ui/react"
+import { Button, Link, MenuItem, useToast } from "@chakra-ui/react"
 import { useContext } from "react"
 import { useHistory } from "react-router-dom"
 
 import { POST } from "../../utils/network"
 import userContext from "./../../context/userContext"
 
-const Logout = () => {
+const Logout = (props) => {
   const { setUser } = useContext(userContext)
   const history = useHistory()
   const toast = useToast()
@@ -34,7 +34,11 @@ const Logout = () => {
     history.push("/")
   }
 
-  return <Link onClick={handleLogout}>Logout</Link>
+  return (
+    <Link _hover={{ textDecoration: "none" }} onClick={handleLogout}>
+      Logout
+    </Link>
+  )
 }
 
 export default Logout

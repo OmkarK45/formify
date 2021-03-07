@@ -40,10 +40,10 @@ const FormList = () => {
 
   if (error) return <Empty text={error.message} status="error" />
   function getCreatedAtDate(date) {
-    return format(new Date(date), "dd-MMM, KK:mm aaa")
+    return format(new Date(date), "MMM dd, KK:mm aaa")
   }
   function getUpdatedAtDate(date) {
-    return format(new Date(date), "dd-MMM, KK:mm aaa")
+    return format(new Date(date), "MMM dd, KK:mm aaa")
   }
   return (
     <Box

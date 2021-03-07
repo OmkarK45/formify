@@ -197,3 +197,34 @@ exports.createForm = async (req, res, next) => {
     )
   }
 }
+
+exports.deleteOneForm = async (req, res, next) => {
+  const { formID } = req.body
+  const { email } = req.user
+
+  try {
+    const formToBeDeleted = await Form.findOne({ formID }).populate("createdBy")
+
+    if (!formToBeDeleted) {
+      res.status(404).json({
+        msg: "Requested form was not found on this server",
+      })
+    }
+
+    if (email === formToBeDeleted.createdBy.email) {
+      await Form.deleteOne({ formID })
+      console.log("trying to send headers")
+      res.status(200).json({
+        msg: "Your form was deleted successfully.",
+      })
+    } else {
+      console.log(" else trying to send headers")
+
+      res.json({
+        msg: "You are not authorized to delete this form",
+      })
+    }
+  } catch (error) {
+    next(new ErrorResponse(error, 500))
+  }
+}

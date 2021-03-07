@@ -95,7 +95,7 @@ export default function Submissions({ fields, submissions }) {
                         <Td>
                           {format(
                             new Date(s["createdAt"]),
-                            "dd-MMM, KK:mm aaa"
+                            "MMM dd, KK:mm aaa"
                           )}
                         </Td>
                         {fields.map((header, index) => {

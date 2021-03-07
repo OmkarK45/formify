@@ -8,6 +8,7 @@ import {
   Tabs,
   Text,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react"
 import { useContext } from "react"
 import { useQuery } from "react-query"

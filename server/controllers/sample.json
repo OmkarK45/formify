@@ -1,0 +1,50 @@
+{
+  "msg": "Here's form to be deleted",
+  "formToBeDeleted": {
+    "formName": "From portfolio 29",
+    "fields": ["first_name", "last_name", "msg", "email"],
+    "submissions": ["604472a9866629a91085892c"],
+    "requiresVerification": true,
+    "enabled": true,
+    "emailNotifications": true,
+    "_id": "60447252866629a91085892b",
+    "createdBy": {
+      "isVerified": true,
+      "forms": [
+        "6017a98bc56b678e740c7f06",
+        "6017ab19cd423c58bcee8e32",
+        "6017ab4ce81f04e1d46e0c4d",
+        "6017ac1b54fe07e508cfb276",
+        "6017ac3954fe07e508cfb277",
+        "6017cd1507410948e0116539",
+        "602cfa8c3c476b2ad8fb9f60",
+        "602cfd117ab89d6a8cc23782",
+        "602d11d66e933e06bcb3a99b",
+        "602d1243b49fc8057c920320",
+        "602d127ee3b5b262d03d394e",
+        "602d13ca6b65413c84e3db0f",
+        "602d13cb6b65413c84e3db10",
+        "602d13cc6b65413c84e3db11",
+        "6041cf7a770f239e3430c61a",
+        "6041d00bbf040b03bd0f85db",
+        "6041d0a4394db68494fb54ea",
+        "6041d0e111a790c7e8d044db",
+        "6041d47c11a790c7e8d044dc",
+        "6041d5b61fca58732098d91d",
+        "6041d5ee1fca58732098d91e",
+        "6041d6671fca58732098d91f",
+        "6041d6671fca58732098d920",
+        "60447252866629a91085892b"
+      ],
+      "registeredOn": "2021-03-05T06:22:51.105Z",
+      "_id": "600d67bb109fa143a0696b9e",
+      "username": "Omkar",
+      "email": "omkarak45@gmail.com",
+      "__v": 26
+    },
+    "formID": "OFyHoq",
+    "createdAt": "2021-03-07T06:27:30.337Z",
+    "updatedAt": "2021-03-07T07:27:21.639Z",
+    "__v": 1
+  }
+}

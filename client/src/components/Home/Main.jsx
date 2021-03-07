@@ -57,7 +57,8 @@ export default function Main() {
             <Text color={"gray.500"}>
               Formify is a ready-to integrate form submission solution for
               static sites. Reduce hassle and let us handle your form
-              submissions! No database configuration required.
+              submissions! No database configuration required. Get submissions
+              emailed to you directly.
             </Text>
             <Stack
               spacing={{ base: 4, sm: 6 }}

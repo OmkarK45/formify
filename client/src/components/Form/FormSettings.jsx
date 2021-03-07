@@ -87,7 +87,6 @@ export default function FormSettings({
                 <Input
                   bg={useColorModeValue("gray.50", "gray.700")}
                   defaultValue={formName}
-                  value={settings.formName}
                   onChange={handleInputChange}
                   name="formName"
                 />

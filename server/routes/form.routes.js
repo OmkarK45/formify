@@ -6,6 +6,7 @@ const {
   createForm,
   postSubmissions,
   formSettings,
+  deleteOneForm,
 } = require("../controllers/form")
 const { protect } = require("../middleware/authMiddleware")
 // @routes -> you are here /api/forms->
@@ -16,5 +17,5 @@ router.route("/:formID/settings").put(protect, formSettings)
 // @desc -> get one form with given ID and submit to the fields array
 router.route("/f/:formID").all(postSubmissions)
 router.route("/f/:email/:formID").get(protect, getOneForm)
-
+router.route("/f/:email/:formID/delete").post(protect, deleteOneForm)
 module.exports = router

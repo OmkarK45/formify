@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react"
 import { FaCheckCircle as CheckIcon } from "react-icons/fa"
 import { Link as RouterLink } from "react-router-dom"
+import PremiumBadge from "../Utils/PremiumBadge"
 import AccountSettings from "./../User/AccountSettings"
 
 export function Features() {
@@ -72,11 +73,11 @@ export function Features() {
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckIcon} color="green.400" />
-                  Add reCaptcha verification to forms
+                  Add reCaptcha verification to forms <PremiumBadge />
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckIcon} color="green.400" />
-                  Custom thank you screen
+                  Custom thank you screen <PremiumBadge />
                 </ListItem>
               </List>
             </Box>

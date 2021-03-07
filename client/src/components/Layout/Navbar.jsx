@@ -210,4 +210,8 @@ const NAV_ITEMS = [
     label: "Privacy Policy",
     href: "#",
   },
+  {
+    label: "Support",
+    href: "#",
+  },
 ]
