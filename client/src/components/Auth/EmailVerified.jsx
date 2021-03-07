@@ -1,14 +1,15 @@
-import { useContext, useEffect } from "react"
 import {
-  Box,
   Alert,
-  AlertIcon,
   AlertDescription,
+  AlertIcon,
   AlertTitle,
+  Box,
   Progress,
   useToast,
 } from "@chakra-ui/react"
-import { useParams, useHistory } from "react-router-dom"
+import { useContext, useEffect } from "react"
+import { useHistory, useParams } from "react-router-dom"
+
 import { POST } from "../../utils/network"
 import userContext from "./../../context/userContext"
 
@@ -21,10 +22,9 @@ export default function EmailVerified() {
   useEffect(() => {
     const sendVerficationToken = async () => {
       try {
-        await POST(
-          process.env.REACT_APP_BACKEND + "/api/auth/emailverification",
-          { verificationToken }
-        ).then((res) => {
+        await POST(process.env.REACT_APP_BACKEND + "/api/auth/emailverification", {
+          verificationToken,
+        }).then((res) => {
           setUser({
             isAuthenticated: true,
             userID: res.data.userID,

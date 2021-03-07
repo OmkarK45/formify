@@ -1,8 +1,10 @@
-import { useContext } from "react"
 import { Link, useToast } from "@chakra-ui/react"
-import userContext from "./../../context/userContext"
+import { useContext } from "react"
 import { useHistory } from "react-router-dom"
+
 import { POST } from "../../utils/network"
+import userContext from "./../../context/userContext"
+
 const Logout = () => {
   const { setUser } = useContext(userContext)
   const history = useHistory()

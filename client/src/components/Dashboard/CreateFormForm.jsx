@@ -1,19 +1,18 @@
-import { useState } from "react"
 import {
-  Input,
-  FormControl,
-  FormLabel,
   Box,
   Button,
-  InputGroup,
+  FormControl,
+  FormLabel,
   HStack,
   IconButton,
-  Flex,
+  Input,
+  InputGroup,
   Select,
-  Textarea,
 } from "@chakra-ui/react"
+import { useState } from "react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import { FaRegTimesCircle } from "react-icons/fa"
+
 export default function CreateFormForm({
   handleInputChange,
   handleSubmit,

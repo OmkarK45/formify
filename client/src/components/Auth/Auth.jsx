@@ -1,14 +1,6 @@
-import {
-  Box,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
-  useColorModeValue,
-} from "@chakra-ui/react"
-import { Register } from "./index"
-import Login from "./Login"
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue } from "@chakra-ui/react"
+
+import { Login, Register } from "."
 
 const Auth = () => {
   return (

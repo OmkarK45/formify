@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react"
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Button,
   Box,
+  Button,
   HStack,
-  Heading,
+  Table,
+  TableCaption,
+  Tbody,
+  Td,
   Text,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react"
 import Pagination from "@choc-ui/paginator"
+import { useEffect, useState } from "react"
+
 import Empty from "./../Utils/Empty"
 import { SkeletonRow } from "./../Utils/TableSkeleton"
 

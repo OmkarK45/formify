@@ -1,24 +1,24 @@
-import { useContext } from "react"
-import { useQuery } from "react-query"
-import { Link } from "react-router-dom"
-import { FiExternalLink } from "react-icons/fi"
 import {
-  Table,
-  Thead,
-  Tbody,
-  Text,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
   Box,
+  Table,
+  TableCaption,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
   useColorModeValue,
 } from "@chakra-ui/react"
+import { useContext } from "react"
+import { FiExternalLink } from "react-icons/fi"
+import { useQuery } from "react-query"
+import { Link } from "react-router-dom"
 
-import { GET } from "./../../utils/network"
-import userContext from "./../../context/userContext"
-import Empty from "./../Utils/Empty"
-import TableSkeleton from "./../Utils/TableSkeleton"
+import userContext from "../../context/userContext"
+import { GET } from "../../utils/network"
+import Empty from "../Utils/Empty"
+import TableSkeleton from "../Utils/TableSkeleton"
 
 const FormList = () => {
   const { user } = useContext(userContext)

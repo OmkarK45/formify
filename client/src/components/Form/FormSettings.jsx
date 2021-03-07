@@ -1,25 +1,22 @@
-import { useState, useEffect } from "react"
-import { useMutation } from "react-query"
 import {
   Box,
-  Input,
   Button,
-  Text,
-  useColorModeValue,
-  VStack,
-  Switch,
-  HStack,
-  IconButton,
   FormControl,
   FormLabel,
-  useToast,
-  Flex,
+  HStack,
+  Input,
   Stack,
+  Switch,
+  Text,
+  useColorModeValue,
+  useToast,
+  VStack,
 } from "@chakra-ui/react"
-import { HiOutlineTrash } from "react-icons/hi"
-import { MdSave } from "react-icons/md"
-import Setting from "./Setting"
-import { PUT } from "./../../utils/network"
+import { useState } from "react"
+
+import { PUT } from "../../utils/network"
+import Setting from "../Layout/Setting"
+
 // Settings need some work
 export default function FormSettings({
   form: { enabled, emailNotifications, requiresVerification, formName, formID },
@@ -89,6 +86,7 @@ export default function FormSettings({
               <HStack mt="0.7rem" spacing={8} justify="space-between">
                 <Input
                   bg={useColorModeValue("gray.50", "gray.700")}
+                  defaultValue={formName}
                   value={settings.formName}
                   onChange={handleInputChange}
                   name="formName"

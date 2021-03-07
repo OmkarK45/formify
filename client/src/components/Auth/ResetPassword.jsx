@@ -1,17 +1,18 @@
-import { useState } from "react"
-import { useParams, useHistory } from "react-router-dom"
 import {
-  Input,
+  Box,
+  Button,
   FormControl,
   FormLabel,
-  Box,
   Heading,
-  Button,
+  Input,
   InputGroup,
-  useColorModeValue,
   Text,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react"
+import { useState } from "react"
+import { useHistory, useParams } from "react-router-dom"
+
 import { PUT } from "../../utils/network"
 
 export default function ResetPassword() {

@@ -1,24 +1,23 @@
-import { useQuery } from "react-query"
-import { useContext } from "react"
 import {
   Box,
-  Tabs,
-  TabList,
-  Text,
+  Flex,
   Tab,
+  TabList,
   TabPanel,
   TabPanels,
+  Tabs,
+  Text,
   useColorModeValue,
-  Flex,
 } from "@chakra-ui/react"
+import { useContext } from "react"
+import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
-import DashboardHeader from "./DashboardHeader"
-import Integrations from "./Integrations"
-import Submissions from "./Submissions"
-import { GET } from "./../../utils/network"
-import userContext from "./../../context/userContext"
-import TableSkeleton from "./../Utils/TableSkeleton"
-import Empty from "./../Utils/Empty"
+
+import userContext from "../../context/userContext"
+import { GET } from "../../utils/network"
+import { DashboardHeader, Integrations, Submissions } from "../Dashboard"
+import Empty from "../Utils/Empty"
+import TableSkeleton from "../Utils/TableSkeleton"
 import FormSettings from "./FormSettings"
 
 const FormDetails = ({ location: { state } }) => {

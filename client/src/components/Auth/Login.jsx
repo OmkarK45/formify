@@ -1,27 +1,28 @@
-import { useState, useContext } from "react"
-import { useHistory, Link as ReactRouterLink } from "react-router-dom"
-import { POST } from "../../utils/network"
 import {
-  Input,
+  Box,
+  Button,
   FormControl,
   FormLabel,
-  Box,
   Heading,
-  Button,
-  useToast,
+  Icon,
+  IconButton,
+  Input,
   InputGroup,
   InputLeftElement,
-  Icon,
   InputRightElement,
-  IconButton,
   Link,
+  useToast,
 } from "@chakra-ui/react"
+import { useContext, useState } from "react"
 import {
-  HiOutlineMail,
-  HiOutlineLockClosed,
   HiOutlineEye,
   HiOutlineEyeOff,
+  HiOutlineLockClosed,
+  HiOutlineMail,
 } from "react-icons/hi"
+import { Link as ReactRouterLink, useHistory } from "react-router-dom"
+
+import { POST } from "../../utils/network"
 import userContext from "./../../context/userContext"
 
 const Login = () => {

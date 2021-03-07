@@ -1,20 +1,23 @@
-import { useState, useEffect } from "react"
-import { Header } from "./components/Layout/"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import { Hero } from "./components/Home/"
-import { GET } from "./utils/network"
-import { Auth, ForgotPassword, ResetPassword } from "./components/Auth"
-import userContext from "./context/userContext"
-import PrivateRoute from "./components/Utils/PrivateRoute"
-import Dashboard from "./components/Dashboard/Dashboard"
-import FormDetails from "./components/Dashboard/FormDetails"
-import Footer from "./components/Layout/Footer"
-import AccountSettings from "./components/User/AccountSettings"
+import { useEffect, useState } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
-import VerificationEmailSent from "./components/Auth/VerificationEmailSent"
-import EmailVerified from "./components/Auth/EmailVerified"
-import CreateNewForm from "./components/Dashboard/CreateNewForm"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
+import {
+  Auth,
+  EmailVerified,
+  ForgotPassword,
+  ResetPassword,
+  VerificationEmailSent,
+} from "./components/Auth"
+import { CreateNewForm, Dashboard } from "./components/Dashboard/"
+import { FormDetails } from "./components/Form"
+import { Hero } from "./components/Home/"
+import { Footer, Header } from "./components/Layout/"
+import { AccountSettings } from "./components/User/"
+import { PrivateRoute } from "./components/Utils"
+import userContext from "./context/userContext"
+import { GET } from "./utils/network"
+import { Nav } from "./components/Layout"
 const queryClient = new QueryClient()
 
 const App = () => {
@@ -55,7 +58,8 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <userContext.Provider value={{ user, setUser }}>
           <Router>
-            <Header />
+            {/* <Header /> */}
+            <Nav />
             <Switch>
               <Route path="/" exact component={Hero}></Route>
               <Route path="/auth" exact component={Auth} />

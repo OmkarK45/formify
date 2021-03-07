@@ -1,26 +1,25 @@
-import { useRef, useContext } from "react"
 import {
-  Drawer,
-  useDisclosure,
-  DrawerBody,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Button,
-  IconButton,
-  DrawerHeader,
-  Heading,
-  Flex,
-  Divider,
-  useColorModeValue,
   Box,
+  Button,
+  Divider,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  Heading,
+  useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react"
-import { FaBolt, FaBook } from "react-icons/fa"
-import ProfileMenu from "./../Utils/ProfileMenu"
-import { Link } from "react-router-dom"
-import { HiMenuAlt1 } from "react-icons/hi"
-import { BsMoon } from "react-icons/bs"
+import { useContext, useRef } from "react"
 import { BiSun } from "react-icons/bi"
+import { BsMoon } from "react-icons/bs"
+import { FaBolt, FaBook } from "react-icons/fa"
+import { HiMenuAlt1 } from "react-icons/hi"
+import { Link } from "react-router-dom"
+
 import userContext from "./../../context/userContext"
 import Logo from "./../Logo"
 import DrawerMenu from "./DrawerMenu"
@@ -40,7 +39,7 @@ function Menu({ colorMode, toggleColorMode }) {
         onClick={onOpen}
         variant="ghost"
         shadow="none"
-        fontSize='1.4rem'
+        fontSize="1.4rem"
       >
         <HiMenuAlt1 />
       </Button>

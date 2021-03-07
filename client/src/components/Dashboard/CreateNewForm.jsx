@@ -1,7 +1,7 @@
-import { Heading, Stack } from "@chakra-ui/react"
+import { Stack } from "@chakra-ui/react"
 import { useState } from "react"
-import CreateFormForm from "./CreateFormForm"
-import DashboardHeader from "./DashboardHeader"
+
+import { CreateFormForm, DashboardHeader } from "."
 
 export default function CreateNewForm() {
   const [data, setData] = useState({

@@ -1,3 +1,6 @@
-export { default as Footer } from "./Footer";
-export { default as Header } from "./Header";
-export { default as Drawer } from "./Drawer";
+export { default as Setting } from "./Setting"
+export { default as MenuContent } from "./MenuContent"
+export { default as Footer } from "./Footer"
+export { default as DrawerMenu } from "./DrawerMenu"
+export { default as Drawer } from "./Drawer"
+export { default as Nav } from "./Navbar"

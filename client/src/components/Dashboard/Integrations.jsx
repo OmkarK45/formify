@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react"
 import { MdContentCopy } from "react-icons/md"
 import { useState } from "react"
-import CodeSnippet from "./CodeSnippet"
+import CodeSnippet from "../Utils/CodeSnippet"
 
 export default function Integrations({ formID }) {
   const url = "https://formify.com/forms/" + formID

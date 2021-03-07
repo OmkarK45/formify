@@ -1,17 +1,18 @@
-import { useContext } from "react"
 import {
   Box,
   Button,
-  useColorModeValue,
-  useMediaQuery,
-  useDisclosure,
   IconButton,
+  useColorModeValue,
+  useDisclosure,
+  useMediaQuery,
 } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
-import userContext from "./../../context/userContext"
+import { useContext } from "react"
 import { HiPlusCircle } from "react-icons/hi"
-import FormList from "./FormList"
-import DashboardHeader from "./DashboardHeader"
+import { Link } from "react-router-dom"
+
+import { DashboardHeader } from "."
+import userContext from "./../../context/userContext"
+import { FormList } from "../Form"
 
 const Dashboard = () => {
   const { user } = useContext(userContext)

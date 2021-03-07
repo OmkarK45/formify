@@ -1,20 +1,17 @@
-import { useContext, useState } from "react"
 import {
   Box,
-  Button,
-  Table,
-  Tbody,
-  Tr,
-  Td,
-  VStack,
+  FormLabel,
   HStack,
   Input,
   InputGroup,
-  FormLabel,
+  VStack,
 } from "@chakra-ui/react"
-import ModalAlert from "./../Utils/Modal"
-import Setting from "./../Dashboard/Setting"
+import { useContext, useState } from "react"
+
+import Setting from "../Layout/Setting"
 import userContext from "./../../context/userContext"
+import ModalAlert from "./../Utils/Modal"
+
 export default function Profile() {
   const { user } = useContext(userContext)
   const [data, setData] = useState({

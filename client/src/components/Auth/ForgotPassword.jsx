@@ -1,15 +1,16 @@
-import { useState } from "react"
 import {
-  Input,
+  Box,
+  Button,
   FormControl,
   FormLabel,
-  Box,
   Heading,
-  Button,
+  Input,
   InputGroup,
-  useColorModeValue,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react"
+import { useState } from "react"
+
 import { POST } from "../../utils/network"
 
 export default function ForgotPassword() {
