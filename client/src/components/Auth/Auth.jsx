@@ -1,15 +1,25 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue } from "@chakra-ui/react"
+import {
+  Box,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  useColorModeValue,
+} from "@chakra-ui/react"
 
 import { Login, Register } from "."
+import Callout from "../Utils/Callout"
 
 const Auth = () => {
   return (
-    <>
+    <Box maxW={["90%", "75%", "75%", "50%", "30%"]} margin="0 auto">
+      <Box mt="0.4rem">
+        <Callout />
+      </Box>
       <Box
         borderRadius="10px"
-        maxW={["90%", "75%", "75%", "50%", "30%"]}
-        margin="0 auto"
-        marginTop="3rem"
+        mt="0.8rem"
         bg={useColorModeValue("white", "gray.800")}
         boxShadow={useColorModeValue("base", "none")}
       >
@@ -28,7 +38,7 @@ const Auth = () => {
           </TabPanels>
         </Tabs>
       </Box>
-    </>
+    </Box>
   )
 }
 

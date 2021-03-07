@@ -11,7 +11,7 @@ import {
 } from "./components/Auth"
 import { CreateNewForm, Dashboard } from "./components/Dashboard/"
 import { FormDetails } from "./components/Form"
-import { Hero } from "./components/Home/"
+import { Hero, Main } from "./components/Home/"
 import { Footer, Header } from "./components/Layout/"
 import { AccountSettings } from "./components/User/"
 import { PrivateRoute } from "./components/Utils"
@@ -61,7 +61,7 @@ const App = () => {
             {/* <Header /> */}
             <Nav />
             <Switch>
-              <Route path="/" exact component={Hero}></Route>
+              <Route path="/" exact component={Main}></Route>
               <Route path="/auth" exact component={Auth} />
               <Route
                 path="/auth/forgotPassword"
