@@ -149,7 +149,7 @@ const Login = () => {
           marginBottom="1rem"
           type="submit"
           isLoading={isLoading}
-          loadingText="Logging in"
+          loadingText="Signing you in..."
           colorScheme="orange"
         >
           Login
