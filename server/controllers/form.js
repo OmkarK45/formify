@@ -9,7 +9,7 @@ exports.getForms = async (req, res) => {
   const { email } = req.user
   try {
     const user = await User.findOne({ email }).populate("forms")
-    res.status(200).json({
+    return res.status(200).json({
       msg: "Here are your forms you created!",
       status: true,
       user,
@@ -101,7 +101,7 @@ exports.postSubmissions = async (req, res, next) => {
   }
 
   if (req.method !== "POST") {
-    res.render("badrequest", {
+    return res.render("badrequest", {
       message: "Please make sure to use POST method.",
       heading: "Aw, Snap!",
       success: false,
@@ -129,14 +129,14 @@ exports.postSubmissions = async (req, res, next) => {
     if (foundForm.enabled) {
       await submission.save()
       await foundForm.save()
-      res.render("submitted", {
+      return res.render("submitted", {
         message: "Your response was submitted.",
         heading: "Thanks!",
         success: true,
       })
     }
     if (foundForm.enabled === false) {
-      res.render("submitted", {
+      return res.render("submitted", {
         message: "The owner of this form has disabled submission",
         heading: "Aw, Snap!",
         success: false,
@@ -152,7 +152,7 @@ exports.postSubmissions = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error)
-    res.render("submitted", {
+    return res.render("submitted", {
       success: false,
       message:
         "Something went wrong while submitting this form. Please try again or contact support@formify.com",
@@ -183,7 +183,7 @@ exports.createForm = async (req, res, next) => {
     await user.save()
     await newForm.save()
 
-    res.status(200).json({
+    return res.status(200).json({
       msg: "Form created sucessfully !",
       success: true,
       user,
@@ -206,7 +206,7 @@ exports.deleteOneForm = async (req, res, next) => {
     const formToBeDeleted = await Form.findOne({ formID }).populate("createdBy")
 
     if (!formToBeDeleted) {
-      res.status(404).json({
+      return res.status(404).json({
         msg: "Requested form was not found on this server",
       })
     }
@@ -214,13 +214,13 @@ exports.deleteOneForm = async (req, res, next) => {
     if (email === formToBeDeleted.createdBy.email) {
       await Form.deleteOne({ formID })
       console.log("trying to send headers")
-      res.status(200).json({
+      return res.status(200).json({
         msg: "Your form was deleted successfully.",
       })
     } else {
       console.log(" else trying to send headers")
 
-      res.json({
+      return res.json({
         msg: "You are not authorized to delete this form",
       })
     }
