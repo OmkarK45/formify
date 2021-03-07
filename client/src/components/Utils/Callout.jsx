@@ -1,11 +1,11 @@
 import {
   Alert,
-  AlertIcon,
-  Box,
-  AlertTitle,
   AlertDescription,
-  CloseButton,
+  AlertIcon,
+  AlertTitle,
+  Box,
 } from "@chakra-ui/react"
+
 export default function Callout() {
   return (
     <Alert mb="0.3rem" status="warning" borderRadius="10px">
