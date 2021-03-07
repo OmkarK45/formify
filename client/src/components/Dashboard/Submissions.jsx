@@ -16,6 +16,7 @@ import { useEffect, useState } from "react"
 import format from "date-fns/format"
 import Empty from "./../Utils/Empty"
 import { SkeletonRow } from "./../Utils/TableSkeleton"
+import { ImDrawer2 } from "react-icons/im"
 
 export default function Submissions({ fields, submissions }) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -108,6 +109,7 @@ export default function Submissions({ fields, submissions }) {
               </Table>
             ) : (
               <Empty
+                icon={ImDrawer2}
                 status="empty"
                 text="You don't have any submissions on this form."
               />

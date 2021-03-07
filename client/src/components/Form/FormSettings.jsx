@@ -12,12 +12,13 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react"
-import { useState } from "react"
+import { useContext, useState } from "react"
 
-import { PUT } from "../../utils/network"
+import { POST, PUT } from "../../utils/network"
 import Setting from "../Layout/Setting"
+import userContext from "./../../context/userContext"
+import { useHistory } from "react-router-dom"
 
-// Settings need some work
 export default function FormSettings({
   form: { enabled, emailNotifications, requiresVerification, formName, formID },
 }) {
@@ -27,9 +28,9 @@ export default function FormSettings({
     requiresVerification,
     formName,
   })
-  console.log({ settings })
-  // @TODO -> This needs work
+  const { user } = useContext(userContext)
   const toast = useToast()
+  const history = useHistory()
   function handleInputChange(e) {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value
@@ -71,6 +72,32 @@ export default function FormSettings({
         title: "Failed to save settings",
         status: "error",
         isClosable: true,
+      })
+    }
+  }
+  async function handleFormDelete() {
+    try {
+      const response = await POST(
+        process.env.REACT_APP_BACKEND +
+          `/api/forms/f/${user.email}/${formID}/delete`,
+        {
+          formID,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      if (response.status === 200) {
+        toast({
+          title: "Form deleted !",
+          status: "info",
+        })
+        return history.goBack()
+      }
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        status: "error",
       })
     }
   }
@@ -178,6 +205,10 @@ export default function FormSettings({
                 caution
               </Text>
             </FormLabel>
+
+            <Button colorScheme="red" onClick={handleFormDelete}>
+              Delete
+            </Button>
           </HStack>
         </FormControl>
       </Setting>

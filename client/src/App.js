@@ -17,6 +17,7 @@ import { AccountSettings } from "./components/User/"
 import { PrivateRoute } from "./components/Utils"
 import userContext from "./context/userContext"
 import { GET } from "./utils/network"
+import NotFound from "./components/Utils/NotFound"
 
 const queryClient = new QueryClient()
 
@@ -102,6 +103,7 @@ const App = () => {
                 exact
                 component={FormDetails}
               />
+              <Route component={NotFound} />
             </Switch>
           </Router>
           <Footer />

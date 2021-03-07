@@ -1,7 +1,5 @@
-import { Text, Flex, Icon } from "@chakra-ui/react"
-import { ImDrawer2 } from "react-icons/im"
-import { BiError } from "react-icons/bi"
-export default function Empty({ text, status }) {
+import { Text, Flex, Icon, Heading } from "@chakra-ui/react"
+export default function Empty({ text, code, icon }) {
   return (
     <>
       <Flex
@@ -11,24 +9,13 @@ export default function Empty({ text, status }) {
         alignItems="center"
         justifyContent="center"
       >
-        {status === "empty" ? (
-          <Icon
-            as={ImDrawer2}
-            zIndex="0"
-            fontSize={["6rem", "7rem"]}
-            color="gray.400"
-          />
-        ) : status === "error" ? (
-          <Icon
-            as={BiError}
-            zIndex="0"
-            fontSize={["6rem", "7rem"]}
-            color="gray.400"
-          />
-        ) : (
-          ""
-        )}
-
+        <Icon
+          as={icon}
+          zIndex="0"
+          fontSize={["6rem", "7rem"]}
+          color="gray.400"
+        />
+        <Heading color="gray.500">{code}</Heading>
         <Text mt="1rem" zIndex="0" color="gray.500">
           {text}
         </Text>
