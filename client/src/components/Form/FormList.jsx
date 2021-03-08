@@ -20,6 +20,7 @@ import userContext from "../../context/userContext"
 import { GET } from "../../utils/network"
 import Empty from "../Utils/Empty"
 import TableSkeleton from "../Utils/TableSkeleton"
+import { ImDrawer2 } from "react-icons/im"
 
 const FormList = () => {
   const { user } = useContext(userContext)
@@ -45,6 +46,7 @@ const FormList = () => {
   function getUpdatedAtDate(date) {
     return format(new Date(date), "MMM dd, KK:mm aaa")
   }
+  console.log(data?.data?.user?.forms)
   return (
     <Box
       boxShadow="base"
@@ -54,8 +56,8 @@ const FormList = () => {
       maxW={["auto", "95%", "80%"]}
       overflowX="auto"
     >
-      {data ? (
-        <Box>
+      <Box>
+        {data?.data?.user?.forms.length > 0 ? (
           <Table size="md" variant="simple">
             <TableCaption>Forms created by {user?.username}</TableCaption>
             <Thead bg={tableHeaderBg}>
@@ -74,9 +76,9 @@ const FormList = () => {
                     <Td>
                       <Link to={"/dashboard/forms/" + form.formID}>
                         {form.formName} &nbsp;
-                        <span style={{ marginLeft: "0.3rem" }}>
+                        <Box d="inline-flex">
                           <FiExternalLink />
-                        </span>
+                        </Box>
                       </Link>
                       <Text fontSize="sm" color="gray.500">
                         {form.email}
@@ -91,13 +93,13 @@ const FormList = () => {
               })}
             </Tbody>
           </Table>
-        </Box>
-      ) : (
-        <Empty
-          text="You don't have any forms you can see submissions of. Create a form by clicking the create form button above."
-          status="empty"
-        />
-      )}
+        ) : (
+          <Empty
+            text="You don't have any forms you can see submissions of. Create a form by clicking the create form button above."
+            icon={ImDrawer2}
+          />
+        )}
+      </Box>
     </Box>
   )
 }

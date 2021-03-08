@@ -8,23 +8,23 @@ import {
   Tabs,
   Text,
   useColorModeValue,
-  VStack,
 } from "@chakra-ui/react"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 
 import userContext from "../../context/userContext"
 import { GET } from "../../utils/network"
 import { DashboardHeader, Integrations, Submissions } from "../Dashboard"
-import Empty from "../Utils/Empty"
 import TableSkeleton from "../Utils/TableSkeleton"
+import NotFound from "./../Utils/NotFound"
 import FormSettings from "./FormSettings"
 
 const FormDetails = ({ location: { state } }) => {
   const tabBg = useColorModeValue("gray.50", "gray.900")
   const bg = useColorModeValue("gray.200", "gray.800")
   const { user } = useContext(userContext)
+  const [enabled, setEnabled] = useState(true)
   let { formID } = useParams()
   const tabStyle = {
     maxW: ["100%", "100%", "80%"],
@@ -34,20 +34,22 @@ const FormDetails = ({ location: { state } }) => {
     "formList",
     async () =>
       await GET(
-        process.env.REACT_APP_BACKEND +
-          "/api/forms/f/" +
-          user.email +
-          "/" +
-          formID,
+        `${process.env.REACT_APP_BACKEND}/api/forms/f/${user.email}/${formID}`,
         {
           withCredentials: true,
         }
-      )
+      ),
+    {
+      onError: () => setEnabled(false),
+      refetchOnWindowFocus: false,
+    }
   )
 
   if (isLoading) return <TableSkeleton />
 
-  if (error) return <Empty text={error.message} status="error" />
+  if (error) {
+    return <NotFound />
+  }
 
   return (
     <Box>
