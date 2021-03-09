@@ -71,7 +71,6 @@ const FormDetails = ({ location: { state } }) => {
               <Tab>Integration</Tab>
               <Tab>Submissions</Tab>
               <Tab>Settings</Tab>
-              <Tab isDisabled>Plugins (Coming Soon)</Tab>
             </TabList>
             <TabPanels bg={tabBg}>
               <TabPanel {...tabStyle}>
@@ -86,7 +85,6 @@ const FormDetails = ({ location: { state } }) => {
               <TabPanel {...tabStyle}>
                 <FormSettings form={data.data.requestedForm} />
               </TabPanel>
-              <TabPanel {...tabStyle}>Plugins</TabPanel>
             </TabPanels>
           </Tabs>
         </Box>

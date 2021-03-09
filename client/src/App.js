@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react"
-import { QueryClient, QueryClientProvider } from "react-query"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-
 import {
   Auth,
   EmailVerified,
   ForgotPassword,
   ResetPassword,
   VerificationEmailSent,
-} from "./components/Auth"
-import { CreateNewForm, Dashboard } from "./components/Dashboard/"
-import { FormDetails } from "./components/Form"
-import { Main } from "./components/Home/"
-import { Footer, Nav } from "./components/Layout/"
-import { AccountSettings } from "./components/User/"
-import { PrivateRoute } from "./components/Utils"
+} from "@components/Auth"
+import { CreateNewForm, Dashboard } from "@components/Dashboard/"
+import { FormDetails } from "@components/Form"
+import { Main } from "@components/Home"
+import { Footer, Nav } from "@components/Layout/"
+import { AccountSettings } from "@components/User/"
+import { PrivateRoute } from "@components/Utils"
+import NotFound from "@components/Utils/NotFound"
+import { GET } from "@utils/network"
+import { useEffect, useState } from "react"
+import { QueryClient, QueryClientProvider } from "react-query"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+
 import userContext from "./context/userContext"
-import { GET } from "./utils/network"
-import NotFound from "./components/Utils/NotFound"
 
 const queryClient = new QueryClient()
 
