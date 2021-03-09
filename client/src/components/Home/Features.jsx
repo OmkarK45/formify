@@ -1,4 +1,9 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button,
   Center,
@@ -10,18 +15,13 @@ import {
   ListIcon,
   ListItem,
   Text,
-  VStack,
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react"
 import { FaCheckCircle as CheckIcon } from "react-icons/fa"
 import { Link as RouterLink } from "react-router-dom"
+
 import PremiumBadge from "../Utils/PremiumBadge"
-import AccountSettings from "./../User/AccountSettings"
 
 export function Features() {
   return (

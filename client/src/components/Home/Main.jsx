@@ -15,7 +15,7 @@ import {
 import { useContext } from "react"
 import { Link as RouterLink } from "react-router-dom"
 
-import { Features, FAQ } from "."
+import { FAQ, Features } from "."
 import userContext from "./../../context/userContext"
 import { CTA } from "./Features"
 
