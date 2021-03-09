@@ -13,6 +13,7 @@ import {
 import format from "date-fns/format"
 import { useContext } from "react"
 import { FiExternalLink } from "react-icons/fi"
+import { ImDrawer2 } from "react-icons/im"
 import { useQuery } from "react-query"
 import { Link } from "react-router-dom"
 
@@ -20,13 +21,11 @@ import userContext from "../../context/userContext"
 import { GET } from "../../utils/network"
 import Empty from "../Utils/Empty"
 import TableSkeleton from "../Utils/TableSkeleton"
-import { ImDrawer2 } from "react-icons/im"
 
 const FormList = () => {
   const { user } = useContext(userContext)
-  const tableHeaderBg = useColorModeValue("gray.100", "gray.800")
-
-  const { isLoading, error, data, isFetching } = useQuery(
+  const bg = useColorModeValue("gray.100", "gray.800")
+  const { isLoading, error, data } = useQuery(
     "getList",
     async () =>
       await GET(
@@ -40,13 +39,11 @@ const FormList = () => {
   if (isLoading) return <TableSkeleton />
 
   if (error) return <Empty text={error.message} status="error" />
-  function getCreatedAtDate(date) {
+
+  function getFormattedDate(date) {
     return format(new Date(date), "MMM dd, KK:mm aaa")
   }
-  function getUpdatedAtDate(date) {
-    return format(new Date(date), "MMM dd, KK:mm aaa")
-  }
-  console.log(data?.data?.user?.forms)
+
   return (
     <Box
       boxShadow="base"
@@ -60,7 +57,7 @@ const FormList = () => {
         {data?.data?.user?.forms.length > 0 ? (
           <Table size="md" variant="simple">
             <TableCaption>Forms created by {user?.username}</TableCaption>
-            <Thead bg={tableHeaderBg}>
+            <Thead bg={bg}>
               <Tr>
                 <Th>Forms</Th>
                 <Th>Date Created</Th>
@@ -84,8 +81,8 @@ const FormList = () => {
                         {form.email}
                       </Text>
                     </Td>
-                    <Td>{getCreatedAtDate(form.createdAt)}</Td>
-                    <Td>{getUpdatedAtDate(form.updatedAt)}</Td>
+                    <Td>{getFormattedDate(form.createdAt)}</Td>
+                    <Td>{getFormattedDate(form.updatedAt)}</Td>
                     <Td>{form.disabled ? "Disabled" : "Active"}</Td>
                     <Td isNumeric>{form.submissions.length}</Td>
                   </Tr>
