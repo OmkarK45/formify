@@ -1,15 +1,7 @@
-import {
-  Box,
-  Text,
-  Heading,
-  Input,
-  Button,
-  useToast,
-  Code,
-  Container,
-} from "@chakra-ui/react"
-import { MdContentCopy } from "react-icons/md"
+import { Box, Button, Code, Input, Text, useToast } from "@chakra-ui/react"
 import { useState } from "react"
+import { MdContentCopy } from "react-icons/md"
+
 import CodeSnippet from "../Utils/CodeSnippet"
 
 export default function Integrations({ formID }) {

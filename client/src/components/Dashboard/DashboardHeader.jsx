@@ -1,22 +1,16 @@
 import {
   Box,
-  Flex,
-  Heading,
-  useColorModeValue,
-  Text,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
+  Flex,
+  Heading,
+  useColorModeValue,
 } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
 import { HiChevronRight } from "react-icons/hi"
-export default function DashboardHeader({
-  title,
-  submissions,
-  createdAt,
-  children,
-}) {
+import { Link } from "react-router-dom"
+
+export default function DashboardHeader({ title, children }) {
   const bg = useColorModeValue("gray.200", "gray.800")
 
   return (
