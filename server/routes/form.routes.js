@@ -8,14 +8,17 @@ const {
   formSettings,
   deleteOneForm,
 } = require("../controllers/form")
+/*
+  @TODO-> [Security][swap email for username]
+*/
 const { protect } = require("../middleware/authMiddleware")
 // @routes -> you are here /api/forms->
-router.route("/:email/all").get(protect, getForms)
-router.route("/:email/create").post(protect, createForm)
+router.route("/:username/all").get(protect, getForms)
+router.route("/:username/create").post(protect, createForm)
 // @desc -> get one form and see its submissions
 router.route("/:formID/settings").put(protect, formSettings)
 // @desc -> get one form with given ID and submit to the fields array
-router.route("/f/:formID").all(postSubmissions)
-router.route("/f/:email/:formID").get(protect, getOneForm)
-router.route("/f/:email/:formID/delete").post(protect, deleteOneForm)
+router.route("/:formID").get(protect, getOneForm)
+router.route("/:formID").all(postSubmissions)
+router.route("/:formID/delete").post(protect, deleteOneForm)
 module.exports = router

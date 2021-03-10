@@ -144,11 +144,17 @@ exports.postSubmissions = async (req, res, next) => {
     }
     const html = newSubmissionTemplate(foundForm.formName, foundForm.formID)
     if (foundForm.emailNotifications) {
-      await sendEmail({
-        to: foundForm.createdBy.email,
-        subject: `[Formify] : New Submission for ${foundForm.formName}`,
-        text: html,
-      })
+      try {
+        sendEmail({
+          to: foundForm.createdBy.email,
+          subject: `[Formify] : New Submission for ${foundForm.formName}`,
+          text: html,
+        })
+      } catch (error) {
+        console.log(
+          ` Error occured while emailing submissions for ${foundForm.formID}`
+        )
+      }
     }
   } catch (error) {
     console.log(error)
@@ -189,8 +195,7 @@ exports.createForm = async (req, res, next) => {
     })
 
     user.forms.push(newForm)
-    await user.save()
-    await newForm.save()
+    await Promise.all([await user.save(), await newForm.save()])
 
     return res.status(200).json({
       msg: "Form created sucessfully !",
@@ -223,13 +228,10 @@ exports.deleteOneForm = async (req, res, next) => {
 
     if (email === formToBeDeleted.createdBy.email) {
       await Form.deleteOne({ formID })
-      console.log("trying to send headers")
       return res.status(200).json({
         msg: "Your form was deleted successfully.",
       })
     } else {
-      console.log(" else trying to send headers")
-
       return res.json({
         msg: "You are not authorized to delete this form",
       })

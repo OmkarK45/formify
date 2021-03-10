@@ -33,8 +33,13 @@ app.get("/", (req, res) => {
   res.render("backendhome")
 })
 app.get("/thankyou", (req, res) => {
-  res.render("submitted")
+  res.render("submitted", {
+    success: true,
+    heading: "Thank you!",
+    message: "We received your submission",
+  })
 })
+
 app.use((req, res, next) => {
   res.status(404).json({
     msg: "Requested resource was not found on this server",

@@ -200,6 +200,8 @@ const sendToken = async (user, statusCode, res) => {
   res.cookie("token", token, {
     httpOnly: true,
     maxAge: 7 * 24 * 3600 * 1000,
+    // sameSite: process.env.NODE_ENV === "production" ? "none" : "false",
+    // secure: process.env.NODE_ENV === "production" ? "true" : "false",
   })
   res.status(statusCode).json({
     success: true,
