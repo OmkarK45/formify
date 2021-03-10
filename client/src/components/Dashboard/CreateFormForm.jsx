@@ -91,20 +91,16 @@ export default function CreateFormForm() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Data", data)
+    const payload = {
+      formName: data.formName,
+      fields: values.val,
+    }
     try {
       await POST(
-        process.env.REACT_APP_BACKEND + "/api/forms/" + user.email + "/create",
-        {
-          formName: data.formName,
-          fields: values.val,
-        },
-        {
-          withCredentials: true,
-        }
+        `${process.env.REACT_APP_BACKEND}/api/forms/${user.username}/create`,
+        payload
       )
         .then((res) => {
-          console.log(res.data)
           if (res.status === 200) {
             toast({
               title: "Form created!",
@@ -122,6 +118,10 @@ export default function CreateFormForm() {
           })
         )
     } catch (error) {
+      toast({
+        title: "Error",
+        description: error,
+      })
       console.log(error)
     }
   }

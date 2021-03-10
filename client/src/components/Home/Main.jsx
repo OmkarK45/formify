@@ -20,7 +20,6 @@ import userContext from "./../../context/userContext"
 import { CTA } from "./Features"
 
 export default function Main() {
-  const textBg = useColorModeValue("orange.300", "orange.600")
   const { user } = useContext(userContext)
   return (
     <>

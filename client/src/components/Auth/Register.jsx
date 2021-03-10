@@ -10,7 +10,7 @@ import {
   InputLeftElement,
   useToast,
 } from "@chakra-ui/react"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import {
   HiOutlineLockClosed,
   HiOutlineMail,
@@ -19,10 +19,8 @@ import {
 import { useHistory } from "react-router-dom"
 
 import { POST } from "../../utils/network"
-import userContext from "./../../context/userContext"
 
 const Register = () => {
-  const { setUser } = useContext(userContext)
   const history = useHistory()
   const [isLoading, setIsLoading] = useState(false)
   const toast = useToast()

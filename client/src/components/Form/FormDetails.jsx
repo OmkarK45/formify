@@ -9,7 +9,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 
@@ -24,25 +24,18 @@ const FormDetails = ({ location: { state } }) => {
   const tabBg = useColorModeValue("gray.50", "gray.900")
   const bg = useColorModeValue("gray.200", "gray.800")
   const { user } = useContext(userContext)
-  const [enabled, setEnabled] = useState(true)
   let { formID } = useParams()
   const tabStyle = {
     maxW: ["100%", "100%", "80%"],
     m: "0 auto",
   }
+  console.log(formID)
   const { isLoading, error, data } = useQuery(
     "formList",
     async () =>
-      await GET(
-        `${process.env.REACT_APP_BACKEND}/api/forms/f/${user.email}/${formID}`,
-        {
-          withCredentials: true,
-        }
-      ),
-    {
-      onError: () => setEnabled(false),
-      refetchOnWindowFocus: false,
-    }
+      await GET(`${process.env.REACT_APP_BACKEND}/api/forms/${formID}`, {
+        withCredentials: true,
+      })
   )
 
   if (isLoading) return <TableSkeleton />

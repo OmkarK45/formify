@@ -22,9 +22,12 @@ export default function EmailVerified() {
   useEffect(() => {
     const sendVerficationToken = async () => {
       try {
-        await POST(process.env.REACT_APP_BACKEND + "/api/auth/emailverification", {
-          verificationToken,
-        }).then((res) => {
+        await POST(
+          process.env.REACT_APP_BACKEND + "/api/auth/emailverification",
+          {
+            verificationToken,
+          }
+        ).then((res) => {
           setUser({
             isAuthenticated: true,
             userID: res.data.userID,

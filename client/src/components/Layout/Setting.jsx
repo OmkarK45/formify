@@ -1,4 +1,4 @@
-import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react"
+import { Box, Text, useColorModeValue } from "@chakra-ui/react"
 
 export default function Setting({
   settingTitle,

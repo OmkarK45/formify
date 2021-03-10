@@ -10,6 +10,7 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react"
+import { formatDistance } from "date-fns/esm"
 import format from "date-fns/format"
 import { useContext } from "react"
 import { FiExternalLink } from "react-icons/fi"
@@ -29,7 +30,7 @@ const FormList = () => {
     "getList",
     async () =>
       await GET(
-        process.env.REACT_APP_BACKEND + "/api/forms/" + user.email + "/all",
+        process.env.REACT_APP_BACKEND + "/api/forms/" + user.username + "/all",
         {
           withCredentials: true,
         }
@@ -43,7 +44,12 @@ const FormList = () => {
   function getFormattedDate(date) {
     return format(new Date(date), "MMM dd, KK:mm aaa")
   }
-
+  function getDuration(date) {
+    return formatDistance(new Date(date), Date.now(), {
+      includeSeconds: true,
+      addSuffix: true,
+    })
+  }
   return (
     <Box
       boxShadow="base"
@@ -82,7 +88,7 @@ const FormList = () => {
                       </Text>
                     </Td>
                     <Td>{getFormattedDate(form.createdAt)}</Td>
-                    <Td>{getFormattedDate(form.updatedAt)}</Td>
+                    <Td>{getDuration(form.updatedAt)}</Td>
                     <Td>{form.disabled ? "Disabled" : "Active"}</Td>
                     <Td isNumeric>{form.submissions.length}</Td>
                   </Tr>

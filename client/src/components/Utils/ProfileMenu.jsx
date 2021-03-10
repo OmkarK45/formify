@@ -1,23 +1,24 @@
 import {
+  Box,
+  IconButton,
   Menu,
   MenuButton,
-  MenuList,
-  MenuGroup,
   MenuDivider,
-  Box,
+  MenuGroup,
   MenuItem,
-  IconButton,
+  MenuList,
 } from "@chakra-ui/react"
-import Logout from "../Utils/Logout"
-import { Link } from "react-router-dom"
-import { FaRegUser } from "react-icons/fa"
-import { FiLifeBuoy, FiLogOut } from "react-icons/fi"
 import {
-  AiOutlineFileText,
-  AiOutlineSetting,
-  AiOutlineQuestionCircle,
   AiOutlineBook,
+  AiOutlineFileText,
+  AiOutlineQuestionCircle,
+  AiOutlineSetting,
 } from "react-icons/ai"
+import { FaRegUser } from "react-icons/fa"
+import { FiLifeBuoy } from "react-icons/fi"
+import { Link } from "react-router-dom"
+
+import Logout from "../Utils/Logout"
 
 const ProfileMenu = () => {
   return (

@@ -78,8 +78,7 @@ export default function FormSettings({
   async function handleFormDelete() {
     try {
       const response = await POST(
-        process.env.REACT_APP_BACKEND +
-          `/api/forms/f/${user.email}/${formID}/delete`,
+        process.env.REACT_APP_BACKEND + `/api/forms/${formID}/delete`,
         {
           formID,
         },

@@ -5,27 +5,20 @@ import {
   Flex,
   Icon,
   IconButton,
+  Image,
   Link,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
   Stack,
   Text,
-  Image,
   useColorMode,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react"
 import { useContext } from "react"
-import {
-  AiOutlineClose,
-  AiOutlineDown,
-  AiOutlineMenu,
-  AiOutlineRight,
-} from "react-icons/ai"
+import { AiOutlineClose, AiOutlineDown, AiOutlineMenu } from "react-icons/ai"
 import { BiSun } from "react-icons/bi"
 import { BsMoon } from "react-icons/bs"
 import { Link as RouterLink } from "react-router-dom"
+
 import userContext from "../../context/userContext"
 import { ProfileMenu } from "../Utils/"
 

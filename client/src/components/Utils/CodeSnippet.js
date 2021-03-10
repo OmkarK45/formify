@@ -1,17 +1,16 @@
 import {
   Box,
-  Button,
-  Text,
-  Tabs,
-  TabList,
   Tab,
-  Code,
-  TabPanels,
+  TabList,
   TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
 } from "@chakra-ui/react"
 import { AiFillHtml5 } from "react-icons/ai"
-import { SiJavascript } from "react-icons/si"
 import { FaReact } from "react-icons/fa"
+import { SiJavascript } from "react-icons/si"
+
 const c = {
   pink: "#FF79AA",
   green: "#62E478",
