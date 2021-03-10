@@ -57,6 +57,24 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 # Clone this repository
 $ git clone https://github.com/OmkarK45/formify
 
+# Create environment Variables
+# Create a config.env in ./server folder
+PORT = 5000
+DB_URI_LOCAL = mongodb://localhost:27017/local_db_name
+DB_URI_PRODUCTION=<mongoAtlas URL> // not needed in development
+JWT_SECRET=<Random secure string>
+JWT_EXPIRE=7d
+EMAIL_HOST="smtp.mailtrap.io"
+EMAIL_USERNAME="<your mailtrap username>"
+EMAIL_PASSWORD="<your mailtrap password>"
+EMAIL_FROM="services@formify.com"
+EMAIL_PORT=2525
+
+# Create a .env in ./client folder with following configuration
+
+REACT_APP_BACKEND=http://localhost:5000
+REACT_APP_BACKEND_PROD=<Production deploy URL. Heroku, Digital Ocean etc>
+
 # Go into the repository
 $ cd formify
 
