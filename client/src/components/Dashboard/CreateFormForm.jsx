@@ -159,9 +159,7 @@ export default function CreateFormForm() {
           </InputGroup>
         </FormControl>
         <FormControl isRequired marginTop="1.5rem">
-          <FormLabel>
-            Choose Fields (We not accept credit card numbers & passwords) :{" "}
-          </FormLabel>
+          <FormLabel>Choose Fields : </FormLabel>
           {createInputs()}
           <Button
             colorScheme="orange"
