@@ -86,7 +86,7 @@ You can [visit](https://formify-beta.netlify.app) to see beta version of the app
 
 ## Emailware
 
-Formify is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <omkarka45@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
+Formify is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <omkarak45@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
 
 ## Credits
 
