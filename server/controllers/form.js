@@ -127,8 +127,8 @@ exports.postSubmissions = async (req, res, next) => {
     foundForm.submissions.push(submission)
 
     if (foundForm.enabled) {
-      await submission.save()
-      await foundForm.save()
+      await Promise.all([submission.save(), foundForm.save()])
+
       return res.render("submitted", {
         message: "Your response was submitted.",
         heading: "Thanks!",
