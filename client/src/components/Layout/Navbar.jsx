@@ -12,6 +12,11 @@ import {
   useColorMode,
   useColorModeValue,
   useDisclosure,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
 } from "@chakra-ui/react"
 import { useContext } from "react"
 import { AiOutlineClose, AiOutlineDown, AiOutlineMenu } from "react-icons/ai"
@@ -28,6 +33,15 @@ export default function Nav() {
   const { user } = useContext(userContext)
   return (
     <Box>
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle mr={2}>Warning!</AlertTitle>
+        <AlertDescription>
+          The backend hosting service used for this app (KintoHub) will be taken
+          offline after 12th March. App won't work as intended.
+        </AlertDescription>
+        <CloseButton position="absolute" right="8px" top="8px" />
+      </Alert>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
