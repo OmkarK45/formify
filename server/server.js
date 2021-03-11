@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
   res.render("backendhome")
 })
 app.get("/thankyou", (req, res) => {
-  res.render("submitted", {
+  res.render("endpage", {
     success: true,
     heading: "Thank you!",
     message: "We received your submission",

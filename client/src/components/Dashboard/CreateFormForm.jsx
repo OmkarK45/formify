@@ -20,6 +20,7 @@ import { useHistory } from "react-router-dom"
 
 export default function CreateFormForm() {
   const { user } = useContext(userContext)
+  const [buttonLoading, setButtonLoading] = useState(false)
   const history = useHistory()
   const toast = useToast()
   const [values, setValues] = useState({
@@ -90,6 +91,7 @@ export default function CreateFormForm() {
     })
   }
   const handleSubmit = async (e) => {
+    setButtonLoading(true)
     e.preventDefault()
     const payload = {
       formName: data.formName,
@@ -101,6 +103,7 @@ export default function CreateFormForm() {
         payload
       )
         .then((res) => {
+          setButtonLoading(false)
           if (res.status === 200) {
             toast({
               title: "Form created!",
@@ -110,13 +113,14 @@ export default function CreateFormForm() {
             throw new Error("Something went wrong")
           }
         })
-        .catch((err) =>
+        .catch((err) => {
+          setButtonLoading(false)
           toast({
             title: err,
             description: "Something went wrong",
             status: "error",
           })
-        )
+        })
     } catch (error) {
       toast({
         title: "Error",
@@ -176,6 +180,7 @@ export default function CreateFormForm() {
             mr={3}
             colorScheme="orange"
             fontWeight="400"
+            isLoading={buttonLoading}
           >
             Create
           </Button>

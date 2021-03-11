@@ -95,13 +95,12 @@ exports.formSettings = async (req, res, next) => {
 exports.postSubmissions = async (req, res, next) => {
   const submissionData = req.body
   const { formID } = req.params
-
   if (!submissionData) {
     next(new ErrorResponse("Please make sure to fill required fields", 400))
   }
 
   if (req.method !== "POST") {
-    return res.render("badrequest", {
+    return res.render("endpage", {
       message: "Please make sure to use POST method.",
       heading: "Aw, Snap!",
       success: false,
@@ -118,50 +117,45 @@ exports.postSubmissions = async (req, res, next) => {
       .populate("createdBy")
       .populate("submissions")
 
-    const submission = await Submission.create({
-      belongTo: foundForm._id,
-      ...submissionData,
-      createdAt: Date.now(),
-    })
-
-    foundForm.submissions.push(submission)
-
-    if (foundForm.enabled) {
-      await Promise.all([submission.save(), foundForm.save()])
-
-      return res.render("submitted", {
-        message: "Your response was submitted.",
-        heading: "Thanks!",
-        success: true,
+    if (foundForm) {
+      const submission = await Submission.create({
+        belongTo: foundForm._id,
+        ...submissionData,
+        createdAt: Date.now(),
       })
-    }
-    if (foundForm.enabled === false) {
-      return res.render("submitted", {
-        message: "The owner of this form has disabled submission",
-        heading: "Aw, Snap!",
-        success: false,
-      })
-    }
-    const html = newSubmissionTemplate(foundForm.formName, foundForm.formID)
-    if (foundForm.emailNotifications) {
-      try {
-        sendEmail({
+      foundForm.submissions.push(submission)
+
+      if (foundForm.enabled) {
+        await submission.save()
+        await foundForm.save()
+
+        return res.render("endpage", {
+          message: "We received your submission.",
+          heading: "Thank you.",
+          success: true,
+        })
+      }
+      const html = newSubmissionTemplate(foundForm.formName, foundForm.formID)
+
+      if (foundForm.emailNotifications) {
+        await sendEmail({
           to: foundForm.createdBy.email,
           subject: `[Formify] : New Submission for ${foundForm.formName}`,
           text: html,
         })
-      } catch (error) {
-        console.log(
-          ` Error occured while emailing submissions for ${foundForm.formID}`
-        )
       }
+    } else {
+      return res.render("endpage", {
+        heading: "Invalid Form URL",
+        message: "Please check if the form has correct action URL.",
+        success: false,
+      })
     }
   } catch (error) {
     console.log(error)
-    return res.render("submitted", {
+    return res.render("endpage", {
       success: false,
-      message:
-        "Something went wrong while submitting this form. Please try again or contact support@formify.com",
+      message: error,
       heading: "Aw Snap!",
     })
   }

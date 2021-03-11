@@ -18,6 +18,7 @@ import { POST, PUT } from "../../utils/network"
 import Setting from "../Layout/Setting"
 import userContext from "./../../context/userContext"
 import { useHistory } from "react-router-dom"
+import FormDeletModal from "./FormDeleteModal"
 
 export default function FormSettings({
   form: { enabled, emailNotifications, requiresVerification, formName, formID },
@@ -29,21 +30,26 @@ export default function FormSettings({
     formName,
   })
   const { user } = useContext(userContext)
+  const [buttonLoading, setButtonLoading] = useState(false)
   const toast = useToast()
   const history = useHistory()
+
   function handleInputChange(e) {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value
-    console.log(e.target.type)
-    console.log(e.target.name)
     setSettings({
       ...settings,
       [e.target.name]: value,
     })
   }
 
+  function resetFormState() {
+    setSettings({ enabled, emailNotifications, requiresVerification, formName })
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
+    setButtonLoading(true)
     if (!settings.formName) {
       return toast({
         title: "Form name is required",
@@ -61,6 +67,7 @@ export default function FormSettings({
           withCredentials: true,
         }
       ).then((res) => {
+        setButtonLoading(false)
         return toast({
           title: "Settings saved!",
           status: "success",
@@ -68,6 +75,7 @@ export default function FormSettings({
         })
       })
     } catch (error) {
+      setButtonLoading(false)
       return toast({
         title: "Failed to save settings",
         status: "error",
@@ -75,31 +83,7 @@ export default function FormSettings({
       })
     }
   }
-  async function handleFormDelete() {
-    try {
-      const response = await POST(
-        process.env.REACT_APP_BACKEND + `/api/forms/${formID}/delete`,
-        {
-          formID,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      if (response.status === 200) {
-        toast({
-          title: "Form deleted !",
-          status: "info",
-        })
-        return history.goBack()
-      }
-    } catch (error) {
-      toast({
-        title: "Something went wrong",
-        status: "error",
-      })
-    }
-  }
+
   return (
     <Box mt={4}>
       <form onSubmit={handleSubmit}>
@@ -184,10 +168,15 @@ export default function FormSettings({
               </HStack>
             </FormControl>
             <Stack direction="row-reverse">
-              <Button type="submit" colorScheme="orange">
+              <Button
+                isLoading={buttonLoading}
+                loadingText="Saving settings"
+                type="submit"
+                colorScheme="orange"
+              >
                 Save
               </Button>
-              <Button>Cancel</Button>
+              <Button onClick={resetFormState}>Cancel</Button>
             </Stack>
           </VStack>
         </Setting>
@@ -204,10 +193,7 @@ export default function FormSettings({
                 caution
               </Text>
             </FormLabel>
-
-            <Button colorScheme="red" onClick={handleFormDelete}>
-              Delete
-            </Button>
+            <FormDeletModal formID={formID} />
           </HStack>
         </FormControl>
       </Setting>
