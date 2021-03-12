@@ -124,10 +124,17 @@ exports.postSubmissions = async (req, res, next) => {
         createdAt: Date.now(),
       })
       // Self learning schema
-      foundForm.fields = Object.keys(submissionData)
+
+      Object.keys(submissionData).map((sub) => {
+        if (foundForm.fields.indexOf(sub) === -1) {
+          return foundForm.fields.push(sub)
+        }
+      })
       foundForm.submissions.push(submission)
-      console.log("FoundForm", foundForm)
+
+      console.log("FoundForm", foundForm.fields)
       console.log("Submission", submission)
+
       if (foundForm.enabled) {
         await submission.save()
         await foundForm.save()
