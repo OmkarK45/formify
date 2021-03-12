@@ -8,6 +8,7 @@ export default function Integrations({ formID }) {
   const url = "https://formify.com/forms/" + formID
   const toast = useToast()
   const [copyStatus, setCopySuccess] = useState("")
+
   const copyToClipboard = async (e) => {
     e.preventDefault()
     try {

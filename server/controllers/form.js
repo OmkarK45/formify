@@ -123,8 +123,11 @@ exports.postSubmissions = async (req, res, next) => {
         ...submissionData,
         createdAt: Date.now(),
       })
+      // Self learning schema
+      foundForm.fields = Object.keys(submissionData)
       foundForm.submissions.push(submission)
-
+      console.log("FoundForm", foundForm)
+      console.log("Submission", submission)
       if (foundForm.enabled) {
         await submission.save()
         await foundForm.save()
@@ -178,7 +181,12 @@ exports.createForm = async (req, res, next) => {
 
     function makeFields(fields) {
       const newFields = []
-      fields.map((field) => newFields.push(field.fieldValue))
+      // Reject file submissions
+      fields.map((field) => {
+        if (field.fieldType !== "file") {
+          newFields.push(field.fieldValue)
+        }
+      })
       return newFields
     }
 

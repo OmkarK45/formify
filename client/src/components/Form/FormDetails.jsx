@@ -29,7 +29,6 @@ const FormDetails = ({ location: { state } }) => {
     maxW: ["100%", "100%", "80%"],
     m: "0 auto",
   }
-  console.log(formID)
   const { isLoading, error, data } = useQuery(
     "formList",
     async () =>

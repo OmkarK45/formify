@@ -19,7 +19,6 @@ import { SkeletonRow } from "./../Utils/TableSkeleton"
 import { ImDrawer2 } from "react-icons/im"
 
 export default function Submissions({ fields, submissions }) {
-  const [isLoaded, setIsLoaded] = useState(false)
   const [current, setCurrent] = useState(1)
   const pageSize = 8
   const offset = (current - 1) * pageSize
@@ -27,12 +26,6 @@ export default function Submissions({ fields, submissions }) {
 
   const Prev = (props) => <Button {...props}>Prev </Button>
   const Next = (props) => <Button {...props}> Next </Button>
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoaded(true)
-    }, 1500)
-  }, [])
 
   const itemRender = (_, type) => {
     if (type === "prev") {
@@ -56,7 +49,7 @@ export default function Submissions({ fields, submissions }) {
         minW="100%"
         overflowX="auto"
       >
-        {isLoaded ? (
+        {submissions ? (
           <Box position="relative">
             {submissions.length > 0 ? (
               <Table size="md" variant="simple">
@@ -83,7 +76,6 @@ export default function Submissions({ fields, submissions }) {
                   <Tr>
                     {/* @TODO-> Create a date column here */}
                     <Th>Submitted At</Th>
-
                     {fields.map((s, i) => {
                       return <Th key={i}>{s}</Th>
                     })}
