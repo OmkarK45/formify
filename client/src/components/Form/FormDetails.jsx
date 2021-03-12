@@ -1,6 +1,7 @@
 import {
   Box,
   Flex,
+  HStack,
   Tab,
   TabList,
   TabPanel,
@@ -10,6 +11,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import { useContext } from "react"
+import { IoFileTrayFullOutline } from "react-icons/io5"
 import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 
@@ -47,7 +49,10 @@ const FormDetails = ({ location: { state } }) => {
     <Box>
       <Box>
         <DashboardHeader title={data.data.requestedForm.formName}>
-          <Text>{data.data.requestedForm.submissions.length} Submissions</Text>
+          <Text>
+            <strong>Submissions : </strong>
+            {data.data.requestedForm.submissions.length}
+          </Text>
           <Flex>
             <Text fontWeight="600">Date Created : </Text>
             <Text>

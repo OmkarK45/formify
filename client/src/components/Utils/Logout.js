@@ -1,5 +1,6 @@
-import { Link, useToast } from "@chakra-ui/react"
+import { Flex, Link, Text, useToast } from "@chakra-ui/react"
 import { useContext } from "react"
+import { FiLogOut } from "react-icons/fi"
 import { useHistory } from "react-router-dom"
 
 import { POST } from "../../utils/network"
@@ -36,7 +37,10 @@ const Logout = (props) => {
 
   return (
     <Link _hover={{ textDecoration: "none" }} onClick={handleLogout}>
-      Logout
+      <Flex>
+        <FiLogOut d="inline" fontSize="1.2rem" />
+        <Text ml={3}>Logout</Text>
+      </Flex>
     </Link>
   )
 }

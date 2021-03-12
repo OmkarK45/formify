@@ -53,7 +53,9 @@ export default function Profile() {
         settingTitle="Danger Zone"
         settingDescription="Proceed only if you know what are you doing."
       >
-        <Button>Deactivate Account</Button>
+        <HStack justifySelf="flex-end" mt={4}>
+          <Button colorScheme="red">Deactivate Account</Button>
+        </HStack>
       </Setting>
     </Box>
   )
