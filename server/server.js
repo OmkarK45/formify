@@ -1,4 +1,5 @@
 require("dotenv").config({ path: "./config.env" })
+const helmetOptions = require("./config/cspAllowed")
 const express = require("express")
 const cookieParser = require("cookie-parser")
 const helmet = require("helmet")
@@ -16,30 +17,8 @@ app.set("view engine", "ejs")
 app.use(express.static(__dirname + "/public"))
 app.set("views", __dirname + "/views")
 app.use(cookieParser())
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: [
-          "'self'",
-          "https://www.google.com",
-          "https://www.google.com/recaptcha/api.js",
-          "https://www.gstatic.com/recaptcha/",
-          "https://www.gstatic.com/recaptcha/ ",
-        ],
-        scriptSrc: [
-          "'self'",
-          "https://www.google.com",
-          "https://www.google.com/recaptcha/api.js",
-          "https://www.gstatic.com/recaptcha/",
-          "https://www.gstatic.com/recaptcha/ ",
-        ],
-        styleSrc: ["'self'", "fonts.googleapis.com", "'unsafe-inline'"],
-        fontSrc: ["'self'", "fonts.gstatic.com"],
-      },
-    },
-  })
-)
+// move this to seperate file
+app.use(helmet(helmetOptions))
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -65,7 +44,11 @@ app.get("/thankyou", (req, res) => {
 
 // Testing purpose
 app.get("/verification", (req, res) => {
-  res.render("verificationPage")
+  res.render("verificationPage", {
+    heading: "Hang on..!",
+    message:
+      "The owner of this form requires you to complete captcha verification before you can submit form",
+  })
 })
 
 app.use((req, res, next) => {
