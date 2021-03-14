@@ -271,9 +271,5 @@ exports.captchaVerification = async (req, res, next) => {
       success: "false",
     })
   }
-  res.json({
-    msg: "Captcha solved successfully.",
-    success: "true",
-  })
-  console.log(responseBody)
+  res.redirect("/thankyou")
 }

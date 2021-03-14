@@ -45,7 +45,7 @@ app.get("/thankyou", (req, res) => {
 // Testing purpose
 app.get("/verification", (req, res) => {
   res.render("verificationPage", {
-    heading: "Hang on..!",
+    heading: "Almost complete",
     message:
       "The owner of this form requires you to complete captcha verification before you can submit form",
   })
