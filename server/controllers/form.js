@@ -4,7 +4,7 @@ const Form = require("../models/Form.model")
 const Submission = require("../models/Submission.model")
 const ErrorResponse = require("../utils/errorResponse")
 const sendEmail = require("../utils/sendEmail")
-
+const fetch = require("node-fetch")
 exports.getForms = async (req, res) => {
   const { email } = req.user
   try {
@@ -248,4 +248,32 @@ exports.deleteOneForm = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error, 500))
   }
+}
+
+exports.captchaVerification = async (req, res, next) => {
+  const gCaptchaResponse = req.body["g-recaptcha-response"]
+  if (!gCaptchaResponse) {
+    return res.json({
+      msg: "Please complete captcha challenge",
+      success: "false",
+    })
+  }
+  const secretKey = process.env.CAPTCHA_KEY
+  const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${gCaptchaResponse}`
+
+  const responseBody = await fetch(verificationURL)
+    .then((res) => res.json())
+    .catch((err) => console.log(err))
+
+  if (!responseBody.success) {
+    return res.json({
+      msg: "You failed captcha verification!",
+      success: "false",
+    })
+  }
+  res.json({
+    msg: "Captcha solved successfully.",
+    success: "true",
+  })
+  console.log(responseBody)
 }

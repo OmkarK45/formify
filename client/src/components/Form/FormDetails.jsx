@@ -50,8 +50,7 @@ const FormDetails = ({ location: { state } }) => {
       <Box>
         <DashboardHeader title={data.data.requestedForm.formName}>
           <Text>
-            <strong>Submissions : </strong>
-            {data.data.requestedForm.submissions.length}
+            Submissions : {data.data.requestedForm.submissions.length}
           </Text>
           <Flex>
             <Text fontWeight="600">Date Created : </Text>
