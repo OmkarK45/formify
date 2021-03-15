@@ -27,7 +27,6 @@ app.use("/api/auth", require("./routes/auth.routes"))
 app.use("/api/dashboard", require("./routes/dashboard.routes"))
 app.use("/api/forms/", require("./routes/form.routes"))
 app.use(errorHandler)
-
 const server = app.listen(PORT, () => {
   console.log(`Server [${PORT}] : Started`)
 })
@@ -39,15 +38,6 @@ app.get("/thankyou", (req, res) => {
     success: true,
     heading: "Thank you!",
     message: "We received your submission",
-  })
-})
-
-// Testing purpose
-app.get("/verification", (req, res) => {
-  res.render("verificationPage", {
-    heading: "Almost complete",
-    message:
-      "The owner of this form requires you to complete captcha verification before you can submit form",
   })
 })
 

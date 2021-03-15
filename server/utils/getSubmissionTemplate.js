@@ -1,4 +1,4 @@
-exports.newSubmissionTemplate = (formName, formID) => {
+exports.getSubmissionTemplate = (formName, formID) => {
   return `
     <!DOCTYPE html>
     <html>

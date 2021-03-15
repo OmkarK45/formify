@@ -1,10 +1,17 @@
 const User = require("../models/User.model")
-const { newSubmissionTemplate } = require("./../utils/newSubmissionTemplate")
+const { getSubmissionTemplate } = require("./../utils/getSubmissionTemplate")
 const Form = require("../models/Form.model")
 const Submission = require("../models/Submission.model")
 const ErrorResponse = require("../utils/errorResponse")
 const sendEmail = require("../utils/sendEmail")
-const fetch = require("node-fetch")
+const Recaptcha = require("express-recaptcha").RecaptchaV2
+
+const recaptcha = new Recaptcha(
+  process.env.CAPTCHA_SITE_KEY,
+  process.env.CAPTCHA_SECRET_KEY,
+  { callback: "cb" }
+)
+
 exports.getForms = async (req, res) => {
   const { email } = req.user
   try {
@@ -105,7 +112,6 @@ exports.postSubmissions = async (req, res, next) => {
       heading: "Aw, Snap!",
       success: false,
     })
-    return
   }
 
   if (!formID) {
@@ -117,48 +123,47 @@ exports.postSubmissions = async (req, res, next) => {
       .populate("createdBy")
       .populate("submissions")
 
-    if (foundForm) {
-      const submission = await Submission.create({
-        belongTo: foundForm._id,
-        ...submissionData,
-        createdAt: Date.now(),
-      })
-      // Self learning schema
-
-      Object.keys(submissionData).map((sub) => {
-        if (foundForm.fields.indexOf(sub) === -1) {
-          return foundForm.fields.push(sub)
-        }
-      })
-      foundForm.submissions.push(submission)
-
-      console.log("FoundForm", foundForm.fields)
-      console.log("Submission", submission)
-
-      if (foundForm.enabled) {
-        await submission.save()
-        await foundForm.save()
-
-        return res.render("endpage", {
-          message: "We received your submission.",
-          heading: "Thank you.",
-          success: true,
-        })
-      }
-      const html = newSubmissionTemplate(foundForm.formName, foundForm.formID)
-
-      if (foundForm.emailNotifications) {
-        await sendEmail({
-          to: foundForm.createdBy.email,
-          subject: `[Formify] : New Submission for ${foundForm.formName}`,
-          text: html,
-        })
-      }
-    } else {
+    if (!foundForm) {
       return res.render("endpage", {
         heading: "Invalid Form URL",
         message: "Please check if the form has correct action URL.",
         success: false,
+      })
+    }
+
+    const submission = await Submission.create({
+      belongTo: foundForm._id,
+      ...submissionData,
+      createdAt: Date.now(),
+    })
+    // Self learning schema
+
+    Object.keys(submissionData).map((sub) => {
+      if (foundForm.fields.indexOf(sub) === -1) {
+        return foundForm.fields.push(sub)
+      }
+    })
+    foundForm.submissions.push(submission)
+
+    if (foundForm.enabled) {
+      await submission.save()
+      await foundForm.save()
+
+      // recaptcha verification flow logic here
+
+      res.render("endpage", {
+        message: "We received your submission.",
+        heading: "Thank you.",
+        success: true,
+      })
+    }
+    const html = getSubmissionTemplate(foundForm.formName, foundForm.formID)
+
+    if (foundForm.emailNotifications) {
+      await sendEmail({
+        to: foundForm.createdBy.email,
+        subject: `[Formify] : New Submission for ${foundForm.formName}`,
+        text: html,
       })
     }
   } catch (error) {
@@ -248,28 +253,4 @@ exports.deleteOneForm = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error, 500))
   }
-}
-
-exports.captchaVerification = async (req, res, next) => {
-  const gCaptchaResponse = req.body["g-recaptcha-response"]
-  if (!gCaptchaResponse) {
-    return res.json({
-      msg: "Please complete captcha challenge",
-      success: "false",
-    })
-  }
-  const secretKey = process.env.CAPTCHA_KEY
-  const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${gCaptchaResponse}`
-
-  const responseBody = await fetch(verificationURL)
-    .then((res) => res.json())
-    .catch((err) => console.log(err))
-
-  if (!responseBody.success) {
-    return res.json({
-      msg: "You failed captcha verification!",
-      success: "false",
-    })
-  }
-  res.redirect("/thankyou")
 }

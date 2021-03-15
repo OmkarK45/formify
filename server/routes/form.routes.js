@@ -22,5 +22,4 @@ router.route("/:formID/settings").put(protect, formSettings)
 router.route("/:formID").get(protect, getOneForm)
 router.route("/:formID").all(postSubmissions)
 router.route("/:formID/delete").post(protect, deleteOneForm)
-router.route("/:formID/verification").post(captchaVerification)
 module.exports = router
