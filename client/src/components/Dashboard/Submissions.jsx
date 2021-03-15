@@ -2,6 +2,8 @@ import {
   Box,
   Button,
   HStack,
+  Link,
+  LinkOverlay,
   Table,
   TableCaption,
   Tbody,
@@ -12,11 +14,12 @@ import {
   Tr,
 } from "@chakra-ui/react"
 import Pagination from "@choc-ui/paginator"
-import { useEffect, useState } from "react"
 import format from "date-fns/format"
+import { useState } from "react"
+import { ImDrawer2 } from "react-icons/im"
+
 import Empty from "./../Utils/Empty"
 import { SkeletonRow } from "./../Utils/TableSkeleton"
-import { ImDrawer2 } from "react-icons/im"
 
 export default function Submissions({ fields, submissions }) {
   const [current, setCurrent] = useState(1)
@@ -39,7 +42,14 @@ export default function Submissions({ fields, submissions }) {
   return (
     <>
       <HStack justify="flex-end">
-        <Button colorScheme="orange">Export JSON</Button>
+        <LinkOverlay
+          href={`data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(submissions, null, 2)
+          )}`}
+          download="submissions.json"
+        >
+          <Button colorScheme="orange">Export to JSON</Button>
+        </LinkOverlay>
       </HStack>
       <Box
         shadow="base"
