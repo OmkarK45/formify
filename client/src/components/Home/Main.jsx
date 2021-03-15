@@ -14,15 +14,20 @@ import {
 } from "@chakra-ui/react"
 import { useContext } from "react"
 import { Link as RouterLink } from "react-router-dom"
-
+import { Helmet } from "react-helmet-async"
 import { FAQ, Features } from "."
 import userContext from "./../../context/userContext"
 import { CTA } from "./Features"
+import SEO from "../SEO/SEO"
 
 export default function Main() {
   const { user } = useContext(userContext)
   return (
     <>
+      <SEO
+        title="Formify - Forms for static sites without the pain."
+        description="this is replaced"
+      ></SEO>
       <Container maxW={"7xl"}>
         <Stack
           align={"center"}

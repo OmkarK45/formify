@@ -31,13 +31,15 @@ const FormDetails = ({ location: { state } }) => {
     maxW: ["100%", "100%", "80%"],
     m: "0 auto",
   }
-  const { isLoading, error, data } = useQuery(
-    "formList",
-    async () =>
-      await GET(`${process.env.REACT_APP_BACKEND}/api/forms/${formID}`, {
+  const { isLoading, error, data: form } = useQuery("formList", async () => {
+    const data = await GET(
+      `${process.env.REACT_APP_BACKEND}/api/forms/${formID}`,
+      {
         withCredentials: true,
-      })
-  )
+      }
+    )
+    return data.data.requestedForm
+  })
 
   if (isLoading) return <TableSkeleton />
 
@@ -48,21 +50,19 @@ const FormDetails = ({ location: { state } }) => {
   return (
     <Box>
       <Box>
-        <DashboardHeader title={data.data.requestedForm.formName}>
-          <Text>
-            Submissions : {data.data.requestedForm.submissions.length}
-          </Text>
+        <DashboardHeader title={form.formName}>
+          <Text>Submissions : {form.submissions.length}</Text>
           <Flex>
             <Text fontWeight="600">Date Created : </Text>
             <Text>
               &nbsp;
-              {new Date(data.data.requestedForm.createdAt).toDateString()}
+              {new Date(form.createdAt).toDateString()}
             </Text>
           </Flex>
         </DashboardHeader>
 
         <Box bg={bg}>
-          <Tabs defaultIndex={1} variant="line">
+          <Tabs defaultIndex={1} variant="line" isLazy>
             <TabList m="0 auto" maxW={["100%", "100%", "80%"]}>
               <Tab>Integration</Tab>
               <Tab>Submissions</Tab>
@@ -70,16 +70,13 @@ const FormDetails = ({ location: { state } }) => {
             </TabList>
             <TabPanels bg={tabBg}>
               <TabPanel {...tabStyle}>
-                <Integrations formID={formID} />
+                <Integrations formID={formID} name={form.formName} />
               </TabPanel>
               <TabPanel {...tabStyle}>
-                <Submissions
-                  submissions={data.data.requestedForm.submissions}
-                  fields={data.data.requestedForm.fields}
-                />
+                <Submissions form={form} />
               </TabPanel>
               <TabPanel {...tabStyle}>
-                <FormSettings form={data.data.requestedForm} />
+                <FormSettings form={form} />
               </TabPanel>
             </TabPanels>
           </Tabs>

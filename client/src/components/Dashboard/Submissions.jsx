@@ -20,8 +20,9 @@ import { ImDrawer2 } from "react-icons/im"
 
 import Empty from "./../Utils/Empty"
 import { SkeletonRow } from "./../Utils/TableSkeleton"
+import SEO from "./../SEO/SEO"
 
-export default function Submissions({ fields, submissions }) {
+export default function Submissions({ form: { fields, submissions } }) {
   const [current, setCurrent] = useState(1)
   const pageSize = 8
   const offset = (current - 1) * pageSize
@@ -41,15 +42,17 @@ export default function Submissions({ fields, submissions }) {
 
   return (
     <>
+      <SEO title="Submissions | Formify" />
       <HStack justify="flex-end">
-        <LinkOverlay
+        <Link
+          _hover={{ textDecoration: "none" }}
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(submissions, null, 2)
           )}`}
           download="submissions.json"
         >
           <Button colorScheme="orange">Export to JSON</Button>
-        </LinkOverlay>
+        </Link>
       </HStack>
       <Box
         shadow="base"

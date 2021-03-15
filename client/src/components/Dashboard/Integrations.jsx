@@ -1,10 +1,11 @@
 import { Box, Button, Code, Input, Text, useToast } from "@chakra-ui/react"
 import { useState } from "react"
 import { MdContentCopy } from "react-icons/md"
+import SEO from "../SEO/SEO"
 
 import CodeSnippet from "../Utils/CodeSnippet"
 
-export default function Integrations({ formID }) {
+export default function Integrations({ formID, formName }) {
   const url = "https://formify.com/forms/" + formID
   const toast = useToast()
   const [copyStatus, setCopySuccess] = useState("")
@@ -30,6 +31,7 @@ export default function Integrations({ formID }) {
   }
   return (
     <>
+      <SEO title="Integrations" />
       <form onSubmit={copyToClipboard}>
         <Box>
           <Text mt="1rem">Your form's endpoint is:</Text>
