@@ -48,10 +48,7 @@ export function Features() {
             >
               All your forms in one place.
             </Heading>
-            <Text fontWeight="bold">
-              Manage and monitor your created forms. Create upto 7 forms in free
-              tier*
-            </Text>
+
             <Text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
               convallis facilisis molestie. Pellentesque habitant morbi

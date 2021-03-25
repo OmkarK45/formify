@@ -43,7 +43,8 @@ export default function Submissions({ form: { fields, submissions } }) {
   return (
     <>
       <SEO title="Submissions | Formify" />
-      <HStack justify="flex-end">
+      <HStack justify="space-between">
+        <Text color="gray.500">Showing newer submissions first</Text>
         <Link
           _hover={{ textDecoration: "none" }}
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
@@ -134,8 +135,8 @@ export default function Submissions({ form: { fields, submissions } }) {
         )}
       </Box>
       <Box mt={4} textAlign="center">
-        <Text>
-          Submissions older than 30days are deleted automatically. Learn More
+        <Text color="gray.500">
+          Submissions older than 60 days are deleted automatically. Learn More
         </Text>
       </Box>
     </>

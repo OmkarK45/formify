@@ -41,21 +41,26 @@ export default function Main() {
               fontWeight={600}
               fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
             >
+              Handle form submissions{" "}
               <Text
                 as={"span"}
+                color="white"
                 position={"relative"}
                 _after={{
                   content: "''",
-                  width: "full",
-                  height: "30%",
+                  width: "calc(100% + 10px)",
+                  transform: "rotate(-1deg)",
                   position: "absolute",
+                  height: "90%",
+                  borderRadius: "10px",
                   bottom: 1,
                   left: 0,
-                  bg: "yellow.500",
+                  right: "20px",
+                  bg: "orange.500",
                   zIndex: -1,
                 }}
               >
-                Handle form submissions better.
+                &nbsp; better.
               </Text>
             </Heading>
             <Text color={"gray.500"}>

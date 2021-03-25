@@ -127,3 +127,8 @@ MIT
 > [omkarkulkarni.netlify.app](https://omkarkulkarni.netlify.app) &nbsp;&middot;&nbsp;
 > GitHub [@omkark45](https://github.com/omkark45) &nbsp;&middot;&nbsp;
 > Twitter [@omkar_k45](https://twitter.com/omkar_k45)
+
+@TODO ->
+
+- Create recaptcha verification flow
+- add verification to endpage

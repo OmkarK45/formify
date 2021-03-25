@@ -37,7 +37,14 @@ exports.getOneForm = async (req, res, next) => {
     return next(new ErrorResponse("Please provide valid FormID and Email", 400))
   }
   try {
-    const requestedForm = await Form.findOne({ formID }).populate("submissions")
+    const requestedForm = await Form.findOne({ formID }).populate({
+      path: "submissions",
+      options: {
+        sort: {
+          createdAt: -1,
+        },
+      },
+    })
     if (!requestedForm) {
       return next(
         new ErrorResponse(

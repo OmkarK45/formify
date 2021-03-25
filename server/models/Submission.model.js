@@ -15,6 +15,10 @@ const submissionSchema = new Schema(
       type: Date,
       default: Date.now(),
     },
+    isSpam: {
+      type: Boolean,
+      default: false,
+    },
   },
   { strict: false }
 )
